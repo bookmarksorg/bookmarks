@@ -1,23 +1,49 @@
+import Image from "next/image";
+
 export default function Login() {
     return (
-        <div>
-            <title>Login</title>
-            <link rel="icon" href="/favicon.ico" />
-            <div className="flex flex-col items-center justify-center min-h-screen py-2">
-                <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
-                    <h1 className="text-6xl font-bold">BookMarks</h1>
-                    <p className="mt-3 text-2xl">Junte-se a comunidade!</p>
-                    <div className="flex flex-wrap items-center justify-around max-w-4xl mt-6 sm:w-full">
-                        <div className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600">
-                            <h3 className="text-2xl font-bold">Login &rarr;</h3>
-                            <p className="mt-4 text-xl">Entre com sua conta do Google</p>
-                        </div>
-                        <div className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600">
-                            <h3 className="text-2xl font-bold">Cadastre-se &rarr;</h3>
-                            <p className="mt-4 text-xl">Crie uma conta no BookMarks</p>
+        <div className="flex min-h-full bg-[#2B3747]">
+            <div className="flex flex-[7] flex-col bg-[#2B3747] items-center gap-20">
+                <div className="flex flex-col items-center gap-3 text-white mt-40 px-28">
+                    <h1 className="text-5xl font-bold">
+                        Junte-se a <span className="text-[#ED766F]">comunidade!</span>
+                    </h1>
+                    <h3 className="text-3xl text-left break-words">Interaja com outros usuários e discuta seus livros favoritos!</h3>
+                </div>
+                <div className="bg-white h-[20rem] w-4/5 rounded-md px-6">
+                    <div className="bg-zinc-700 w-11/12 h-4 mt-6 rounded-md"></div>
+                    <div className="bg-zinc-700 w-4/5 h-4 mt-2 rounded-md"></div>
+                    <div className="flex flex-row bg-[#ED766f35] w-full h-24 mt-6 rounded-md">
+                        <div className="flex flex-row gap-5 w-full">
+                            <div className="h-10 w-10 ml-6 mt-3 rounded-full bg-[#4ca6e2]"></div>
+                            <div className="flex flex-col flex-grow pr-8">
+                                <div className="bg-zinc-400 w-3/5 h-3 mt-5 rounded-md"></div>
+                                <div className="flex flex-col pl-2">
+                                    <div className="bg-zinc-400 w-11/12 h-1.5 mt-4 rounded-md"></div>
+                                    <div className="bg-zinc-400 w-5/6 h-1.5 mt-1.5 rounded-md"></div>
+                                    <div className="bg-zinc-400 w-2/3 h-1.5 mt-1.5 rounded-md"></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </main>
+                    <div className="bg-[#ED766f35] w-full h-24 mt-4 rounded-md">
+                        <div className="flex flex-row gap-5 w-full">
+                            <div className="h-10 w-10 ml-6 mt-3 rounded-full bg-[#e24ce2]"></div>
+                            <div className="flex flex-col flex-grow pr-8">
+                                <div className="bg-zinc-400 w-2/5 h-3 mt-5 rounded-md"></div>
+                                <div className="flex flex-col pl-2">
+                                    <div className="bg-zinc-400 w-11/12 h-1.5 mt-4 rounded-md"></div>
+                                    <div className="bg-zinc-400 w-5/6 h-1.5 mt-1.5 rounded-md"></div>
+                                    <div className="bg-zinc-400 w-2/3 h-1.5 mt-1.5 rounded-md"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className="flex flex-[5] flex-col bg-[#F4F1F1] rounded-xl items-center">
+                <Image src="/logo.svg" width={120} height={120} alt="BookMarks's logo" className="mb-14 mt-8" />
+                Login
             </div>
         </div>
     );
