@@ -24,7 +24,7 @@ export default function Home() {
             <Header />
             <div className="flex h-screen-header">
                 <Sidebar />
-                <div className="flex flex-grow p-8 gap-12 bg-[#C4CCD8] overflow-y-auto">
+                <div className="flex flex-grow p-8 pl-12 gap-8 bg-[#C4CCD8] overflow-y-auto">
                     {/* content */}
                     <div className="flex flex-col flex-[2] py-4 pb-8 bg-[#F1F5FA] rounded-md h-fit">
                         {/* bar */}
@@ -41,8 +41,8 @@ export default function Home() {
                         {/* content */}
                         <div className="flex justify-between px-8 pt-10 pb-2">
                             <h3 className="text-xl text-gray-600 font-bold">Atualizados recentemente</h3>
-                            <div className="flex gap-2 px-8 py-3 -mt-3 transition hover:bg-[#d2ffe9] rounded-xl text-md font-medium text-gray-500 cursor-pointer">
-                                <FaSquarePlus className="w-6 h-6 text-[#7AD4A9]" />
+                            <div className="flex gap-2 px-5 py-3 -mt-3 transition hover:bg-[#7AD4A9] hover:text-white rounded-xl text-md font-medium text-gray-500 cursor-pointer group">
+                                <FaSquarePlus className="w-6 h-6 text-[#7AD4A9] group-hover:text-white" />
                                 Nova discussão
                             </div>
                         </div>
