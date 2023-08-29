@@ -1,49 +1,37 @@
+import Input from "@/components/Input";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Login() {
     return (
-        <div className="flex min-h-full bg-[#2B3747]">
-            <div className="flex flex-[7] flex-col bg-[#2B3747] items-center gap-20">
-                <div className="flex flex-col items-center gap-3 text-white mt-40 px-28">
-                    <h1 className="text-5xl font-bold">
-                        Junte-se a <span className="text-[#ED766F]">comunidade!</span>
-                    </h1>
-                    <h3 className="text-3xl text-left break-words">Interaja com outros usuários e discuta seus livros favoritos!</h3>
-                </div>
-                <div className="bg-white h-[20rem] w-4/5 rounded-md px-6">
-                    <div className="bg-zinc-700 w-11/12 h-4 mt-6 rounded-md"></div>
-                    <div className="bg-zinc-700 w-4/5 h-4 mt-2 rounded-md"></div>
-                    <div className="flex flex-row bg-[#ED766f35] w-full h-24 mt-6 rounded-md">
-                        <div className="flex flex-row gap-5 w-full">
-                            <div className="h-10 w-10 ml-6 mt-3 rounded-full bg-[#4ca6e2]"></div>
-                            <div className="flex flex-col flex-grow pr-8">
-                                <div className="bg-zinc-400 w-3/5 h-3 mt-5 rounded-md"></div>
-                                <div className="flex flex-col pl-2">
-                                    <div className="bg-zinc-400 w-11/12 h-1.5 mt-4 rounded-md"></div>
-                                    <div className="bg-zinc-400 w-5/6 h-1.5 mt-1.5 rounded-md"></div>
-                                    <div className="bg-zinc-400 w-2/3 h-1.5 mt-1.5 rounded-md"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="bg-[#ED766f35] w-full h-24 mt-4 rounded-md">
-                        <div className="flex flex-row gap-5 w-full">
-                            <div className="h-10 w-10 ml-6 mt-3 rounded-full bg-[#e24ce2]"></div>
-                            <div className="flex flex-col flex-grow pr-8">
-                                <div className="bg-zinc-400 w-2/5 h-3 mt-5 rounded-md"></div>
-                                <div className="flex flex-col pl-2">
-                                    <div className="bg-zinc-400 w-11/12 h-1.5 mt-4 rounded-md"></div>
-                                    <div className="bg-zinc-400 w-5/6 h-1.5 mt-1.5 rounded-md"></div>
-                                    <div className="bg-zinc-400 w-2/3 h-1.5 mt-1.5 rounded-md"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        <div className="flex min-h-full bg-primary-700">
+            <div className="flex flex-[7] flex-col bg-primary-700 items-center gap-20">
+                <div className="flex flex-col items-center gap-12 text-white mt-32 px-28">
+                    <h1 className="text-4xl font-bold">Bem vindo de volta!</h1>
+                    <Image src="/login.png" width={450} height={450} alt="Two people talking to each other with a cup of coffee on their hands" />
                 </div>
             </div>
             <div className="flex flex-[5] flex-col bg-[#F4F1F1] rounded-xl items-center">
                 <Image src="/logo.svg" width={120} height={120} alt="BookMarks's logo" className="mb-14 mt-8" />
-                Login
+                <div className="flex flex-col w-full">
+                    <h1 className="font-bold text-3xl text-zinc-600 text-center">Faça seu login</h1>
+                    <form action="" className="flex flex-col gap-3 mt-12 w-full px-24">
+                        <Input id="name" label="Nome de usuário" />
+                        <Input id="password" label="Senha" type="password" />
+                        <Link href="/login" className="text-blue-500 text-md pl-1 mt-1">
+                            Esqueceu sua senha?
+                        </Link>
+                        <Link href="/home" type="submit" className="px-4 py-3 text-xl rounded-full bg-primary-700 text-white transition w-full hover:brightness-110 mt-4 text-center">
+                            Entrar
+                        </Link>
+                    </form>
+                    <span className="text-center text-zinc-600 text-md mt-8">
+                        Não possui uma conta?{" "}
+                        <Link href="/" className="text-blue-500">
+                            Cadastre-se!
+                        </Link>
+                    </span>
+                </div>
             </div>
         </div>
     );
