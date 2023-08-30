@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { FaRegCommentDots, FaRegThumbsUp, FaRegBookmark } from "react-icons/fa6";
 
 interface PostCardProps {
@@ -12,7 +13,9 @@ export default function PostCard({ title, description, author, book, date }: Pos
     return (
         <div className="flex flex-col mx-6 mt-4 bg-white rounded-md px-8 py-6">
             <div className="flex justify-between mb-4">
-                <span className="text-sm font-bold text-gray-600 hover:underline cursor-pointer">{author}</span>
+                <Link href={`/profile/${author}`} className="text-sm font-bold text-gray-600 hover:underline cursor-pointer">
+                    {author}
+                </Link>
                 <span className="text-sm font-semibold text-gray-600">{date}</span>
             </div>
             <span className="text-sm font-bold text-primary-600 hover:underline cursor-pointer">{book}</span>

@@ -13,7 +13,7 @@ import { CustomModal } from "@/components/CustomModal";
 
 export default function Home() {
     const [genresModal, setGenresModal] = useState(false);
-    const [feedStatus, setFeedStatus] = useState("discussions");
+    const [feedStatus, setFeedStatus] = useState<"discussions" | "bookmarks">("discussions");
 
     function handleFeedStatus() {
         if (feedStatus === "discussions") setFeedStatus("bookmarks");

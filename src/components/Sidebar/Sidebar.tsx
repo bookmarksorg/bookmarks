@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 
 export default function Sidebar() {
-    const url = usePathname();
+    const url = usePathname().toLowerCase();
 
     return (
         <div className="flex bg-secondary-700">
@@ -19,7 +19,9 @@ export default function Sidebar() {
                     <Link href="/library">
                         <SidebarItem active={url === "/library"} name="Biblioteca" icon={<FaLayerGroup className="h-5 w-5" />} />
                     </Link>
-                    <SidebarItem active={url === "/profile"} name="Perfil" icon={<FaUser className="h-5 w-5" />} />
+                    <Link href="/profile/Jorge_pat">
+                        <SidebarItem active={url === "/profile/jorge_pat"} name="Perfil" icon={<FaUser className="h-5 w-5" />} />
+                    </Link>
                 </div>
                 <div className="flex flex-col gap-3 w-full">
                     <SidebarItem name="Configurações" icon={<FaGear className="h-5 w-5" />} />
