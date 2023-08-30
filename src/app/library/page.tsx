@@ -35,7 +35,7 @@ export default function Library() {
                             </div>
                             <div className="flex flex-col w-48">
                                 <div className="h-72 bg-primary-600 rounded-lg cursor-pointer transition hover:brightness-110"></div>
-                                <span className="text-md font-medium text-gray-500 mt-2 hover:underline cursor-pointer line-clamp-2">Harry Potter and the Sorcerer's Stone</span>
+                                <span className="text-md font-medium text-gray-500 mt-2 hover:underline cursor-pointer line-clamp-2">Harry Potter and the Sorcerer&apos;s Stone</span>
                                 <div className="flex justify-between text-sm mt-3">
                                     <span className="text-gray-500 hover:underline cursor-pointer">J. K. Rowling</span>
                                     <span className="text-orange-400">
@@ -101,7 +101,7 @@ export default function Library() {
                             </div>
                             <div className="flex flex-col w-48">
                                 <div className="h-72 bg-primary-600 rounded-lg cursor-pointer transition hover:brightness-110"></div>
-                                <span className="text-md font-medium text-gray-500 mt-2 hover:underline cursor-pointer line-clamp-2">Harry Potter and the Sorcerer's Stone</span>
+                                <span className="text-md font-medium text-gray-500 mt-2 hover:underline cursor-pointer line-clamp-2">Harry Potter and the Sorcerer&apos;s Stone</span>
                                 <div className="flex justify-between text-sm mt-3">
                                     <span className="text-gray-500 hover:underline cursor-pointer">J. K. Rowling</span>
                                     <span className="text-orange-400">
