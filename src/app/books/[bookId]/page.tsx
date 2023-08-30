@@ -80,7 +80,7 @@ export default function Books() {
                                 <div className="flex flex-col gap-2 text-gray-500">
                                     <span className="font-bold">Nota dos usuários (1.345): </span>
                                     <div className="flex gap-2 text-[#F59E0B] items-center">
-                                        <span className="font-bold">4.5</span>
+                                        <span className="font-bold">1.8</span>
                                         <div className="flex gap-1">
                                             <FaStar className="w-7 h-7 text-[#F59E0B]" />
                                             <FaRegStarHalfStroke className="w-8 h-8 -mt-0.5 text-[#F59E0B]" />
