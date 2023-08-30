@@ -25,7 +25,9 @@ export default function Sidebar() {
                 </div>
                 <div className="flex flex-col gap-3 w-full">
                     <SidebarItem name="Configurações" icon={<FaGear className="h-5 w-5" />} />
-                    <SidebarItem name="Sair" icon={<FaRightFromBracket className="h-5 w-5" />} />
+                    <Link href="/login">
+                        <SidebarItem name="Sair" icon={<FaRightFromBracket className="h-5 w-5" />} />
+                    </Link>
                 </div>
             </div>
         </div>
