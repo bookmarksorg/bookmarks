@@ -25,26 +25,35 @@ export default function Library() {
                             <span className="text-md font-medium text-gray-500 hover:text-primary-600 hover:underline cursor-pointer transition pr-2.5">Ver todos</span>
                         </div>
                         <div className="grid grid-cols-5 gap-12 mt-4">
-                            <Book image="https://m.media-amazon.com/images/I/91k68MKPbNL._AC_UF1000,1000_QL80_.jpg" title="Oyasumi Punpun" author="Inio Asano" rating="5.0 (1.231)" />
+                            <Book id="gf5g6re61" image="https://m.media-amazon.com/images/I/91k68MKPbNL._AC_UF1000,1000_QL80_.jpg" title="Oyasumi Punpun" author="Inio Asano" rating="5.0 (1.231)" />
                             <Book
+                                id="gf5g6re61"
                                 image="https://m.media-amazon.com/images/I/71HbYElfY0L._AC_UF1000,1000_QL80_.jpg"
                                 title="Harry Potter and the Sorcerer's Stone"
                                 author="J. K. Rowling"
                                 rating="2.3 (5.231)"
                             />
                             <Book
+                                id="gf5g6re61"
                                 image="https://m.media-amazon.com/images/I/81tM68Xn66L._AC_UF1000,1000_QL80_.jpg"
                                 title="Star Wars: The High Republic: Light of the Jedi"
                                 author="Charles Soule"
                                 rating="4.8 (631)"
                             />
                             <Book
+                                id="gf5g6re61"
                                 image="https://m.media-amazon.com/images/I/91LptBSFxQL._AC_UF1000,1000_QL80_.jpg"
                                 title="Percy Jackson and the Olympians: The Lightning Thief"
                                 author="Rick Riordan"
                                 rating="3.4 (3.288)"
                             />
-                            <Book image="https://m.media-amazon.com/images/I/614SwlZNtJL._AC_UF1000,1000_QL80_.jpg" title="The Hunger Games" author="Suzanne Collins" rating="5.0 (923)" />
+                            <Book
+                                id="gf5g6re61"
+                                image="https://m.media-amazon.com/images/I/614SwlZNtJL._AC_UF1000,1000_QL80_.jpg"
+                                title="The Hunger Games"
+                                author="Suzanne Collins"
+                                rating="5.0 (923)"
+                            />
                         </div>
                     </div>
                     <div className="flex flex-col bg-white text-gray-600 pt-8 pb-12 w-full rounded-lg px-8 justify-center">
@@ -53,26 +62,35 @@ export default function Library() {
                             <span className="text-md font-medium text-gray-500 hover:text-primary-600 hover:underline cursor-pointer transition pr-2.5">Ver todos</span>
                         </div>
                         <div className="grid grid-cols-5 gap-12 mt-4">
-                            <Book image="https://m.media-amazon.com/images/I/91k68MKPbNL._AC_UF1000,1000_QL80_.jpg" title="Oyasumi Punpun" author="Inio Asano" rating="5.0 (1.231)" />
+                            <Book id="gf5g6re61" image="https://m.media-amazon.com/images/I/91k68MKPbNL._AC_UF1000,1000_QL80_.jpg" title="Oyasumi Punpun" author="Inio Asano" rating="5.0 (1.231)" />
                             <Book
+                                id="gf5g6re61"
                                 image="https://m.media-amazon.com/images/I/71HbYElfY0L._AC_UF1000,1000_QL80_.jpg"
                                 title="Harry Potter and the Sorcerer's Stone"
                                 author="J. K. Rowling"
                                 rating="2.3 (5.231)"
                             />
                             <Book
+                                id="gf5g6re61"
                                 image="https://m.media-amazon.com/images/I/81tM68Xn66L._AC_UF1000,1000_QL80_.jpg"
                                 title="Star Wars: The High Republic: Light of the Jedi"
                                 author="Charles Soule"
                                 rating="4.8 (631)"
                             />
                             <Book
+                                id="gf5g6re61"
                                 image="https://m.media-amazon.com/images/I/91LptBSFxQL._AC_UF1000,1000_QL80_.jpg"
                                 title="Percy Jackson and the Olympians: The Lightning Thief"
                                 author="Rick Riordan"
                                 rating="3.4 (3.288)"
                             />
-                            <Book image="https://m.media-amazon.com/images/I/614SwlZNtJL._AC_UF1000,1000_QL80_.jpg" title="The Hunger Games" author="Suzanne Collins" rating="5.0 (923)" />
+                            <Book
+                                id="gf5g6re61"
+                                image="https://m.media-amazon.com/images/I/614SwlZNtJL._AC_UF1000,1000_QL80_.jpg"
+                                title="The Hunger Games"
+                                author="Suzanne Collins"
+                                rating="5.0 (923)"
+                            />
                         </div>
                     </div>
                 </div>

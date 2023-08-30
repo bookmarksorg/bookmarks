@@ -63,6 +63,7 @@ export default function Home() {
                         <PostCard
                             author="Vitor_perei"
                             book="Dom Casmurro"
+                            bookId="52376982"
                             title="Capitu é mais corno que o joão?"
                             description="Essa é uma descrição séria pra saber qual dos personagens literários levou mais gaia"
                             date="25/04/2023"
@@ -74,6 +75,7 @@ export default function Home() {
                         <PostCard
                             author="Vitor_perei"
                             book="Dom Casmurro"
+                            bookId="52376982"
                             title="Capitu é mais corno que o joão?"
                             description="Essa é uma descrição séria pra saber qual dos personagens literários levou mais gaia"
                             date="25/04/2023"
@@ -81,6 +83,7 @@ export default function Home() {
                         <PostCard
                             author="Vitor_perei"
                             book="Dom Casmurro"
+                            bookId="52376982"
                             title="Capitu é mais corno que o joão?"
                             description="Essa é uma descrição séria pra saber qual dos personagens literários levou mais gaia"
                             date="25/04/2023"

@@ -6,10 +6,11 @@ interface PostCardProps {
     description: string;
     author: string;
     book: string;
+    bookId: string;
     date: string;
 }
 
-export default function PostCard({ title, description, author, book, date }: PostCardProps) {
+export default function PostCard({ title, description, author, book, bookId, date }: PostCardProps) {
     return (
         <div className="flex flex-col mx-6 mt-4 bg-white rounded-md px-8 py-6">
             <div className="flex justify-between mb-4">
@@ -18,7 +19,9 @@ export default function PostCard({ title, description, author, book, date }: Pos
                 </Link>
                 <span className="text-sm font-semibold text-gray-600">{date}</span>
             </div>
-            <span className="text-sm font-bold text-primary-600 hover:underline cursor-pointer">{book}</span>
+            <Link href={`/books/${bookId}`} className="text-sm font-bold text-primary-600 hover:underline cursor-pointer">
+                {book}
+            </Link>
             <span className="text-lg font-bold text-gray-600 cursor-pointer">{title}</span>
             <span className="text-sm font-medium text-gray-600 mt-3">{description}</span>
             <div className="flex justify-end mt-8 gap-6">
