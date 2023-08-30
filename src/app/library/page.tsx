@@ -1,6 +1,7 @@
 import Header from "@/components/Header";
 import FilterBar from "@/components/Library/FilterBar";
 import Sidebar from "@/components/Sidebar/Sidebar";
+import Image from "next/image";
 import { FaBookOpen, FaStar } from "react-icons/fa6";
 
 export default function Library() {
@@ -25,7 +26,13 @@ export default function Library() {
                         <div className="grid grid-cols-5 gap-12 mt-4">
                             {/* book */}
                             <div className="flex flex-col w-48">
-                                <div className="h-72 bg-secondary-700 rounded-lg cursor-pointer transition hover:brightness-110"></div>
+                                <Image
+                                    src="https://m.media-amazon.com/images/I/91k68MKPbNL._AC_UF1000,1000_QL80_.jpg"
+                                    alt="book cover"
+                                    height={288}
+                                    width={192}
+                                    className="h-72 bg-secondary-700 rounded-lg cursor-pointer transition hover:brightness-110"
+                                ></Image>
                                 <span className="text-md font-medium text-gray-500 mt-2 hover:underline cursor-pointer line-clamp-2">Oyasumi Punpun</span>
                                 <div className="flex justify-between text-sm mt-3">
                                     <span className="text-gray-500 hover:underline cursor-pointer">Inio Asano</span>
@@ -36,7 +43,13 @@ export default function Library() {
                                 </div>
                             </div>
                             <div className="flex flex-col w-48">
-                                <div className="h-72 bg-secondary-700 rounded-lg cursor-pointer transition hover:brightness-110"></div>
+                                <Image
+                                    src="https://m.media-amazon.com/images/I/71HbYElfY0L._AC_UF1000,1000_QL80_.jpg"
+                                    alt="book cover"
+                                    height={288}
+                                    width={192}
+                                    className="h-72 bg-secondary-700 rounded-lg cursor-pointer transition hover:brightness-110"
+                                ></Image>
                                 <span className="text-md font-medium text-gray-500 mt-2 hover:underline cursor-pointer line-clamp-2">Harry Potter and the Sorcerer&apos;s Stone</span>
                                 <div className="flex justify-between text-sm mt-3">
                                     <span className="text-gray-500 hover:underline cursor-pointer">J. K. Rowling</span>
@@ -47,7 +60,13 @@ export default function Library() {
                                 </div>
                             </div>
                             <div className="flex flex-col w-48">
-                                <div className="h-72 bg-secondary-700 rounded-lg cursor-pointer transition hover:brightness-110"></div>
+                                <Image
+                                    src="https://m.media-amazon.com/images/I/81tM68Xn66L._AC_UF1000,1000_QL80_.jpg"
+                                    alt="book cover"
+                                    height={288}
+                                    width={192}
+                                    className="h-72 bg-secondary-700 rounded-lg cursor-pointer transition hover:brightness-110"
+                                ></Image>
                                 <span className="text-md font-medium text-gray-500 mt-2 hover:underline cursor-pointer line-clamp-2" title="Star Wars: The High Republic: Light of the Jedi">
                                     Star Wars: The High Republic: Light of the Jedi
                                 </span>
@@ -60,7 +79,13 @@ export default function Library() {
                                 </div>
                             </div>
                             <div className="flex flex-col w-48">
-                                <div className="h-72 bg-secondary-700 rounded-lg cursor-pointer transition hover:brightness-110"></div>
+                                <Image
+                                    src="https://m.media-amazon.com/images/I/91LptBSFxQL._AC_UF1000,1000_QL80_.jpg"
+                                    alt="book cover"
+                                    height={288}
+                                    width={192}
+                                    className="h-72 bg-secondary-700 rounded-lg cursor-pointer transition hover:brightness-110"
+                                ></Image>
                                 <span className="text-md font-medium text-gray-500 mt-2 hover:underline cursor-pointer line-clamp-2">Percy Jackson and the Olympians: The Lightning Thief</span>
                                 <div className="flex justify-between text-sm mt-3">
                                     <span className="text-gray-500 hover:underline cursor-pointer">Rick Riordan</span>
@@ -71,7 +96,13 @@ export default function Library() {
                                 </div>
                             </div>
                             <div className="flex flex-col w-48">
-                                <div className="h-72 bg-secondary-700 rounded-lg cursor-pointer transition hover:brightness-110"></div>
+                                <Image
+                                    src="https://m.media-amazon.com/images/I/614SwlZNtJL._AC_UF1000,1000_QL80_.jpg"
+                                    alt="book cover"
+                                    height={288}
+                                    width={192}
+                                    className="h-72 bg-secondary-700 rounded-lg cursor-pointer transition hover:brightness-110"
+                                ></Image>
                                 <span className="text-md font-medium text-gray-500 mt-2 hover:underline cursor-pointer line-clamp-2">The Hunger Games</span>
                                 <div className="flex justify-between text-sm mt-3">
                                     <span className="text-gray-500 hover:underline cursor-pointer">Suzanne Collins</span>
@@ -91,7 +122,13 @@ export default function Library() {
                         <div className="grid grid-cols-5 gap-12 mt-4">
                             {/* book */}
                             <div className="flex flex-col w-48">
-                                <div className="h-72 bg-secondary-700 rounded-lg cursor-pointer transition hover:brightness-110"></div>
+                                <Image
+                                    src="https://m.media-amazon.com/images/I/91k68MKPbNL._AC_UF1000,1000_QL80_.jpg"
+                                    alt="book cover"
+                                    height={288}
+                                    width={192}
+                                    className="h-72 bg-secondary-700 rounded-lg cursor-pointer transition hover:brightness-110"
+                                ></Image>
                                 <span className="text-md font-medium text-gray-500 mt-2 hover:underline cursor-pointer line-clamp-2">Oyasumi Punpun</span>
                                 <div className="flex justify-between text-sm mt-3">
                                     <span className="text-gray-500 hover:underline cursor-pointer">Inio Asano</span>
@@ -102,7 +139,13 @@ export default function Library() {
                                 </div>
                             </div>
                             <div className="flex flex-col w-48">
-                                <div className="h-72 bg-secondary-700 rounded-lg cursor-pointer transition hover:brightness-110"></div>
+                                <Image
+                                    src="https://m.media-amazon.com/images/I/71HbYElfY0L._AC_UF1000,1000_QL80_.jpg"
+                                    alt="book cover"
+                                    height={288}
+                                    width={192}
+                                    className="h-72 bg-secondary-700 rounded-lg cursor-pointer transition hover:brightness-110"
+                                ></Image>
                                 <span className="text-md font-medium text-gray-500 mt-2 hover:underline cursor-pointer line-clamp-2">Harry Potter and the Sorcerer&apos;s Stone</span>
                                 <div className="flex justify-between text-sm mt-3">
                                     <span className="text-gray-500 hover:underline cursor-pointer">J. K. Rowling</span>
@@ -113,7 +156,13 @@ export default function Library() {
                                 </div>
                             </div>
                             <div className="flex flex-col w-48">
-                                <div className="h-72 bg-secondary-700 rounded-lg cursor-pointer transition hover:brightness-110"></div>
+                                <Image
+                                    src="https://m.media-amazon.com/images/I/81tM68Xn66L._AC_UF1000,1000_QL80_.jpg"
+                                    alt="book cover"
+                                    height={288}
+                                    width={192}
+                                    className="h-72 bg-secondary-700 rounded-lg cursor-pointer transition hover:brightness-110"
+                                ></Image>
                                 <span className="text-md font-medium text-gray-500 mt-2 hover:underline cursor-pointer line-clamp-2" title="Star Wars: The High Republic: Light of the Jedi">
                                     Star Wars: The High Republic: Light of the Jedi
                                 </span>
@@ -126,7 +175,13 @@ export default function Library() {
                                 </div>
                             </div>
                             <div className="flex flex-col w-48">
-                                <div className="h-72 bg-secondary-700 rounded-lg cursor-pointer transition hover:brightness-110"></div>
+                                <Image
+                                    src="https://m.media-amazon.com/images/I/91LptBSFxQL._AC_UF1000,1000_QL80_.jpg"
+                                    alt="book cover"
+                                    height={288}
+                                    width={192}
+                                    className="h-72 bg-secondary-700 rounded-lg cursor-pointer transition hover:brightness-110"
+                                ></Image>
                                 <span className="text-md font-medium text-gray-500 mt-2 hover:underline cursor-pointer line-clamp-2">Percy Jackson and the Olympians: The Lightning Thief</span>
                                 <div className="flex justify-between text-sm mt-3">
                                     <span className="text-gray-500 hover:underline cursor-pointer">Rick Riordan</span>
@@ -137,7 +192,13 @@ export default function Library() {
                                 </div>
                             </div>
                             <div className="flex flex-col w-48">
-                                <div className="h-72 bg-secondary-700 rounded-lg cursor-pointer transition hover:brightness-110"></div>
+                                <Image
+                                    src="https://m.media-amazon.com/images/I/614SwlZNtJL._AC_UF1000,1000_QL80_.jpg"
+                                    alt="book cover"
+                                    height={288}
+                                    width={192}
+                                    className="h-72 bg-secondary-700 rounded-lg cursor-pointer transition hover:brightness-110"
+                                ></Image>
                                 <span className="text-md font-medium text-gray-500 mt-2 hover:underline cursor-pointer line-clamp-2">The Hunger Games</span>
                                 <div className="flex justify-between text-sm mt-3">
                                     <span className="text-gray-500 hover:underline cursor-pointer">Suzanne Collins</span>

@@ -7,7 +7,7 @@ export default function Login() {
         <div className="flex min-h-full bg-primary-700">
             <div className="flex flex-[7] flex-col bg-primary-700 items-center gap-20">
                 <div className="flex flex-col items-center gap-12 text-white mt-32 px-28">
-                    <h1 className="text-4xl font-bold">Bem vindo de volta!</h1>
+                    <h1 className="text-5xl font-bold">Bem vindo de volta!</h1>
                     <Image src="/login.png" width={450} height={450} alt="Two people talking to each other with a cup of coffee on their hands" />
                 </div>
             </div>
