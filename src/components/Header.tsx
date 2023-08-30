@@ -10,7 +10,7 @@ export default function Header() {
             </Link>
             <div className="flex relative w-full">
                 <input
-                    className="pr-4 pl-12 py-2 max-w-[40rem] text-lg h-fit rounded-full border text-gray-600 border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-600 focus:border-transparent transition w-full peer"
+                    className="pr-4 pl-12 py-2 text-lg h-fit rounded-full border text-gray-600 border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-600 focus:border-transparent transition w-6/12 peer"
                     type="text"
                     id="search"
                 />
