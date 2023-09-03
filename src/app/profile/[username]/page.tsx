@@ -1,6 +1,7 @@
 "use client";
 
 import Header from "@/components/Header";
+import Book from "@/components/Library/Book";
 import Sidebar from "@/components/Sidebar/Sidebar";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -103,58 +104,18 @@ export default function Profile() {
                         </div>
                         {/* books */}
                         <div className="grid grid-cols-5 px-8 mt-8 gap-8">
-                            <div className="flex flex-col w-48">
-                                <div className="h-72 bg-secondary-700 rounded-lg cursor-pointer transition hover:brightness-110 text-white text-2xl px-7 items-center justify-center flex">
-                                    Percy Jackson and the Olympians: The Lightning Thief
-                                </div>
-                            </div>
-                            <div className="flex flex-col w-48">
-                                <div className="h-72 bg-secondary-700 rounded-lg cursor-pointer transition hover:brightness-110 text-white text-2xl px-7 items-center justify-center flex">
-                                    Oyasumi Punpun
-                                </div>
-                            </div>
-                            <div className="flex flex-col w-48">
-                                <div className="h-72 bg-secondary-700 rounded-lg cursor-pointer transition hover:brightness-110 text-white text-2xl px-7 items-center justify-center flex">
-                                    Star Wars: The High Republic: Light of the Jedi
-                                </div>
-                            </div>
-                            <div className="flex flex-col w-48">
-                                <div className="h-72 bg-secondary-700 rounded-lg cursor-pointer transition hover:brightness-110 text-white text-2xl px-7 items-center justify-center flex">
-                                    The Hunger Games
-                                </div>
-                            </div>
-                            <div className="flex flex-col w-48">
-                                <div className="h-72 bg-secondary-700 rounded-lg cursor-pointer transition hover:brightness-110 text-white text-2xl px-7 items-center justify-center flex">
-                                    Harry Potter and the Sorcerer&apos;s Stone
-                                </div>
-                            </div>
-                            <div className="flex flex-col w-48">
-                                <div className="h-72 bg-secondary-700 rounded-lg cursor-pointer transition hover:brightness-110 text-white text-2xl px-7 items-center justify-center flex">
-                                    Percy Jackson and the Olympians: The Lightning Thief
-                                </div>
-                            </div>
-                            <div className="flex flex-col w-48">
-                                <div className="h-72 bg-secondary-700 rounded-lg cursor-pointer transition hover:brightness-110 text-white text-2xl px-7 items-center justify-center flex">
-                                    Star Wars: The High Republic: Light of the Jedi
-                                </div>
-                            </div>
-                            <div className="flex flex-col w-48">
-                                <div className="h-72 bg-secondary-700 rounded-lg cursor-pointer transition hover:brightness-110 text-white text-2xl px-7 items-center justify-center flex">
-                                    Oyasumi Punpun
-                                </div>
-                            </div>
-                            <div className="flex flex-col w-48">
-                                <div className="h-72 bg-secondary-700 rounded-lg cursor-pointer transition hover:brightness-110 text-white text-2xl px-7 items-center justify-center flex">
-                                    Harry Potter and the Sorcerer&apos;s Stone
-                                </div>
-                            </div>
-                            <div className="flex flex-col w-48">
-                                <div className="h-72 bg-secondary-700 rounded-lg cursor-pointer transition hover:brightness-110 text-white text-2xl px-7 items-center justify-center flex">
-                                    The Hunger Games
-                                </div>
-                            </div>
+                            <Book id="c3x5jiogs9" image="https://m.media-amazon.com/images/I/614SwlZNtJL._AC_UF1000,1000_QL80_.jpg" noDetails={true} />
+                            <Book id="z7b8w0fkh0" image="https://m.media-amazon.com/images/I/91k68MKPbNL._AC_UF1000,1000_QL80_.jpg" noDetails={true} />
+                            <Book id="g6h34ui3w4" image="https://m.media-amazon.com/images/I/81tM68Xn66L._AC_UF1000,1000_QL80_.jpg" noDetails={true} />
+                            <Book id="m53ynos09g" image="https://m.media-amazon.com/images/I/71HbYElfY0L._AC_UF1000,1000_QL80_.jpg" noDetails={true} />
+                            <Book id="n3ui4tn3tm" image="https://m.media-amazon.com/images/I/91LptBSFxQL._AC_UF1000,1000_QL80_.jpg" noDetails={true} />
+                            <Book id="z7b8w0fkh0" image="https://m.media-amazon.com/images/I/91k68MKPbNL._AC_UF1000,1000_QL80_.jpg" noDetails={true} />
+                            <Book id="n3ui4tn3tm" image="https://m.media-amazon.com/images/I/91LptBSFxQL._AC_UF1000,1000_QL80_.jpg" noDetails={true} />
+                            <Book id="m53ynos09g" image="https://m.media-amazon.com/images/I/71HbYElfY0L._AC_UF1000,1000_QL80_.jpg" noDetails={true} />
+                            <Book id="g6h34ui3w4" image="https://m.media-amazon.com/images/I/81tM68Xn66L._AC_UF1000,1000_QL80_.jpg" noDetails={true} />
+                            <Book id="c3x5jiogs9" image="https://m.media-amazon.com/images/I/614SwlZNtJL._AC_UF1000,1000_QL80_.jpg" noDetails={true} />
                         </div>
-                        <button className="flex items-center self-center text-lg py-2 px-10 mt-10 mb-2 rounded-lg bg-primary-600 text-white transition hover:brightness-105 font-semibold">
+                        <button className="flex items-center self-center text-lg py-2 px-10 mt-10 mb-4 rounded-lg bg-primary-600 text-white transition hover:brightness-105 font-semibold">
                             Mostrar mais
                         </button>
                     </div>
