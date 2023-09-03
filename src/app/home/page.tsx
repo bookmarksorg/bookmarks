@@ -3,13 +3,12 @@
 import { useState } from "react";
 
 import { FaComments, FaBookmark, FaSquarePlus } from "react-icons/fa6";
-import { FaCrown } from "react-icons/fa";
-import { BiSolidCrown } from "react-icons/bi";
 
 import Header from "@/components/Header";
 import PostCard from "@/components/PostCard";
 import Sidebar from "@/components/Sidebar/Sidebar";
-import { CustomModal } from "@/components/CustomModal";
+import { GenresModal } from "@/components/Home/GenresModal";
+import Leaderboard from "@/components/Home/Leaderboard";
 
 export default function Home() {
     const [genresModal, setGenresModal] = useState(false);
@@ -28,7 +27,7 @@ export default function Home() {
 
     return (
         <div className="flex flex-col overflow-y-hidden">
-            <CustomModal isOpen={genresModal} onConfirm={() => handleSaveGenres()} setModalIsOpen={setGenresModal} />
+            <GenresModal isOpen={genresModal} onConfirm={() => handleSaveGenres()} setModalIsOpen={setGenresModal} />
             <Header />
             <div className="flex h-screen-header">
                 <Sidebar />
@@ -60,135 +59,40 @@ export default function Home() {
                                 Nova discussão
                             </div>
                         </div>
-                        <PostCard
-                            author="Vitor_perei"
-                            book="Dom Casmurro"
-                            bookId="52376982"
-                            title="Capitu é mais corno que o joão?"
-                            description="Essa é uma descrição séria pra saber qual dos personagens literários levou mais gaia"
-                            date="25/04/2023"
-                        />
+                        <div className="flex flex-col px-6">
+                            <PostCard
+                                author="Vitor_perei"
+                                book="Harry Potter and the Sorcerer's Stone"
+                                bookId="m53ynos09g"
+                                title="Snape is Harry's father"
+                                description="This is a serious description to know if Snape is Harry's father"
+                                date="02/09/2023"
+                            />
+                        </div>
                         {/* content */}
                         <div className="flex justify-between px-8 pt-10 pb-2">
                             <h3 className="text-xl text-gray-600 font-bold">Sem atualizações</h3>
                         </div>
-                        <PostCard
-                            author="Vitor_perei"
-                            book="Dom Casmurro"
-                            bookId="52376982"
-                            title="Capitu é mais corno que o joão?"
-                            description="Essa é uma descrição séria pra saber qual dos personagens literários levou mais gaia"
-                            date="25/04/2023"
-                        />
-                        <PostCard
-                            author="Vitor_perei"
-                            book="Dom Casmurro"
-                            bookId="52376982"
-                            title="Capitu é mais corno que o joão?"
-                            description="Essa é uma descrição séria pra saber qual dos personagens literários levou mais gaia"
-                            date="25/04/2023"
-                        />
-                    </div>
-                    {/* leaderboard */}
-                    <div className="flex flex-col flex-1 h-fit bg-[#F1F5FA] rounded-md px-6 pb-5">
-                        {/* title */}
-                        <div className="flex flex-col items-center justify-center gap-2 text-2xl font-medium text-gray-600">
-                            <FaCrown className="w-10 h-10 text-[#FFB743] self-center mt-4" />
-                            Leaderboard
-                        </div>
-                        <div className="flex flex-col gap-3 mt-6">
-                            <div className="flex flex-col bg-gray-200 w-full rounded-lg h-max">
-                                <div className="flex items-center justify-between gap-2 font-medium text-gray-600 py-3 px-4">
-                                    <div className="flex items-center">
-                                        <BiSolidCrown size={22} className="text-[#FFB743]" />
-                                        <span className="ml-3">Vitor_perei</span>
-                                    </div>
-                                    <span className="text-[#9D6B3C]">1000 pts</span>
-                                </div>
-                            </div>
-                            <div className="flex flex-col bg-gray-200 w-full rounded-lg h-max">
-                                <div className="flex items-center justify-between gap-2 font-medium text-gray-600 py-3 px-4">
-                                    <div className="flex items-center">
-                                        <BiSolidCrown size={22} className="text-[#48C8FF]" />
-                                        <span className="ml-3">Vitor_perei</span>
-                                    </div>
-                                    <span className="text-[#9D6B3C]">1000 pts</span>
-                                </div>
-                            </div>
-                            <div className="flex flex-col bg-gray-200 w-full rounded-lg h-max">
-                                <div className="flex items-center justify-between gap-2 font-medium text-gray-600 py-3 px-4">
-                                    <div className="flex items-center">
-                                        <BiSolidCrown size={22} className="text-[#FF7A00]" />
-                                        <span className="ml-3">Vitor_perei</span>
-                                    </div>
-                                    <span className="text-[#9D6B3C]">1000 pts</span>
-                                </div>
-                            </div>
-                            <div className="flex flex-col bg-gray-200 w-full rounded-lg h-max">
-                                <div className="flex items-center justify-between gap-2 font-medium text-gray-600 py-3 px-4">
-                                    <div className="flex items-center">
-                                        <span className="ml-1.5 font-bold text-gray-600">4</span>
-                                        <span className="ml-3">Vitor_perei</span>
-                                    </div>
-                                    <span className="text-[#9D6B3C]">1000 pts</span>
-                                </div>
-                            </div>
-                            <div className="flex flex-col bg-gray-200 w-full rounded-lg h-max">
-                                <div className="flex items-center justify-between gap-2 font-medium text-gray-600 py-3 px-4">
-                                    <div className="flex items-center">
-                                        <span className="ml-1.5 font-bold text-gray-600">5</span>
-                                        <span className="ml-3">Vitor_perei</span>
-                                    </div>
-                                    <span className="text-[#9D6B3C]">1000 pts</span>
-                                </div>
-                            </div>
-                            <div className="flex flex-col bg-gray-200 w-full rounded-lg h-max">
-                                <div className="flex items-center justify-between gap-2 font-medium text-gray-600 py-3 px-4">
-                                    <div className="flex items-center">
-                                        <span className="ml-1.5 font-bold text-gray-600">6</span>
-                                        <span className="ml-3">Vitor_perei</span>
-                                    </div>
-                                    <span className="text-[#9D6B3C]">1000 pts</span>
-                                </div>
-                            </div>
-                            <div className="flex flex-col bg-gray-200 w-full rounded-lg h-max">
-                                <div className="flex items-center justify-between gap-2 font-medium text-gray-600 py-3 px-4">
-                                    <div className="flex items-center">
-                                        <span className="ml-1.5 font-bold text-gray-600">7</span>
-                                        <span className="ml-3">Vitor_perei</span>
-                                    </div>
-                                    <span className="text-[#9D6B3C]">1000 pts</span>
-                                </div>
-                            </div>
-                            <div className="flex flex-col bg-gray-200 w-full rounded-lg h-max">
-                                <div className="flex items-center justify-between gap-2 font-medium text-gray-600 py-3 px-4">
-                                    <div className="flex items-center">
-                                        <span className="ml-1.5 font-bold text-gray-600">8</span>
-                                        <span className="ml-3">Vitor_perei</span>
-                                    </div>
-                                    <span className="text-[#9D6B3C]">1000 pts</span>
-                                </div>
-                            </div>
-                            <div className="flex flex-col bg-gray-200 w-full rounded-lg h-max">
-                                <div className="flex items-center justify-between gap-2 font-medium text-gray-600 py-3 px-4">
-                                    <div className="flex items-center">
-                                        <span className="ml-1.5 font-bold text-gray-600">9</span>
-                                        <span className="ml-3">Vitor_perei</span>
-                                    </div>
-                                    <span className="text-[#9D6B3C]">1000 pts</span>
-                                </div>
-                            </div>
-                            <div className="flex flex-col bg-primary-600/30 w-full rounded-lg h-max">
-                                <div className="flex items-center justify-between gap-2 font-medium text-gray-600 py-3 px-4">
-                                    <div className="flex items-center">
-                                        <span className="ml-1.5 font-bold text-primary-700">1002</span>
-                                        <span className="ml-3">Vitor_perei</span>
-                                    </div>
-                                    <span className="text-[#9D6B3C]">1000 pts</span>
-                                </div>
-                            </div>
+                        <div className="flex flex-col px-6">
+                            <PostCard
+                                author="Iasminborbita"
+                                book="Oyasumi Punpun"
+                                bookId="z7b8w0fkh0"
+                                title="Is Punpun actually a bird?"
+                                description="I'm not sure if Punpun is a bird or not, does anyone know?"
+                                date="15/11/2022"
+                            />
+                            <PostCard
+                                author="thegreat_alex"
+                                book="The Hunger Games"
+                                bookId="c3x5jiogs9"
+                                title="Katniss and Peeta should have died"
+                                description="I think Katniss and Peeta should have died in the end of the book, what do you think?"
+                                date="28/02/2023"
+                            />
                         </div>
                     </div>
+                    <Leaderboard />
                 </div>
             </div>
         </div>

@@ -1,106 +1,18 @@
 "use client";
 
-import BookDetail from "@/components/Books/BookDetail";
-import Header from "@/components/Header";
-import Sidebar from "@/components/Sidebar/Sidebar";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { FaArrowLeft } from "react-icons/fa6";
 
-type BookInfo = {
-    image: string;
-    title: string;
-    sinopses?: string;
-    author: string;
-    pages: number;
-    language: string;
-    year: number;
-    genres: Record<string, string>[];
-    rating: number;
-    ratingUsers: string;
-};
+import BookDetail from "@/components/Books/BookDetail";
+import Header from "@/components/Header";
+import PostCard from "@/components/PostCard";
+import Sidebar from "@/components/Sidebar/Sidebar";
+
+import { FaArrowLeft } from "react-icons/fa6";
 
 export default function Books() {
     const { bookId } = useParams();
-
     const id = bookId as string;
-
-    const books: Record<string, BookInfo> = {
-        n3ui4tn3tm: {
-            image: "https://m.media-amazon.com/images/I/91LptBSFxQL._AC_UF1000,1000_QL80_.jpg",
-            title: "Percy Jackson and the Olympians: The Lightning Thief",
-            author: "Rick Riordan",
-            pages: 237,
-            language: "English",
-            year: 2005,
-            genres: [
-                { name: "Fantasy", color: "bg-green-500/90" },
-                { name: "Young Adult", color: "bg-yellow-500/90" },
-                { name: "Adventure", color: "bg-teal-500/90" },
-            ],
-            rating: 3.4,
-            ratingUsers: "3.288",
-        },
-        g6h34ui3w4: {
-            image: "https://m.media-amazon.com/images/I/81tM68Xn66L._AC_UF1000,1000_QL80_.jpg",
-            title: "Star Wars: The High Republic: Light of the Jedi",
-            author: "Charles Soule",
-            pages: 427,
-            language: "English",
-            year: 2021,
-            genres: [
-                { name: "Science Fiction", color: "bg-blue-500/90" },
-                { name: "Fantasy", color: "bg-green-500/90" },
-            ],
-            rating: 4.8,
-            ratingUsers: "631",
-        },
-        m53ynos09g: {
-            image: "https://m.media-amazon.com/images/I/71HbYElfY0L._AC_UF1000,1000_QL80_.jpg",
-            title: "Harry Potter and the Sorcerer's Stone",
-            author: "J. K. Rowling",
-            pages: 309,
-            language: "English",
-            year: 1997,
-            genres: [
-                { name: "Fantasy", color: "bg-green-500/90" },
-                { name: "Magic", color: "bg-yellow-500/90" },
-            ],
-            rating: 2.3,
-            ratingUsers: "5.231",
-        },
-        z7b8w0fkh0: {
-            image: "https://m.media-amazon.com/images/I/91k68MKPbNL._AC_UF1000,1000_QL80_.jpg",
-            title: "Oyasumi Punpun",
-            author: "Inio Asano",
-            pages: 164,
-            language: "Japanese",
-            year: 2007,
-            genres: [
-                { name: "Drama", color: "bg-red-500/90" },
-                { name: "Slice of Life", color: "bg-yellow-500/90" },
-                { name: "Psychological", color: "bg-purple-500/90" },
-                { name: "Seinen", color: "bg-blue-500/90" },
-            ],
-            rating: 5.0,
-            ratingUsers: "666.666",
-        },
-        c3x5jiogs9: {
-            image: "https://m.media-amazon.com/images/I/614SwlZNtJL._AC_UF1000,1000_QL80_.jpg",
-            title: "The Hunger Games",
-            author: "Suzanne Collins",
-            pages: 526,
-            language: "English",
-            year: 2008,
-            genres: [
-                { name: "Science Fiction", color: "bg-blue-500/90" },
-                { name: "Young Adult", color: "bg-yellow-500/90" },
-                { name: "Adventure", color: "bg-teal-500/90" },
-            ],
-            rating: 4.2,
-            ratingUsers: "923",
-        },
-    };
 
     return (
         <div className="flex flex-col overflow-y-hidden">
@@ -112,19 +24,42 @@ export default function Books() {
                         <FaArrowLeft className="w-5 h-5" />
                         <h2 className="text-xl font-semibold text-gray-600">Voltar</h2>
                     </Link>
-                    <div className="flex bg-white text-gray-600 py-12 w-full rounded-lg px-12 justify-center gap-4">
-                        <BookDetail
-                            id={id}
-                            image={books[id].image}
-                            title={books[id].title}
-                            author={books[id].author}
-                            pages={books[id].pages}
-                            language={books[id].language}
-                            year={books[id].year}
-                            genres={books[id].genres}
-                            rating={books[id].rating}
-                            ratingUsers={books[id].ratingUsers}
-                        />
+                    <div className="flex flex-col bg-[#F1F5FA] text-gray-600 py-12 w-full rounded-lg px-12 justify-center gap-4">
+                        <BookDetail id={id} />
+                    </div>
+                    <div className="flex flex-col bg-[#F1F5FA] text-gray-600 pt-3 pb-12 w-full rounded-lg px-12 justify-center gap-4">
+                        <div className="flex flex-col mt-8">
+                            <div className="flex justify-between px-1 items-center relative mb-4">
+                                <h2 className="text-2xl font-bold text-gray-600">Reviews recentes</h2>
+                                <Link href={`/books/${id}/discussions`}>
+                                    <span className="text-md font-semibold text-primary-600 hover:underline">Ver todos</span>
+                                </Link>
+                            </div>
+                            <PostCard
+                                title="Esse livro é até que bom, recomendo"
+                                author="random_bob"
+                                description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusamus explicabo voluptatibus delectus necessitatibus suscipit, nam ipsum impedit voluptate dignissimos vero quas possimus odit, consequatur quam omnis quaerat! Aliquam, perspiciatis error."
+                                date="15/09/2021"
+                                isReview
+                                rating={4}
+                            />
+                            <PostCard
+                                title="Podia ser melhor"
+                                author="average_joe"
+                                description="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Maxime ut consequuntur architecto. Magnam quam autem amet consectetur, quod magni minima."
+                                date="13/09/2021"
+                                isReview
+                                rating={3}
+                            />
+                            <PostCard
+                                title="Odiei esse livro com todas as minhas forças"
+                                author="Joaozinho"
+                                description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab explicabo facere temporibus, impedit mollitia inventore hic autem porro molestias laborum maiores fugiat quasi ipsa laudantium cupiditate aliquid ad delectus, saepe cumque, dicta veniam. Nobis distinctio ipsam assumenda nihil illo hic iste nam non corporis odit, temporibus vel doloribus in quisquam?"
+                                date="08/09/2021"
+                                isReview
+                                rating={1}
+                            />
+                        </div>
                     </div>
                 </div>
             </div>

@@ -32,13 +32,13 @@ const customStyles = {
     },
 };
 
-type CustomModalProps = {
+type GenresModalProps = {
     isOpen: boolean;
     onConfirm: () => void;
     setModalIsOpen: (value: boolean) => void;
 };
 
-export function CustomModal({ isOpen, onConfirm, setModalIsOpen }: CustomModalProps) {
+export function GenresModal({ isOpen, onConfirm, setModalIsOpen }: GenresModalProps) {
     Modal.setAppElement("#root");
 
     const [modalIsOpen, setIsOpen] = useState(isOpen);
