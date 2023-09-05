@@ -50,17 +50,17 @@ export default function Discussions() {
             <Header />
             <div className="flex h-screen-header">
                 <Sidebar />
-                <div className="flex flex-col flex-grow p-8 pl-12 gap-8 bg-[#C4CCD8] overflow-y-auto">
+                <div className="flex flex-col flex-grow p-8 pl-12 gap-8 bg-[#C4CCD8] dark:bg-[#4B5B73] dark:text-white overflow-y-auto">
                     <Link href={`/books/${id}`} className="flex gap-3 items-center hover:underline">
                         <FaArrowLeft className="w-5 h-5" />
-                        <h2 className="text-xl font-semibold text-gray-600">Voltar</h2>
+                        <h2 className="text-xl font-semibold">Voltar</h2>
                     </Link>
-                    <div className="flex flex-col bg-[#F1F5FA] text-gray-600 py-12 w-full rounded-lg px-12 justify-center gap-4">
+                    <div className="flex flex-col bg-[#F1F5FA] dark:bg-[#253449] text-gray-600 dark:text-white py-12 w-full rounded-lg px-12 justify-center gap-4">
                         <div className="flex gap-12">
                             <Image src={books[id].image} width={150} height={300} alt={`${books[id].title}'s cover`} className="rounded-lg cursor-pointer transition hover:brightness-110" />
                             <div className="flex flex-col gap-2 font-semibold justify-between w-full">
                                 <h2 className="flex flex-col gap-2 text-2xl">
-                                    <span className="text-gray-600">Fórum sobre:</span>
+                                    <span className="">Fórum sobre:</span>
                                     <span className="text-primary-600 text-4xl">{books[id].title}</span>
                                 </h2>
                                 <div className="flex w-full items-center justify-between">
@@ -82,7 +82,7 @@ export default function Discussions() {
                                 </div>
                             </div>
                         </div>
-                        <div className="flex justify-between mt-16 border-b-2 border-b-[#D5D8DB] text-gray-500">
+                        <div className="flex justify-between mt-16 border-b-2 border-b-[#D5D8DB] dark:border-b-[#4B5B73] text-gray-500 dark:text-white">
                             <div className="flex">
                                 <div
                                     className={`flex px-10 py-2 cursor-pointer border-b-4 border-transparent ${forumStatus === "reviews" ? "border-b-primary-700" : ""} transition`}

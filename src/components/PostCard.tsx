@@ -14,10 +14,10 @@ interface PostCardProps {
 
 export default function PostCard({ title, description, author, book, bookId, date, isReview, rating }: PostCardProps) {
     return (
-        <div className={`flex flex-col mt-4 bg-white rounded-md px-8 ${isReview ? "py-8" : "py-6"} w-full`}>
+        <div className={`flex flex-col mt-4 bg-white dark:bg-[#2D3F59] text-gray-600 dark:text-white/90 rounded-md px-8 ${isReview ? "py-8" : "py-6"} w-full`}>
             <div className="flex justify-between mb-4">
                 <div className="flex gap-2 items-center">
-                    <Link href={`/profile/${author}`} className="text-sm font-bold text-gray-600 hover:underline cursor-pointer">
+                    <Link href={`/profile/${author}`} className="text-sm font-bold hover:underline cursor-pointer">
                         {author}
                     </Link>
                     {rating && (
@@ -31,26 +31,26 @@ export default function PostCard({ title, description, author, book, bookId, dat
                         </span>
                     )}
                 </div>
-                <span className="text-sm font-semibold text-gray-600">{date}</span>
+                <span className="text-sm font-semibold">{date}</span>
             </div>
             {book && (
                 <Link href={`/books/${bookId}`} className="text-sm font-bold text-primary-600 hover:underline cursor-pointer">
                     {book}
                 </Link>
             )}
-            <span className="text-lg font-bold text-gray-600 cursor-pointer">{title}</span>
-            <span className="text-sm font-medium text-gray-600 mt-3">{description}</span>
+            <span className="text-lg font-bold  cursor-pointer">{title}</span>
+            <span className="text-sm font-medium mt-3">{description}</span>
             {!isReview && (
                 <div className="flex justify-end mt-8 gap-6">
-                    <div className="flex gap-1 items-center cursor-pointer transition text-gray-600 hover:text-primary-600">
+                    <div className="flex gap-1 items-center cursor-pointer transition hover:text-primary-600">
                         <FaRegCommentDots className="w-5 h-5" />
                         <span className="text-sm font-medium">2k Comentários</span>
                     </div>
-                    <div className="flex gap-1 items-center cursor-pointer transition text-gray-600 hover:text-primary-600">
+                    <div className="flex gap-1 items-center cursor-pointer transition hover:text-primary-600">
                         <FaRegThumbsUp className="w-5 h-5" />
                         <span className="text-sm font-mediu">3k Curtidas</span>
                     </div>
-                    <div className="flex gap-1 items-center cursor-pointer transition text-gray-600 hover:text-primary-600">
+                    <div className="flex gap-1 items-center cursor-pointer transition hover:text-primary-600">
                         <FaRegBookmark className="w-5 h-5" />
                         <span className="text-sm font-medium">14k Marcações</span>
                     </div>

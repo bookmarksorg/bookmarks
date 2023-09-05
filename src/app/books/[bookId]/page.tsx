@@ -19,18 +19,18 @@ export default function Books() {
             <Header />
             <div className="flex h-screen-header">
                 <Sidebar />
-                <div className="flex flex-col flex-grow p-8 pl-12 gap-8 bg-[#C4CCD8] overflow-y-auto">
+                <div className="flex flex-col flex-grow p-8 pl-12 gap-8 bg-[#C4CCD8] dark:bg-[#4B5B73] text-gray-600 dark:text-white overflow-y-auto">
                     <Link href="/library" className="flex gap-3 items-center hover:underline">
                         <FaArrowLeft className="w-5 h-5" />
-                        <h2 className="text-xl font-semibold text-gray-600">Voltar</h2>
+                        <h2 className="text-xl font-semibold">Voltar</h2>
                     </Link>
-                    <div className="flex flex-col bg-[#F1F5FA] text-gray-600 py-12 w-full rounded-lg px-12 justify-center gap-4">
+                    <div className="flex flex-col bg-[#F1F5FA] dark:bg-[#253449] py-12 w-full rounded-lg px-12 justify-center gap-4">
                         <BookDetail id={id} />
                     </div>
-                    <div className="flex flex-col bg-[#F1F5FA] text-gray-600 pt-3 pb-12 w-full rounded-lg px-12 justify-center gap-4">
+                    <div className="flex flex-col bg-[#F1F5FA] dark:bg-[#253449] pt-3 pb-12 w-full rounded-lg px-12 justify-center gap-4">
                         <div className="flex flex-col mt-8">
                             <div className="flex justify-between px-1 items-center relative mb-4">
-                                <h2 className="text-2xl font-bold text-gray-600">Reviews recentes</h2>
+                                <h2 className="text-2xl font-bold">Reviews recentes</h2>
                                 <Link href={`/books/${id}/forum`}>
                                     <span className="text-md font-semibold text-primary-600 hover:underline">Ver todos</span>
                                 </Link>

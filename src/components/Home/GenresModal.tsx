@@ -60,7 +60,7 @@ export function GenresModal({ isOpen, onConfirm, setModalIsOpen }: GenresModalPr
 
     return (
         <Modal
-            className="outline-none absolute w-3/5 h-5/6 bg-white rounded-xl flex flex-col items-center"
+            className="outline-none absolute w-3/5 h-5/6 bg-white dark:bg-[#253449] rounded-xl flex flex-col items-center"
             overlayClassName="overlay"
             onRequestClose={closeModal}
             shouldCloseOnOverlayClick={true}
@@ -68,7 +68,7 @@ export function GenresModal({ isOpen, onConfirm, setModalIsOpen }: GenresModalPr
             style={customStyles}
             contentLabel="Select Modal"
         >
-            <div className="flex flex-col text-center text-secondary-700 h-full">
+            <div className="flex flex-col text-center text-secondary-700 dark:text-white h-full">
                 <div className="flex flex-col flex-[1] items-center">
                     <h2 className="text-4xl font-semibold mt-12">Selecione seus gêneros favoritos</h2>
 

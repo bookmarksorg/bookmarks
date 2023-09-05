@@ -10,7 +10,7 @@ export default function Library() {
             <Header />
             <div className="flex h-screen-header">
                 <Sidebar />
-                <div className="flex flex-col flex-grow p-8 pl-12 gap-8 bg-[#C4CCD8] overflow-y-auto">
+                <div className="flex flex-col flex-grow p-8 pl-12 gap-8 bg-[#C4CCD8] dark:bg-[#1C2635] dark:text-white overflow-y-auto">
                     <div className="flex gap-4">
                         <div className="text-2xl font-bold bg-primary-600 rounded-xl px-8 py-4 text-white w-fit flex justify-center items-center">
                             <FaBookOpen className="w-8 h-8 mr-4" />
@@ -18,10 +18,10 @@ export default function Library() {
                         </div>
                         <FilterBar />
                     </div>
-                    <div className="flex flex-col bg-white text-gray-600 pt-6 pb-12 w-full rounded-lg px-8 justify-center">
+                    <div className="flex flex-col bg-white dark:bg-[#253449] text-gray-600 dark:text-white/90 pt-6 pb-12 w-full rounded-lg px-8 justify-center">
                         <div className="flex justify-between pb-8">
-                            <h2 className="text-xl font-bold">Novidades</h2>
-                            <span className="text-md font-medium text-gray-500 hover:text-primary-600 hover:underline cursor-pointer transition pr-2.5">Ver todos</span>
+                            <h2 className="text-2xl font-bold">Novidades</h2>
+                            <span className="text-md font-medium text-gray-500 dark:text-white/90  hover:text-primary-600 hover:underline cursor-pointer transition pr-2.5">Ver todos</span>
                         </div>
                         <div className="grid grid-cols-5 gap-12 mt-4">
                             <Book
@@ -61,10 +61,10 @@ export default function Library() {
                             />
                         </div>
                     </div>
-                    <div className="flex flex-col bg-white text-gray-600 pt-8 pb-12 w-full rounded-lg px-8 justify-center">
+                    <div className="flex flex-col bg-white dark:bg-[#253449] text-gray-600 dark:text-white/90 pt-8 pb-12 w-full rounded-lg px-8 justify-center">
                         <div className="flex justify-between pb-8">
                             <h2 className="text-2xl font-bold">Mais curtidos</h2>
-                            <span className="text-md font-medium text-gray-500 hover:text-primary-600 hover:underline cursor-pointer transition pr-2.5">Ver todos</span>
+                            <span className="text-md font-medium text-gray-500 dark:text-white/90 hover:text-primary-600 hover:underline cursor-pointer transition pr-2.5">Ver todos</span>
                         </div>
                         <div className="grid grid-cols-5 gap-12 mt-4">
                             <Book

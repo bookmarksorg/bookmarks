@@ -104,7 +104,7 @@ export default function BookDetail({ id }: { id: string }) {
     const hasHalfStar = floatStars;
 
     return (
-        <div className="flex">
+        <div className="flex  dark:text-white/90">
             <div className="flex flex-col w-76">
                 <Image src={image} alt={title} height={446} width={300} className="rounded-lg cursor-pointer transition hover:brightness-110"></Image>
                 <button className="bg-primary-600 rounded-lg w-full py-2 text-white flex justify-center items-center mt-4 hover:brightness-110 transition">
@@ -147,29 +147,29 @@ export default function BookDetail({ id }: { id: string }) {
                 {/* details */}
                 <div className="flex gap-3 text-lg mt-6">
                     {/* author | pages | language */}
-                    <div className="text-gray-500">
+                    <div>
                         <span className="font-bold">Autor: </span>
                         <span>{author} |</span>
                     </div>
-                    <div className="text-gray-500">
+                    <div>
                         <span className="font-bold">Nº de páginas: </span>
                         <span>{pages} |</span>
                     </div>
-                    <div className="text-gray-500">
+                    <div>
                         <span className="font-bold">Idioma: </span>
                         <span>{language}</span>
                     </div>
                 </div>
                 {/* date */}
                 <div className="flex gap-3 text-lg mt-3">
-                    <div className="text-gray-500">
+                    <div>
                         <span className="font-bold">Ano de lançamento: </span>
                         <span>{year}</span>
                     </div>
                 </div>
                 {/* genres */}
                 <div className="flex gap-3 text-lg mt-3">
-                    <div className="flex flex-col gap-2 text-gray-500">
+                    <div className="flex flex-col gap-2 ">
                         <span className="font-bold">Gêneros: </span>
                         <div className="flex gap-3">
                             {genres.map((genre) => (
@@ -183,7 +183,7 @@ export default function BookDetail({ id }: { id: string }) {
                 <hr className="my-6 bg-gray-300 h-[2px]" />
                 {/* rating */}
                 <div className="flex gap-3 text-lg">
-                    <div className="flex flex-col gap-2 text-gray-500">
+                    <div className="flex flex-col gap-2 ">
                         <span className="font-bold">Nota dos usuários ({ratingUsers}): </span>
                         <div className="flex gap-2 text-[#F59E0B] items-center">
                             <span className="font-bold">{rating.toFixed(1)}</span>

@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import ToasterContext from "@/context/ToasterContext";
 import AuthContext from "@/context/AuthContext";
 import "./globals.css";
+import { ThemeProvider } from "@/components/ThemeProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,10 +17,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     return (
         <html lang="pt-br">
             <body id="root" className={inter.className}>
-                {/* <AuthContext> */}
-                <ToasterContext />
-                {children}
-                {/* </AuthContext> */}
+                <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+                    {/* <AuthContext> */}
+                    <ToasterContext />
+                    {children}
+                    {/* </AuthContext> */}
+                </ThemeProvider>
             </body>
         </html>
     );

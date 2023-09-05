@@ -11,7 +11,7 @@ import { GenresModal } from "@/components/Home/GenresModal";
 import Leaderboard from "@/components/Home/Leaderboard";
 
 export default function Home() {
-    const [genresModal, setGenresModal] = useState(false);
+    const [genresModal, setGenresModal] = useState(true);
     const [feedStatus, setFeedStatus] = useState<"discussions" | "bookmarks">("discussions");
 
     function handleFeedStatus() {
@@ -31,30 +31,30 @@ export default function Home() {
             <Header />
             <div className="flex h-screen-header">
                 <Sidebar />
-                <div className="flex flex-grow p-8 pl-12 gap-8 bg-[#C4CCD8] overflow-y-auto">
+                <div className="flex flex-grow p-8 pl-12 gap-8 bg-[#C4CCD8] dark:bg-[#1C2635] dark:text-white overflow-y-auto">
                     {/* content */}
-                    <div className="flex flex-col pt-2 pb-8 flex-[2] bg-[#F1F5FA] rounded-lg h-fit">
+                    <div className="flex flex-col pt-2 pb-8 flex-[2] bg-[#F1F5FA] dark:bg-[#253449] rounded-lg h-fit">
                         {/* bar */}
-                        <div className="flex border-b-2 border-b-[#D5D8DB]">
+                        <div className="flex border-b-2 border-b-[#D5D8DB] dark:border-b-[#4B5B73] text-gray-500 dark:text-white">
                             <div
                                 className={`flex px-8 py-4 text-lg cursor-pointer border-b-4 border-transparent ${feedStatus === "discussions" ? "border-b-primary-700" : ""} transition`}
                                 onClick={() => handleFeedStatus()}
                             >
                                 <FaComments className="w-8 h-8 text-[#00A79D]" />
-                                <span className="ml-2 font-medium text-gray-500 text-lg">Minhas discussões</span>
+                                <span className="ml-2 font-medium text-lg">Minhas discussões</span>
                             </div>
                             <div
                                 className={`flex px-4 py-4 text-lg cursor-pointer border-b-4 border-transparent ${feedStatus === "bookmarks" ? "border-b-primary-700" : ""} transition`}
                                 onClick={() => handleFeedStatus()}
                             >
                                 <FaBookmark className="w-6 h-6 text-[#F44336]" />
-                                <span className="ml-2 font-medium text-gray-500 text-lg">Minhas marcações</span>
+                                <span className="ml-2 font-mediumtext-lg">Minhas marcações</span>
                             </div>
                         </div>
                         {/* content */}
                         <div className="flex justify-between px-8 pt-10 pb-2">
-                            <h3 className="text-xl text-gray-600 font-bold">Atualizados recentemente</h3>
-                            <div className="flex gap-2 px-5 py-3 -mt-3 transition hover:bg-[#7AD4A9] hover:text-white rounded-xl text-md font-medium text-gray-500 cursor-pointer group">
+                            <h3 className="text-xl text-gray-600 dark:text-white/90 font-bold">Atualizados recentemente</h3>
+                            <div className="flex gap-2 px-5 py-3 -mt-3 transition hover:bg-[#7AD4A9] hover:text-white rounded-xl text-md font-medium text-gray-500 dark:text-white cursor-pointer group">
                                 <FaSquarePlus className="w-6 h-6 text-[#7AD4A9] transition group-hover:text-white" />
                                 Nova discussão
                             </div>
@@ -71,7 +71,7 @@ export default function Home() {
                         </div>
                         {/* content */}
                         <div className="flex justify-between px-8 pt-10 pb-2">
-                            <h3 className="text-xl text-gray-600 font-bold">Sem atualizações</h3>
+                            <h3 className="text-xl text-gray-600 dark:text-white/90 font-bold">Sem atualizações</h3>
                         </div>
                         <div className="flex flex-col px-6">
                             <PostCard
