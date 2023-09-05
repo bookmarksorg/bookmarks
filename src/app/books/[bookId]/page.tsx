@@ -31,7 +31,7 @@ export default function Books() {
                         <div className="flex flex-col mt-8">
                             <div className="flex justify-between px-1 items-center relative mb-4">
                                 <h2 className="text-2xl font-bold text-gray-600">Reviews recentes</h2>
-                                <Link href={`/books/${id}/discussions`}>
+                                <Link href={`/books/${id}/forum`}>
                                     <span className="text-md font-semibold text-primary-600 hover:underline">Ver todos</span>
                                 </Link>
                             </div>

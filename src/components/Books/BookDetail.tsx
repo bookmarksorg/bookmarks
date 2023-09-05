@@ -1,7 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { FaRegStar, FaRegStarHalfStroke, FaStar } from "react-icons/fa6";
+import Link from "next/link";
+import { FaBook, FaComments, FaRegStar, FaRegStarHalfStroke, FaStar } from "react-icons/fa6";
 
 type BookInfo = {
     image: string;
@@ -105,13 +106,30 @@ export default function BookDetail({ id }: { id: string }) {
     return (
         <div className="flex">
             <div className="flex flex-col w-76">
-                <Image src={image} alt={title} height={446} width={300} className="bg-secondary-700 rounded-lg cursor-pointer transition hover:brightness-110"></Image>
+                <Image src={image} alt={title} height={446} width={300} className="rounded-lg cursor-pointer transition hover:brightness-110"></Image>
                 <button className="bg-primary-600 rounded-lg w-full py-2 text-white flex justify-center items-center mt-4 hover:brightness-110 transition">
                     <h2 className="text-lg font-bold flex gap-3 items-center">
                         <FaStar className="w-5 h-5" />
                         Adicionar aos favoritos
                     </h2>
                 </button>
+                <div className="flex gap-2">
+                    <Link href={`/books/${id}/forum?status=reviews`} className="bg-[#293fbbd0] rounded-lg w-full py-2 text-white flex justify-center items-center mt-4 hover:brightness-110 transition">
+                        <h2 className="text-md font-bold flex gap-3 items-center">
+                            <FaBook className="w-4 h-4" />
+                            Reviews
+                        </h2>
+                    </Link>
+                    <Link
+                        href={`/books/${id}/forum?status=discussions`}
+                        className="bg-[#6d29bbd0] rounded-lg w-full py-2 text-white flex justify-center items-center mt-4 hover:brightness-110 transition"
+                    >
+                        <h2 className="text-md font-bold flex gap-3 items-center">
+                            <FaComments className="w-4 h-4" />
+                            Discussões
+                        </h2>
+                    </Link>
+                </div>
             </div>
             <div className="flex flex-col flex-[7] pl-8 pr-16">
                 {/* title */}
