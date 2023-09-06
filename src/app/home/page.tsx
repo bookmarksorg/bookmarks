@@ -9,6 +9,7 @@ import PostCard from "@/components/PostCard";
 import Sidebar from "@/components/Sidebar/Sidebar";
 import { GenresModal } from "@/components/Home/GenresModal";
 import Leaderboard from "@/components/Home/Leaderboard";
+import Link from "next/link";
 
 export default function Home() {
     const [genresModal, setGenresModal] = useState(true);
@@ -54,10 +55,13 @@ export default function Home() {
                         {/* content */}
                         <div className="flex justify-between px-8 pt-10 pb-2">
                             <h3 className="text-xl text-gray-600 dark:text-white/90 font-bold">Atualizados recentemente</h3>
-                            <div className="flex gap-2 px-5 py-3 -mt-3 transition hover:bg-[#7AD4A9] hover:text-white rounded-xl text-md font-medium text-gray-500 dark:text-white cursor-pointer group">
+                            <Link
+                                href="/new"
+                                className="flex gap-2 px-5 py-3 -mt-3 transition hover:bg-[#7AD4A9] hover:text-white dark:hover:bg-[#7ad4a8da] rounded-xl text-md font-medium text-gray-500 dark:text-white cursor-pointer group"
+                            >
                                 <FaSquarePlus className="w-6 h-6 text-[#7AD4A9] transition group-hover:text-white" />
                                 Nova discussão
-                            </div>
+                            </Link>
                         </div>
                         <div className="flex flex-col px-6">
                             <PostCard

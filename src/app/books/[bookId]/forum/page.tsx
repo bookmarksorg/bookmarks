@@ -3,6 +3,7 @@
 import Header from "@/components/Header";
 import PostCard from "@/components/PostCard";
 import Sidebar from "@/components/Sidebar/Sidebar";
+import { books } from "@/constants/books";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams, useSearchParams } from "next/navigation";
@@ -20,29 +21,6 @@ export default function Discussions() {
     const handleForumStatus = () => {
         if (forumStatus === "reviews") setForumStatus("discussions");
         else setForumStatus("reviews");
-    };
-
-    const books: Record<string, { image: string; title: string }> = {
-        n3ui4tn3tm: {
-            image: "https://m.media-amazon.com/images/I/91LptBSFxQL._AC_UF1000,1000_QL80_.jpg",
-            title: "Percy Jackson and the Olympians: The Lightning Thief",
-        },
-        g6h34ui3w4: {
-            image: "https://m.media-amazon.com/images/I/81tM68Xn66L._AC_UF1000,1000_QL80_.jpg",
-            title: "Star Wars: The High Republic: Light of the Jedi",
-        },
-        m53ynos09g: {
-            image: "https://m.media-amazon.com/images/I/71HbYElfY0L._AC_UF1000,1000_QL80_.jpg",
-            title: "Harry Potter and the Sorcerer's Stone",
-        },
-        z7b8w0fkh0: {
-            image: "https://m.media-amazon.com/images/I/91k68MKPbNL._AC_UF1000,1000_QL80_.jpg",
-            title: "Oyasumi Punpun",
-        },
-        c3x5jiogs9: {
-            image: "https://m.media-amazon.com/images/I/614SwlZNtJL._AC_UF1000,1000_QL80_.jpg",
-            title: "The Hunger Games",
-        },
     };
 
     return (
@@ -73,12 +51,12 @@ export default function Discussions() {
                                             <span className="text-primary-600">576 </span>discussões
                                         </span>
                                     </div>
-                                    <button className="bg-primary-600 rounded-lg px-8 py-2 text-white flex justify-center items-center hover:brightness-110 transition">
+                                    <Link href={`/new?book=${bookId}`} className="bg-primary-600 rounded-lg px-8 py-2 text-white flex justify-center items-center hover:brightness-110 transition">
                                         <h2 className="text-md font-bold flex gap-3 items-center">
                                             <FaFloppyDisk className="w-5 h-5" />
                                             Criar nova discussão
                                         </h2>
-                                    </button>
+                                    </Link>
                                 </div>
                             </div>
                         </div>
