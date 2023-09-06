@@ -50,7 +50,7 @@ export default function Discussions() {
             <Header />
             <div className="flex h-screen-header">
                 <Sidebar />
-                <div className="flex flex-col flex-grow p-8 pl-12 gap-8 bg-[#C4CCD8] dark:bg-[#4B5B73] dark:text-white overflow-y-auto">
+                <div className="flex flex-col flex-grow p-8 pl-12 gap-8 bg-[#C4CCD8] dark:bg-[#1C2635] dark:text-white overflow-y-auto">
                     <Link href={`/books/${id}`} className="flex gap-3 items-center hover:underline">
                         <FaArrowLeft className="w-5 h-5" />
                         <h2 className="text-xl font-semibold">Voltar</h2>
