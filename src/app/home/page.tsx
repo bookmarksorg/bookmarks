@@ -32,7 +32,7 @@ export default function Home() {
             <Header />
             <div className="flex h-screen-header">
                 <Sidebar />
-                <div className="flex flex-grow p-8 pl-12 gap-8 bg-[#C4CCD8] dark:bg-[#1C2635] dark:text-white overflow-y-auto">
+                <div id="body" className="flex flex-grow p-8 pl-12 gap-8 bg-[#C4CCD8] dark:bg-[#1C2635] dark:text-white overflow-y-auto">
                     {/* content */}
                     <div className="flex flex-col pt-2 pb-8 flex-[2] bg-[#F1F5FA] dark:bg-[#253449] rounded-lg h-fit">
                         {/* bar */}

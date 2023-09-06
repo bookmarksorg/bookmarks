@@ -16,7 +16,7 @@ const config: Config = {
                 },
             },
             height: {
-                "screen-header": "calc(100vh - 4.8rem)",
+                "screen-header": "calc(100vh - 6.24rem)",
             },
             plugins: [],
         },
