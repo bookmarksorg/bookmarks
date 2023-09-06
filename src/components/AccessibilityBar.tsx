@@ -1,3 +1,5 @@
+"use client";
+
 export default function AccessibilityBar() {
     const handleFontSize = (value: number) => {
         if (value === 0) {

@@ -1,4 +1,4 @@
-type BookInfo = {
+export type BookInfo = {
     image: string;
     title: string;
     sinopses?: string;
