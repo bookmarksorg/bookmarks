@@ -14,7 +14,7 @@ export default function Input({ id, label, type = "text" }: InputProps) {
                 {label}
             </label>
             <input
-                className="px-4 py-2 text-lg rounded-full border text-gray-600 border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-600 focus:border-transparent transition w-full"
+                className="dark:bg-white px-4 py-2 text-lg rounded-full border text-gray-600 border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-600 focus:border-transparent transition w-full"
                 type={type}
                 id={id}
                 required

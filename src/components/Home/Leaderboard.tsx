@@ -3,7 +3,7 @@ import { BiSolidCrown } from "react-icons/bi";
 
 export default function Leaderboard() {
     return (
-        <div className="flex flex-col flex-1 h-fit bg-[#F1F5FA] dark:bg-[#2D3F59] rounded-md px-6 pb-5 text-gray-600 dark:text-white">
+        <div className="flex flex-col flex-1 h-fit bg-[#F1F5FA] dark:bg-[#253449] rounded-md px-6 pb-5 text-gray-600 dark:text-white">
             {/* title */}
             <div className="flex flex-col items-center justify-center gap-2 text-2xl font-medium ">
                 <FaCrown className="w-10 h-10 text-[#FFB743] self-center mt-4" />
