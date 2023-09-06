@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { FaRegCommentDots, FaRegThumbsUp, FaRegBookmark, FaStar } from "react-icons/fa6";
+import { FaRegCommentDots, FaRegThumbsUp, FaRegBookmark, FaStar, FaBookmark } from "react-icons/fa6";
 
 interface PostCardProps {
     title: string;
@@ -11,9 +11,10 @@ interface PostCardProps {
     isReview?: boolean;
     rating?: number;
     discussionId?: string;
+    isBookMarked?: boolean;
 }
 
-export default function PostCard({ title, description, author, book, bookId, date, isReview, rating, discussionId }: PostCardProps) {
+export default function PostCard({ title, description, author, book, bookId, date, isReview, rating, discussionId, isBookMarked }: PostCardProps) {
     return (
         <div className={`flex flex-col mt-4 bg-white dark:bg-[#2D3F59] text-gray-600 dark:text-white/90 rounded-md px-8 ${isReview ? "py-8" : "py-6"} w-full`}>
             <div className="flex justify-between mb-4">
@@ -49,18 +50,25 @@ export default function PostCard({ title, description, author, book, bookId, dat
             <span className="text-sm font-medium mt-3">{description}</span>
             {!isReview && (
                 <div className="flex justify-end mt-8 gap-6">
-                    <div className="flex gap-1 items-center cursor-pointer transition hover:text-primary-600">
+                    <Link href={`/books/${bookId}/discussions/${discussionId}`} className="flex gap-1 items-center cursor-pointer transition hover:text-primary-600">
                         <FaRegCommentDots className="w-5 h-5" />
                         <span className="text-sm font-medium">2k Comentários</span>
-                    </div>
+                    </Link>
                     <div className="flex gap-1 items-center cursor-pointer transition hover:text-primary-600">
                         <FaRegThumbsUp className="w-5 h-5" />
                         <span className="text-sm font-mediu">3k Curtidas</span>
                     </div>
-                    <div className="flex gap-1 items-center cursor-pointer transition hover:text-primary-600">
-                        <FaRegBookmark className="w-5 h-5" />
-                        <span className="text-sm font-medium">14k Marcações</span>
-                    </div>
+                    {isBookMarked ? (
+                        <div className="flex gap-1 items-center cursor-pointer text-primary-600">
+                            <FaBookmark className="w-5 h-5" />
+                            <span className="text-sm font-medium">Salvo</span>
+                        </div>
+                    ) : (
+                        <div className="flex gap-1 items-center cursor-pointer transition hover:text-primary-600">
+                            <FaRegBookmark className="w-5 h-5" />
+                            <span className="text-sm font-medium">14k Marcações</span>
+                        </div>
+                    )}
                 </div>
             )}
         </div>

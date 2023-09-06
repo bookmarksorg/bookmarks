@@ -1,7 +1,9 @@
 "use client";
 
+import Comment from "@/components/Comment";
 import Header from "@/components/Header";
 import Book from "@/components/Library/Book";
+import PostCard from "@/components/PostCard";
 import Sidebar from "@/components/Sidebar/Sidebar";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -33,7 +35,7 @@ export default function Profile() {
             <div className="flex h-screen-header">
                 <Sidebar />
                 <div className="flex flex-col flex-grow p-8 pl-12 gap-8 bg-[#C4CCD8] dark:bg-[#1C2635] text-gray-600 dark:text-white overflow-y-auto">
-                    <div className="flex flex-col bg-white dark:bg-[#253449] mt-12 pt-6 pb-8 px-20 rounded-lg h-fit relative">
+                    <div className="flex flex-col bg-[#F1F5FA] dark:bg-[#253449] mt-12 pt-6 pb-8 px-20 rounded-lg h-fit relative">
                         {/* photo and change bio */}
                         <div className="flex">
                             <div className="flex bg-primary-700 h-32 w-32 border-[3px] border-white dark:border-[#253449] text-white rounded-full items-center justify-center text-6xl absolute left-20 -top-14">
@@ -76,7 +78,7 @@ export default function Profile() {
                             </p>
                         </div>
                     </div>
-                    <div className="flex flex-col bg-white dark:bg-[#253449] text-gray-500 dark:text-white rounded-lg py-3">
+                    <div className="flex flex-col bg-[#F1F5FA] dark:bg-[#253449] text-gray-500 dark:text-white rounded-lg py-3 pb-8">
                         {/* another filter bar */}
                         <div className="flex border-b-2 border-b-[#D5D8DB] dark:border-b-[#4B5B73]">
                             <div
@@ -89,7 +91,7 @@ export default function Profile() {
                                 className={`flex px-4 py-4 text-lg cursor-pointer border-b-4 border-transparent ${feedStatus === "books" ? "border-b-primary-700" : ""} transition`}
                                 onClick={() => handleFeedStatus("books")}
                             >
-                                <span className="ml-2 font-medium  text-lg">Livros favoritos (3)</span>
+                                <span className="ml-2 font-medium  text-lg">Livros favoritos (23)</span>
                             </div>
                             <div
                                 className={`flex px-4 py-4 text-lg cursor-pointer border-b-4 border-transparent ${feedStatus === "comments" ? "border-b-primary-700" : ""} transition`}
@@ -101,25 +103,145 @@ export default function Profile() {
                                 className={`flex px-4 py-4 text-lg cursor-pointer border-b-4 border-transparent ${feedStatus === "discussions" ? "border-b-primary-700" : ""} transition`}
                                 onClick={() => handleFeedStatus("discussions")}
                             >
-                                <span className="ml-2 font-medium text-lg">Minhas discussões (0)</span>
+                                <span className="ml-2 font-medium text-lg">Minhas discussões (2)</span>
                             </div>
                         </div>
-                        {/* books */}
-                        <div className="grid grid-cols-5 px-8 mt-8 gap-8">
-                            <Book id="c3x5jiogs9" image="https://m.media-amazon.com/images/I/614SwlZNtJL._AC_UF1000,1000_QL80_.jpg" noDetails={true} />
-                            <Book id="z7b8w0fkh0" image="https://m.media-amazon.com/images/I/91k68MKPbNL._AC_UF1000,1000_QL80_.jpg" noDetails={true} />
-                            <Book id="g6h34ui3w4" image="https://m.media-amazon.com/images/I/81tM68Xn66L._AC_UF1000,1000_QL80_.jpg" noDetails={true} />
-                            <Book id="m53ynos09g" image="https://m.media-amazon.com/images/I/71HbYElfY0L._AC_UF1000,1000_QL80_.jpg" noDetails={true} />
-                            <Book id="n3ui4tn3tm" image="https://m.media-amazon.com/images/I/91LptBSFxQL._AC_UF1000,1000_QL80_.jpg" noDetails={true} />
-                            <Book id="z7b8w0fkh0" image="https://m.media-amazon.com/images/I/91k68MKPbNL._AC_UF1000,1000_QL80_.jpg" noDetails={true} />
-                            <Book id="n3ui4tn3tm" image="https://m.media-amazon.com/images/I/91LptBSFxQL._AC_UF1000,1000_QL80_.jpg" noDetails={true} />
-                            <Book id="m53ynos09g" image="https://m.media-amazon.com/images/I/71HbYElfY0L._AC_UF1000,1000_QL80_.jpg" noDetails={true} />
-                            <Book id="g6h34ui3w4" image="https://m.media-amazon.com/images/I/81tM68Xn66L._AC_UF1000,1000_QL80_.jpg" noDetails={true} />
-                            <Book id="c3x5jiogs9" image="https://m.media-amazon.com/images/I/614SwlZNtJL._AC_UF1000,1000_QL80_.jpg" noDetails={true} />
-                        </div>
-                        <button className="flex items-center self-center text-lg py-2 px-10 mt-10 mb-4 rounded-lg bg-primary-600 text-white transition hover:brightness-105 font-semibold">
-                            Mostrar mais
-                        </button>
+                        {feedStatus === "bookmarks" && (
+                            <div className="flex flex-col w-full px-12 mt-6 justify-center">
+                                <PostCard
+                                    author="Iasminborbita"
+                                    book="Oyasumi Punpun"
+                                    bookId="z7b8w0fkh0"
+                                    title="Is Punpun actually a bird?"
+                                    description="I'm not sure if Punpun is a bird or not, does anyone know?"
+                                    date="15/11/2022"
+                                    discussionId="h6s8h0d8b9"
+                                    isBookMarked
+                                />
+                                <PostCard
+                                    author="thegreat_alex"
+                                    book="The Hunger Games"
+                                    bookId="c3x5jiogs9"
+                                    title="Katniss and Peeta should have died"
+                                    description="I think Katniss and Peeta should have died in the end of the book, what do you think?"
+                                    date="28/02/2023"
+                                    discussionId="x7v6a9g3j1"
+                                    isBookMarked
+                                />
+                                <PostCard
+                                    author="Iasminborbita"
+                                    book="Oyasumi Punpun"
+                                    bookId="z7b8w0fkh0"
+                                    title="Is Punpun actually a bird?"
+                                    description="I'm not sure if Punpun is a bird or not, does anyone know?"
+                                    date="15/11/2022"
+                                    discussionId="h6s8h0d8b9"
+                                    isBookMarked
+                                />
+                                <PostCard
+                                    author="thegreat_alex"
+                                    book="The Hunger Games"
+                                    bookId="c3x5jiogs9"
+                                    title="Katniss and Peeta should have died"
+                                    description="I think Katniss and Peeta should have died in the end of the book, what do you think?"
+                                    date="28/02/2023"
+                                    discussionId="x7v6a9g3j1"
+                                    isBookMarked
+                                />
+                                <PostCard
+                                    author="Iasminborbita"
+                                    book="Oyasumi Punpun"
+                                    bookId="z7b8w0fkh0"
+                                    title="Is Punpun actually a bird?"
+                                    description="I'm not sure if Punpun is a bird or not, does anyone know?"
+                                    date="15/11/2022"
+                                    discussionId="h6s8h0d8b9"
+                                    isBookMarked
+                                />
+                            </div>
+                        )}
+                        {feedStatus === "books" && (
+                            <div className="grid grid-cols-5 px-12 mt-6 gap-8">
+                                <Book id="c3x5jiogs9" image="https://m.media-amazon.com/images/I/614SwlZNtJL._AC_UF1000,1000_QL80_.jpg" noDetails={true} />
+                                <Book id="z7b8w0fkh0" image="https://m.media-amazon.com/images/I/91k68MKPbNL._AC_UF1000,1000_QL80_.jpg" noDetails={true} />
+                                <Book id="g6h34ui3w4" image="https://m.media-amazon.com/images/I/81tM68Xn66L._AC_UF1000,1000_QL80_.jpg" noDetails={true} />
+                                <Book id="m53ynos09g" image="https://m.media-amazon.com/images/I/71HbYElfY0L._AC_UF1000,1000_QL80_.jpg" noDetails={true} />
+                                <Book id="n3ui4tn3tm" image="https://m.media-amazon.com/images/I/91LptBSFxQL._AC_UF1000,1000_QL80_.jpg" noDetails={true} />
+                                <Book id="z7b8w0fkh0" image="https://m.media-amazon.com/images/I/91k68MKPbNL._AC_UF1000,1000_QL80_.jpg" noDetails={true} />
+                                <Book id="n3ui4tn3tm" image="https://m.media-amazon.com/images/I/91LptBSFxQL._AC_UF1000,1000_QL80_.jpg" noDetails={true} />
+                                <Book id="m53ynos09g" image="https://m.media-amazon.com/images/I/71HbYElfY0L._AC_UF1000,1000_QL80_.jpg" noDetails={true} />
+                                <Book id="g6h34ui3w4" image="https://m.media-amazon.com/images/I/81tM68Xn66L._AC_UF1000,1000_QL80_.jpg" noDetails={true} />
+                                <Book id="c3x5jiogs9" image="https://m.media-amazon.com/images/I/614SwlZNtJL._AC_UF1000,1000_QL80_.jpg" noDetails={true} />
+                            </div>
+                        )}
+                        {feedStatus === "comments" && (
+                            <div className="flex flex-col w-full px-12 mt-6 justify-center">
+                                <Comment
+                                    author={username}
+                                    date="06/09/6969"
+                                    comment="I think that I don't agree with this thing that you said, because I think that this is not true, and I think that you are wrong."
+                                    answers="467"
+                                    likes="69"
+                                />
+                                <Comment
+                                    author={username}
+                                    date="07/07/2007"
+                                    comment="You are right, I think that you are right, and I think that you are the best person in the world, and I think that you are the best person in the world, and I think that you are the best person in the world."
+                                    answers="999"
+                                    likes="999"
+                                />
+                                <Comment
+                                    author={username}
+                                    date="06/09/6969"
+                                    comment="I think that I don't agree with this thing that you said, because I think that this is not true, and I think that you are wrong."
+                                    answers="467"
+                                    likes="69"
+                                />
+                                <Comment
+                                    author={username}
+                                    date="07/07/2007"
+                                    comment="You are right, I think that you are right, and I think that you are the best person in the world, and I think that you are the best person in the world, and I think that you are the best person in the world."
+                                    answers="999"
+                                    likes="999"
+                                />
+                                <Comment
+                                    author={username}
+                                    date="07/07/2007"
+                                    comment="You are right, I think that you are right, and I think that you are the best person in the world, and I think that you are the best person in the world, and I think that you are the best person in the world."
+                                    answers="999"
+                                    likes="999"
+                                />
+                            </div>
+                        )}
+                        {feedStatus === "discussions" && (
+                            <div className="flex flex-col w-full px-12 mt-6 justify-center">
+                                <PostCard
+                                    author={username}
+                                    book="Oyasumi Punpun"
+                                    bookId="z7b8w0fkh0"
+                                    title="Is Punpun actually a bird?"
+                                    description="I'm not sure if Punpun is a bird or not, does anyone know?"
+                                    date="15/11/2022"
+                                    discussionId="h6s8h0d8b9"
+                                    isBookMarked
+                                />
+                                <PostCard
+                                    author={username}
+                                    book="The Hunger Games"
+                                    bookId="c3x5jiogs9"
+                                    title="Katniss and Peeta should have died"
+                                    description="I think Katniss and Peeta should have died in the end of the book, what do you think?"
+                                    date="28/02/2023"
+                                    discussionId="x7v6a9g3j1"
+                                    isBookMarked
+                                />
+                            </div>
+                        )}
+                        {feedStatus !== "discussions" && (
+                            <button className="flex items-center self-center text-lg py-2 px-10 mt-10 rounded-lg bg-primary-600 text-white transition hover:brightness-105 font-semibold">
+                                Mostrar mais
+                            </button>
+                        )}
                     </div>
                 </div>
             </div>
