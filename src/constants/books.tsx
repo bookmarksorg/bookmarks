@@ -42,7 +42,7 @@ export const books: Record<string, BookInfo> = {
         ratingUsers: "631",
     },
     m53ynos09g: {
-        image: "https://m.media-amazon.com/images/I/71HbYElfY0L._AC_UF1000,1000_QL80_.jpg",
+        image: "https://m.media-amazon.com/images/I/A1oURyPAO2L._AC_UF1000,1000_QL80_.jpg",
         title: "Harry Potter and the Sorcerer's Stone",
         author: "J. K. Rowling",
         pages: 309,

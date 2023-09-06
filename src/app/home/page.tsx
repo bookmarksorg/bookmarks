@@ -65,12 +65,13 @@ export default function Home() {
                         </div>
                         <div className="flex flex-col px-6">
                             <PostCard
-                                author="Vitor_perei"
+                                author="Jorge_pat"
                                 book="Harry Potter and the Sorcerer's Stone"
                                 bookId="m53ynos09g"
                                 title="Snape is Harry's father"
                                 description="This is a serious description to know if Snape is Harry's father"
                                 date="02/09/2023"
+                                discussionId="b8f9k3l1c5"
                             />
                         </div>
                         {/* content */}
@@ -85,6 +86,7 @@ export default function Home() {
                                 title="Is Punpun actually a bird?"
                                 description="I'm not sure if Punpun is a bird or not, does anyone know?"
                                 date="15/11/2022"
+                                discussionId="h6s8h0d8b9"
                             />
                             <PostCard
                                 author="thegreat_alex"
@@ -93,6 +95,7 @@ export default function Home() {
                                 title="Katniss and Peeta should have died"
                                 description="I think Katniss and Peeta should have died in the end of the book, what do you think?"
                                 date="28/02/2023"
+                                discussionId="x7v6a9g3j1"
                             />
                         </div>
                     </div>

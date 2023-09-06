@@ -137,19 +137,37 @@ export default function Discussions() {
                             </div>
                         ) : (
                             <div className="flex flex-col">
-                                <PostCard author="Iasminborbita" title="Is Punpun actually a bird?" description="I'm not sure if Punpun is a bird or not, does anyone know?" date="15/11/2022" />
                                 <PostCard
-                                    author="thegreat_alex"
-                                    title="Katniss and Peeta should have died"
-                                    description="I think Katniss and Peeta should have died in the end of the book, what do you think?"
-                                    date="28/02/2023"
+                                    author="Iasminborbita"
+                                    title="Is Punpun actually a bird?"
+                                    description="I'm not sure if Punpun is a bird or not, does anyone know?"
+                                    date="15/11/2022"
+                                    bookId={id}
+                                    discussionId="h6s8h0d8b9"
                                 />
-                                <PostCard author="Iasminborbita" title="Is Punpun actually a bird?" description="I'm not sure if Punpun is a bird or not, does anyone know?" date="15/11/2022" />
                                 <PostCard
                                     author="thegreat_alex"
                                     title="Katniss and Peeta should have died"
                                     description="I think Katniss and Peeta should have died in the end of the book, what do you think?"
                                     date="28/02/2023"
+                                    bookId={id}
+                                    discussionId="x7v6a9g3j1"
+                                />
+                                <PostCard
+                                    author="Iasminborbita"
+                                    title="Is Punpun actually a bird?"
+                                    description="I'm not sure if Punpun is a bird or not, does anyone know?"
+                                    date="15/11/2022"
+                                    bookId={id}
+                                    discussionId="h6s8h0d8b9"
+                                />
+                                <PostCard
+                                    author="thegreat_alex"
+                                    title="Katniss and Peeta should have died"
+                                    description="I think Katniss and Peeta should have died in the end of the book, what do you think?"
+                                    date="28/02/2023"
+                                    bookId={id}
+                                    discussionId="x7v6a9g3j1"
                                 />
                             </div>
                         )}

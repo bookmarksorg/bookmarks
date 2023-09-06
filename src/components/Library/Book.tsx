@@ -1,3 +1,4 @@
+import { books } from "@/constants/books";
 import Image from "next/image";
 import Link from "next/link";
 import { FaStar } from "react-icons/fa6";
@@ -11,7 +12,9 @@ interface BookProps {
     rating?: string;
 }
 
-export default function Book({ id, noDetails, image, title, author, rating }: BookProps) {
+export default function Book({ id, noDetails, title, author, rating }: BookProps) {
+    const { image } = books[id];
+
     return (
         <div className="flex flex-col w-48">
             <Link href={`/books/${id}`}>

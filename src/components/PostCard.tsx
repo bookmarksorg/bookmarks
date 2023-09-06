@@ -10,9 +10,10 @@ interface PostCardProps {
     date: string;
     isReview?: boolean;
     rating?: number;
+    discussionId?: string;
 }
 
-export default function PostCard({ title, description, author, book, bookId, date, isReview, rating }: PostCardProps) {
+export default function PostCard({ title, description, author, book, bookId, date, isReview, rating, discussionId }: PostCardProps) {
     return (
         <div className={`flex flex-col mt-4 bg-white dark:bg-[#2D3F59] text-gray-600 dark:text-white/90 rounded-md px-8 ${isReview ? "py-8" : "py-6"} w-full`}>
             <div className="flex justify-between mb-4">
@@ -38,7 +39,13 @@ export default function PostCard({ title, description, author, book, bookId, dat
                     {book}
                 </Link>
             )}
-            <span className="text-lg font-bold  cursor-pointer">{title}</span>
+            {isReview ? (
+                <h1 className="text-2xl font-bold mt-2">{title}</h1>
+            ) : (
+                <Link href={`/books/${bookId}/discussions/${discussionId}`} className="text-lg font-bold">
+                    {title}
+                </Link>
+            )}
             <span className="text-sm font-medium mt-3">{description}</span>
             {!isReview && (
                 <div className="flex justify-end mt-8 gap-6">
