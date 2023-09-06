@@ -20,7 +20,7 @@ export const ThemeSwitcher = () => {
     return (
         <div className="flex items-center gap-2 px-2 border border-gray-200 dark:border-gray-200/30 rounded-full">
             <button
-                className={`flex items-center justify-center w-8 h-8 rounded-full transition-colors duration-200 bg-transparent ${theme === "light" && "bg-gray-300"}`}
+                className={`flex items-center justify-center w-8 h-8 rounded-full transition-colors duration-200 ${theme === "light" ? "bg-gray-300" : "bg-transparent"}`}
                 onClick={() => setTheme("light")}
             >
                 <BiSun className="text-gray-500 dark:text-white/80 w-5 h-5" />
@@ -32,7 +32,7 @@ export const ThemeSwitcher = () => {
                 <PiMonitor className="text-gray-500 dark:text-white/80 w-5 h-5" />
             </button>
             <button
-                className={`flex items-center justify-center w-8 h-8 rounded-full transition-colors duration-200 bg-transparent ${theme === "dark" && "bg-gray-700"}`}
+                className={`flex items-center justify-center w-8 h-8 rounded-full transition-colors duration-200 ${theme === "dark" ? "bg-gray-700" : "bg-transparent"}`}
                 onClick={() => setTheme("dark")}
             >
                 <BiMoon className="text-gray-500 dark:text-white/80 w-5 h-5" />
