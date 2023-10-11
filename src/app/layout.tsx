@@ -18,10 +18,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <html lang="pt-br">
             <body id="root" className={inter.className}>
                 <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-                    {/* <AuthContext> */}
-                    <ToasterContext />
-                    {children}
-                    {/* </AuthContext> */}
+                    <AuthContext>
+                        <ToasterContext />
+                        {children}
+                    </AuthContext>
                 </ThemeProvider>
             </body>
         </html>
