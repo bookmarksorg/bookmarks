@@ -1,13 +1,13 @@
-// import { FieldValues, UseFormRegister } from "react-hook-form";
+import { FieldValues, UseFormRegister } from "react-hook-form";
 
 interface InputProps {
     id: string;
     type?: string;
     label: string;
-    // register: UseFormRegister<FieldValues>;
+    register: UseFormRegister<FieldValues>;
 }
 
-export default function Input({ id, label, type = "text" }: InputProps) {
+export default function Input({ id, label, register, type = "text" }: InputProps) {
     return (
         <div className="flex flex-col">
             <label className="text-md text-gray-500 pl-0.5" htmlFor={id}>
@@ -18,7 +18,7 @@ export default function Input({ id, label, type = "text" }: InputProps) {
                 type={type}
                 id={id}
                 required
-                // {...register(id, { required: true })}
+                {...register(id)}
             />
         </div>
     );

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { FaComments, FaBookmark, FaSquarePlus } from "react-icons/fa6";
 
@@ -10,10 +10,15 @@ import Sidebar from "@/components/Sidebar/Sidebar";
 import { GenresModal } from "@/components/Home/GenresModal";
 import Leaderboard from "@/components/Home/Leaderboard";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function Home() {
     const [genresModal, setGenresModal] = useState(true);
     const [feedStatus, setFeedStatus] = useState<"discussions" | "bookmarks">("discussions");
+
+    useEffect(() => {
+        if (localStorage.getItem("genresModal") === "false") setGenresModal(false);
+    }, []);
 
     function handleFeedStatus() {
         if (feedStatus === "discussions") setFeedStatus("bookmarks");
@@ -24,6 +29,7 @@ export default function Home() {
         // TODO: save favorite genres from user
 
         setGenresModal(false);
+        localStorage.setItem("genresModal", "false");
     }
 
     return (

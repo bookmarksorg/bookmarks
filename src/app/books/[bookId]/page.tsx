@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useParams } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 
 import BookDetail from "@/components/Books/BookDetail";
 import Header from "@/components/Header";
@@ -13,12 +13,13 @@ import { FaArrowLeft } from "react-icons/fa6";
 export default function Books() {
     const { bookId } = useParams();
     const id = bookId as string;
+    const url = usePathname().toLowerCase();
 
     return (
         <div className="flex flex-col overflow-y-hidden">
             <Header />
             <div className="flex h-screen-header">
-                <Sidebar />
+                <Sidebar url={url} />
                 <div className="flex flex-col flex-grow p-8 pl-12 gap-8 bg-[#C4CCD8] dark:bg-[#1C2635] text-gray-600 dark:text-white overflow-y-auto">
                     <Link href="/library" className="flex gap-3 items-center hover:underline">
                         <FaArrowLeft className="w-5 h-5" />

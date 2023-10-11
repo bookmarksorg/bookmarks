@@ -50,6 +50,7 @@ export function GenresModal({ isOpen, onConfirm, setModalIsOpen }: GenresModalPr
     function closeModal() {
         setIsOpen(false);
         setModalIsOpen(false);
+        localStorage.setItem("genresModal", "false");
     }
 
     const [active, setActive] = useState(false);

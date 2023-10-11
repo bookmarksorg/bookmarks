@@ -5,9 +5,30 @@ import { FaHouse, FaLayerGroup, FaUser, FaGear, FaRightFromBracket } from "react
 import SidebarItem from "./SidebarItem";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import { getSession, signOut, useSession } from "next-auth/react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 export default function Sidebar() {
     const url = usePathname().toLowerCase();
+    const session = useSession();
+    const [username, setUsername] = useState("");
+
+    useEffect(() => {
+        async function getUser() {
+            const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/users/`, {
+                headers: {
+                    Authorization: `Bearer ${session?.data?.token.token.user.accessToken}`,
+                },
+            });
+            localStorage.setItem("user", JSON.stringify(response.data));
+            setUsername(response.data.user.username);
+        }
+
+        if (session?.status === "authenticated") getUser();
+
+        console.log(username);
+    }, []);
 
     return (
         <div className="flex bg-secondary-700 dark:bg-[#253449]">
@@ -19,13 +40,13 @@ export default function Sidebar() {
                     <Link href="/library">
                         <SidebarItem active={url === "/library"} name="Biblioteca" icon={<FaLayerGroup className="h-5 w-5" />} />
                     </Link>
-                    <Link href="/profile/Jorge_pat">
-                        <SidebarItem active={url === "/profile/jorge_pat"} name="Perfil" icon={<FaUser className="h-5 w-5" />} />
+                    <Link href={`/profile/${username}`}>
+                        <SidebarItem active={url === `/profile/${username}`} name="Perfil" icon={<FaUser className="h-5 w-5" />} />
                     </Link>
                 </div>
                 <div className="flex flex-col gap-3 w-full">
                     <SidebarItem name="Configurações" icon={<FaGear className="h-5 w-5" />} />
-                    <Link href="/login">
+                    <Link href="#" onClick={() => signOut()}>
                         <SidebarItem name="Sair" icon={<FaRightFromBracket className="h-5 w-5" />} />
                     </Link>
                 </div>

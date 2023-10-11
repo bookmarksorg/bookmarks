@@ -4,7 +4,6 @@ import { AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
 export const authOptions: AuthOptions = {
-    // Configure one or more authentication providers
     providers: [
         CredentialsProvider({
             name: "credentials",
@@ -21,16 +20,29 @@ export const authOptions: AuthOptions = {
                     throw new Error("Invalid credentials");
                 }
 
-                const { data } = await axios.post("/api/auth/login", {
-                    username: credentials.username,
-                    password: credentials.password,
-                });
+                const { data } = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/token/`, credentials);
 
-                if (data) {
-                    return data;
-                } else {
+                if (!data) {
                     throw new Error("Invalid credentials");
                 }
+
+                const user = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/users`, {
+                    headers: {
+                        Authorization: `Bearer ${data.access}`,
+                    },
+                });
+
+                if (!user) {
+                    throw new Error("Invalid credentials");
+                }
+
+                return {
+                    id: user.data.id,
+                    name: user.data.username,
+                    email: user.data.email,
+                    accessToken: data.access,
+                    refreshToken: data.refresh,
+                };
             },
         }),
     ],
@@ -38,6 +50,25 @@ export const authOptions: AuthOptions = {
         strategy: "jwt",
     },
     secret: process.env.NEXTAUTH_SECRET,
+    callbacks: {
+        async session(session, user) {
+            return {
+                ...session,
+                user: {
+                    ...session.user,
+                    ...user,
+                },
+            };
+        },
+        async jwt(token, user) {
+            if (user) {
+                token.accessToken = user.accessToken;
+                token.refreshToken = user.refreshToken;
+            }
+
+            return token;
+        },
+    },
 };
 
 const authHandler = NextAuth(authOptions);
