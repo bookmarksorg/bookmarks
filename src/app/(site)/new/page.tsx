@@ -18,7 +18,7 @@ import MuiThemeProvider from "@/components/MuiThemeProvider";
 
 type Book = {
     title: string;
-    image: string;
+    cover: string;
 };
 
 export default function New() {
@@ -28,8 +28,19 @@ export default function New() {
     const [books, setBooks] = useState<Book[]>([]);
     const [book, setBook] = useState<any>(null);
     const [type, setType] = useState<"discussion" | "review">("discussion");
-    const [rating, setRating] = useState(0);
     const { data } = useSession();
+
+    const [rating, setRating] = useState(0);
+    const [definitive, setDefinitive] = useState(false);
+
+    const handleStarHover = (hoveredRating: number) => {
+        if (!definitive) setRating(hoveredRating);
+    };
+
+    const setRatingDefinitive = (rating: number) => {
+        setRating(rating);
+        setDefinitive(true);
+    };
 
     useEffect(() => {
         async function getBooks() {
@@ -45,10 +56,58 @@ export default function New() {
         if (data?.user?.image) getBooks();
     }, [data]);
 
-    const handleNew = () => {
-        toast.success("Criado com sucesso!");
-        router.push(`/books/${book}/forum?status=${type}s`);
-    };
+    async function handleNew() {
+        if (!data?.user?.image) return;
+        const title = (document.getElementById("title") as HTMLInputElement).value;
+        const description = (document.getElementById("description") as HTMLInputElement).value;
+        const is_adult = (document.getElementById("adult") as HTMLInputElement).checked;
+        const is_spoiler = (document.getElementById("spoiler") as HTMLInputElement).checked;
+
+        if (type === "review") {
+            await axios.post(
+                `${process.env.NEXT_PUBLIC_API_URL}/reviews/`,
+                {
+                    title,
+                    description,
+                    is_adult,
+                    is_spoiler,
+                    rating,
+                    cod_ISBN: book.cod_ISBN,
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${data?.user?.image}`,
+                    },
+                }
+            );
+
+            toast.success("Review criado com sucesso!");
+            toast.success("Você ganhou 10 pontos!");
+
+            router.push(`/books/${book.cod_ISBN}/forum?status=${type}s`);
+        } else {
+            await axios.post(
+                `${process.env.NEXT_PUBLIC_API_URL}/discussions/`,
+                {
+                    title,
+                    description,
+                    is_adult,
+                    is_spoiler,
+                    cod_ISBN: book.cod_ISBN,
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${data?.user?.image}`,
+                    },
+                }
+            );
+
+            toast.success("Discussão criada com sucesso!");
+            toast.success("Você ganhou 5 pontos!");
+
+            router.push(`/books/${book.cod_ISBN}/forum?status=${type}s`);
+        }
+    }
 
     return (
         <div className="flex flex-col flex-grow p-8 pl-12 gap-8 bg-[#C4CCD8] dark:bg-[#1C2635] dark:text-white overflow-y-auto">
@@ -57,13 +116,6 @@ export default function New() {
                     <div className="flex flex-col gap-4">
                         <h1 className="text-2xl font-bold">Escolha um livro</h1>
                         <div className="flex flex-wrap gap-4">
-                            {/* <select className="px-4 py-2 rounded-lg bg-white dark:bg-[#1C2635] dark:text-white" onChange={(e) => setBook(e.target.value)}>
-                                {Object.keys(books).map((book) => (
-                                    <option key={book} value={book}>
-                                        {book.title}
-                                    </option>
-                                ))}
-                            </select> */}
                             {books && (
                                 <MuiThemeProvider>
                                     <Autocomplete
@@ -189,24 +241,21 @@ export default function New() {
                                             Nota
                                         </label>
                                         <div className="flex gap-8 items-center">
-                                            <div className="flex">
-                                                <select
-                                                    name="rating"
-                                                    id="rating"
-                                                    className="dark:bg-[#253449] px-8 py-2 text-lg rounded-2xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-600 focus:border-transparent transition"
-                                                    onChange={(e) => setRating(parseInt(e.target.value))}
-                                                >
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                    <option value="4">4</option>
-                                                    <option value="5">5</option>
-                                                </select>
-                                            </div>
-                                            <div className="flex gap-2 -mt-1">
-                                                {/* draw the rating of stars with FaStar */}
-                                                {rating > 0 && Array.from({ length: rating }, (_, i) => <FaStar key={i} className="text-primary-600 w-8 h-8" />)}
-                                                {rating < 5 && Array.from({ length: 5 - rating }, (_, i) => <FaRegStar key={i} className="text-primary-600 w-8 h-8" />)}
+                                            <div className="flex gap-2 -mt-1" onMouseLeave={() => handleStarHover(0)}>
+                                                {[1, 2, 3, 4, 5].map((value) => (
+                                                    <div
+                                                        key={value}
+                                                        onMouseEnter={() => handleStarHover(value)}
+                                                        onMouseLeave={() => handleStarHover(rating)}
+                                                        onClick={() => setRatingDefinitive(value)}
+                                                    >
+                                                        {value <= (rating || 0) ? (
+                                                            <FaStar className="cursor-pointer text-primary-600 w-8 h-8" />
+                                                        ) : (
+                                                            <FaRegStar className="cursor-pointer text-primary-600 w-8 h-8" />
+                                                        )}
+                                                    </div>
+                                                ))}
                                             </div>
                                         </div>
                                     </div>

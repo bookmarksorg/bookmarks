@@ -102,13 +102,13 @@ export default function Profile() {
                         className={`flex px-8 py-4 text-lg cursor-pointer border-b-4 border-transparent ${feedStatus === "bookmarks" ? "border-b-primary-700" : ""} transition`}
                         onClick={() => handleFeedStatus("bookmarks")}
                     >
-                        <span className="ml-2 font-mediumtext-lg">Meus Bookmarks ({user?.tagged?.length})</span>
+                        <span className="ml-2 font-mediumtext-lg">Meus Bookmarks ({user?.bookmarks?.length})</span>
                     </div>
                     <div
                         className={`flex px-4 py-4 text-lg cursor-pointer border-b-4 border-transparent ${feedStatus === "books" ? "border-b-primary-700" : ""} transition`}
                         onClick={() => handleFeedStatus("books")}
                     >
-                        <span className="ml-2 font-medium  text-lg">Livros favoritos ({user?.user?.favorite_books?.length})</span>
+                        <span className="ml-2 font-medium  text-lg">Livros favoritos ({user?.favorite_books?.length})</span>
                     </div>
                     <div
                         className={`flex px-4 py-4 text-lg cursor-pointer border-b-4 border-transparent ${feedStatus === "comments" ? "border-b-primary-700" : ""} transition`}
@@ -125,133 +125,54 @@ export default function Profile() {
                 </div>
                 {feedStatus === "bookmarks" && (
                     <div className="flex flex-col w-full px-12 mt-6 justify-center">
-                        {/* <PostCard
-                                    author="Iasminborbita"
-                                    book="Oyasumi Punpun"
-                                    bookId="z7b8w0fkh0"
-                                    title="Is Punpun actually a bird?"
-                                    description="I'm not sure if Punpun is a bird or not, does anyone know?"
-                                    date="15/11/2022"
-                                    discussionId="h6s8h0d8b9"
-                                    isBookMarked
-                                />
-                                <PostCard
-                                    author="thegreat_alex"
-                                    book="The Hunger Games"
-                                    bookId="c3x5jiogs9"
-                                    title="Katniss and Peeta should have died"
-                                    description="I think Katniss and Peeta should have died in the end of the book, what do you think?"
-                                    date="28/02/2023"
-                                    discussionId="x7v6a9g3j1"
-                                    isBookMarked
-                                />
-                                <PostCard
-                                    author="Iasminborbita"
-                                    book="Oyasumi Punpun"
-                                    bookId="z7b8w0fkh0"
-                                    title="Is Punpun actually a bird?"
-                                    description="I'm not sure if Punpun is a bird or not, does anyone know?"
-                                    date="15/11/2022"
-                                    discussionId="h6s8h0d8b9"
-                                    isBookMarked
-                                />
-                                <PostCard
-                                    author="thegreat_alex"
-                                    book="The Hunger Games"
-                                    bookId="c3x5jiogs9"
-                                    title="Katniss and Peeta should have died"
-                                    description="I think Katniss and Peeta should have died in the end of the book, what do you think?"
-                                    date="28/02/2023"
-                                    discussionId="x7v6a9g3j1"
-                                    isBookMarked
-                                />
-                                <PostCard
-                                    author="Iasminborbita"
-                                    book="Oyasumi Punpun"
-                                    bookId="z7b8w0fkh0"
-                                    title="Is Punpun actually a bird?"
-                                    description="I'm not sure if Punpun is a bird or not, does anyone know?"
-                                    date="15/11/2022"
-                                    discussionId="h6s8h0d8b9"
-                                    isBookMarked
-                                /> */}
+                        {/* {user?.bookmarks?.map((bookmark: any) => (
+                            <PostCard
+                                key={bookmark.id_bookmark}
+                                author={bookmark.username}
+                                book={bookmark.discussion}
+                                bookId="z7b8w0fkh0"
+                                title="Is Punpun actually a bird?"
+                                description="I'm not sure if Punpun is a bird or not, does anyone know?"
+                                date="15/11/2022"
+                                discussionId="h6s8h0d8b9"
+                                isBookMarked
+                            />
+                        ))} */}
+
+                        {user?.bookmarks?.length === 0 && <span className="italic text-center pt-8 pb-5 text-gray-400">Sem bookmarks</span>}
                     </div>
                 )}
                 {feedStatus === "books" && (
                     <div className="grid grid-cols-5 px-12 mt-6 gap-8">
-                        {/* <Book id="c3x5jiogs9" image="https://m.media-amazon.com/images/I/614SwlZNtJL._AC_UF1000,1000_QL80_.jpg" noDetails={true} />
-                                <Book id="z7b8w0fkh0" image="https://m.media-amazon.com/images/I/91k68MKPbNL._AC_UF1000,1000_QL80_.jpg" noDetails={true} />
-                                <Book id="g6h34ui3w4" image="https://m.media-amazon.com/images/I/81tM68Xn66L._AC_UF1000,1000_QL80_.jpg" noDetails={true} />
-                                <Book id="m53ynos09g" image="https://m.media-amazon.com/images/I/71HbYElfY0L._AC_UF1000,1000_QL80_.jpg" noDetails={true} />
-                                <Book id="n3ui4tn3tm" image="https://m.media-amazon.com/images/I/91LptBSFxQL._AC_UF1000,1000_QL80_.jpg" noDetails={true} />
-                                <Book id="z7b8w0fkh0" image="https://m.media-amazon.com/images/I/91k68MKPbNL._AC_UF1000,1000_QL80_.jpg" noDetails={true} />
-                                <Book id="n3ui4tn3tm" image="https://m.media-amazon.com/images/I/91LptBSFxQL._AC_UF1000,1000_QL80_.jpg" noDetails={true} />
-                                <Book id="m53ynos09g" image="https://m.media-amazon.com/images/I/71HbYElfY0L._AC_UF1000,1000_QL80_.jpg" noDetails={true} />
-                                <Book id="g6h34ui3w4" image="https://m.media-amazon.com/images/I/81tM68Xn66L._AC_UF1000,1000_QL80_.jpg" noDetails={true} />
-                                <Book id="c3x5jiogs9" image="https://m.media-amazon.com/images/I/614SwlZNtJL._AC_UF1000,1000_QL80_.jpg" noDetails={true} /> */}
+                        {user?.favorite_books?.map((book: any) => (
+                            <Book key={book.cod_ISBN} id={book.cod_ISBN} image={book.cover} noDetails={true} />
+                        ))}
+                        {user?.favorite_books?.length === 0 && <span className="italic col-span-5 text-center pt-8 pb-5 text-gray-400">Sem livros favoritos</span>}
                     </div>
                 )}
                 {feedStatus === "comments" && (
                     <div className="flex flex-col w-full px-12 mt-6 justify-center">
-                        {/* <Comment
-                                    author={username}
-                                    date="06/09/6969"
-                                    comment="I think that I don't agree with this thing that you said, because I think that this is not true, and I think that you are wrong."
-                                    answers="467"
-                                    likes="69"
-                                />
-                                <Comment
-                                    author={username}
-                                    date="07/07/2007"
-                                    comment="You are right, I think that you are right, and I think that you are the best person in the world, and I think that you are the best person in the world, and I think that you are the best person in the world."
-                                    answers="999"
-                                    likes="999"
-                                />
-                                <Comment
-                                    author={username}
-                                    date="06/09/6969"
-                                    comment="I think that I don't agree with this thing that you said, because I think that this is not true, and I think that you are wrong."
-                                    answers="467"
-                                    likes="69"
-                                />
-                                <Comment
-                                    author={username}
-                                    date="07/07/2007"
-                                    comment="You are right, I think that you are right, and I think that you are the best person in the world, and I think that you are the best person in the world, and I think that you are the best person in the world."
-                                    answers="999"
-                                    likes="999"
-                                />
-                                <Comment
-                                    author={username}
-                                    date="07/07/2007"
-                                    comment="You are right, I think that you are right, and I think that you are the best person in the world, and I think that you are the best person in the world, and I think that you are the best person in the world."
-                                    answers="999"
-                                    likes="999"
-                                /> */}
+                        {user?.comments?.map((comment: any) => (
+                            <Comment key={comment.id_comment} author={user?.username} date={comment.date} comment={comment.comment} answers={comment.answers} likes={comment.likes} />
+                        ))}
+                        {user?.comments?.length === 0 && <span className="italic text-center pt-8 pb-5 text-gray-400">Sem comentários</span>}
                     </div>
                 )}
                 {feedStatus === "discussions" && (
                     <div className="flex flex-col w-full px-12 mt-6 justify-center">
-                        {/* <PostCard
-                                    author={username}
-                                    book="Oyasumi Punpun"
-                                    bookId="z7b8w0fkh0"
-                                    title="Is Punpun actually a bird?"
-                                    description="I'm not sure if Punpun is a bird or not, does anyone know?"
-                                    date="15/11/2022"
-                                    discussionId="h6s8h0d8b9"
-                                    isBookMarked
-                                />
-                                <PostCard
-                                    author={username}
-                                    book="The Hunger Games"
-                                    bookId="c3x5jiogs9"
-                                    title="Katniss and Peeta should have died"
-                                    description="I think Katniss and Peeta should have died in the end of the book, what do you think?"
-                                    date="28/02/2023"
-                                    discussionId="x7v6a9g3j1"
-                                    isBookMarked
-                                /> */}
+                        {user?.discussions?.map((discussion: any) => (
+                            <PostCard
+                                key={discussion.id_discussion}
+                                author={user?.username}
+                                book={discussion.book}
+                                bookId={discussion.cod_ISBN}
+                                title={discussion.title}
+                                description={discussion.description}
+                                date={new Date(discussion.date).toLocaleDateString("pt-BR")}
+                                discussionId={discussion.id_discussion}
+                                isBookMarked
+                            />
+                        ))}
                     </div>
                 )}
                 {feedStatus !== "discussions" && user?.tagged?.length > 0 && (

@@ -30,8 +30,10 @@ export default function Home() {
                 },
             });
             setUser(user);
-            console.log(user);
-            if (user.genres.length === 0) setGenresModal(true);
+
+            if (user.genres.length === 0 && localStorage.getItem("genres") !== "skipped") {
+                setGenresModal(true);
+            }
         }
 
         if (data?.user?.image) getUserGenres();
@@ -55,7 +57,10 @@ export default function Home() {
             }
         );
 
-        toast.success("Gêneros salvos com sucesso!");
+        if (genresSelected.length === 0) {
+            toast.success("Você pode alterar seus gêneros a qualquer momento na página de perfil", { duration: 10000 });
+            localStorage.setItem("genres", "skipped");
+        } else toast.success("Gêneros salvos com sucesso!");
         setGenresModal(false);
     }
 
