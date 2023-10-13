@@ -26,7 +26,7 @@ export const authOptions: AuthOptions = {
                     throw new Error("Invalid credentials");
                 }
 
-                const user = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/users`, {
+                const { data: user } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/users`, {
                     headers: {
                         Authorization: `Bearer ${data.access}`,
                     },
@@ -37,9 +37,10 @@ export const authOptions: AuthOptions = {
                 }
 
                 return {
-                    id: user.data.id,
-                    name: user.data.username,
-                    email: user.data.email,
+                    id: user.id,
+                    name: user.username,
+                    email: user.email,
+                    image: data.access,
                     accessToken: data.access,
                     refreshToken: data.refresh,
                 };
@@ -50,25 +51,7 @@ export const authOptions: AuthOptions = {
         strategy: "jwt",
     },
     secret: process.env.NEXTAUTH_SECRET,
-    callbacks: {
-        async session(session, user) {
-            return {
-                ...session,
-                user: {
-                    ...session.user,
-                    ...user,
-                },
-            };
-        },
-        async jwt(token, user) {
-            if (user) {
-                token.accessToken = user.accessToken;
-                token.refreshToken = user.refreshToken;
-            }
-
-            return token;
-        },
-    },
+    debug: true,
 };
 
 const authHandler = NextAuth(authOptions);

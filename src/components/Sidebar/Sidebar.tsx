@@ -11,31 +11,19 @@ import { useEffect, useState } from "react";
 
 export default function Sidebar() {
     const url = usePathname().toLowerCase();
-    const session = useSession();
+    const { data } = useSession();
     const [username, setUsername] = useState("");
 
     useEffect(() => {
-        async function getUser() {
-            const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/users/`, {
-                headers: {
-                    Authorization: `Bearer ${session?.data?.token.token.user.accessToken}`,
-                },
-            });
-            localStorage.setItem("user", JSON.stringify(response.data));
-            setUsername(response.data.user.username);
-        }
-
-        if (session?.status === "authenticated") getUser();
-
-        console.log(username);
-    }, []);
+        if (data && data.user && data.user.name) setUsername(data.user.name);
+    }, [data]);
 
     return (
         <div className="flex bg-secondary-700 dark:bg-[#253449]">
             <div className="flex flex-col w-64 items-center py-6 px-3 justify-between">
                 <div id="menu" className="flex flex-col gap-3 w-full">
-                    <Link href="/home">
-                        <SidebarItem active={url === "/home"} name="Início" icon={<FaHouse className="h-5 w-5" />} />
+                    <Link href="/">
+                        <SidebarItem active={url === "/"} name="Início" icon={<FaHouse className="h-5 w-5" />} />
                     </Link>
                     <Link href="/library">
                         <SidebarItem active={url === "/library"} name="Biblioteca" icon={<FaLayerGroup className="h-5 w-5" />} />

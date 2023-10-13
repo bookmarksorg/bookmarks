@@ -15,7 +15,7 @@ export default function Login() {
 
     useEffect(() => {
         if (session?.status === "authenticated") {
-            router.push("/home");
+            router.push("/");
         }
     }, [session?.status, router]);
 
@@ -32,12 +32,11 @@ export default function Login() {
             redirect: false,
         }).then((callback) => {
             if (callback?.error) {
-                console.error(callback.error);
                 toast.error("Nome de usuário ou senha incorretos!");
             }
             if (callback?.ok && !callback?.error) {
                 toast.success("Login feito com sucesso!");
-                router.push("/home");
+                router.push("/");
             }
         });
     };
@@ -66,7 +65,7 @@ export default function Login() {
                     </form>
                     <span className="text-center text-zinc-600 text-md mt-8">
                         Não possui uma conta?{" "}
-                        <Link href="/" className="text-blue-500">
+                        <Link href="/register" className="text-blue-500">
                             Cadastre-se!
                         </Link>
                     </span>

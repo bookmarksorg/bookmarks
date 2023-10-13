@@ -7,7 +7,7 @@ import AccessibilityBar from "./AccessibilityBar";
 export default function Header() {
     return (
         <>
-            <AccessibilityBar />
+            {/* <AccessibilityBar /> */}
             <div className="flex items-center px-20 py-3 border-b gap-96 border-b-[#EEEEEE] dark:border-b-[#4B5B73] dark:bg-[#1C2635]">
                 <Link href="/home">
                     <Image src="/logo.svg" width={120} height={120} alt="BookMarks's logo" className="dark:hidden" />
