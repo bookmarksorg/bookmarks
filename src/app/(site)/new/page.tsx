@@ -15,6 +15,7 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import MuiThemeProvider from "@/components/MuiThemeProvider";
+import { FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from "@mui/material";
 
 type Book = {
     title: string;
@@ -28,6 +29,8 @@ export default function New() {
     const [books, setBooks] = useState<Book[]>([]);
     const [book, setBook] = useState<any>(null);
     const [type, setType] = useState<"discussion" | "review">("discussion");
+    const [is_adult, setIsAdult] = useState(false);
+    const [is_spoiler, setIsSpoiler] = useState(false);
     const { data } = useSession();
 
     const [rating, setRating] = useState(0);
@@ -40,6 +43,10 @@ export default function New() {
     const setRatingDefinitive = (rating: number) => {
         setRating(rating);
         setDefinitive(true);
+    };
+
+    const handleType = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setType((event.target as HTMLInputElement).value as "discussion" | "review");
     };
 
     useEffect(() => {
@@ -60,8 +67,6 @@ export default function New() {
         if (!data?.user?.image) return;
         const title = (document.getElementById("title") as HTMLInputElement).value;
         const description = (document.getElementById("description") as HTMLInputElement).value;
-        const is_adult = (document.getElementById("adult") as HTMLInputElement).checked;
-        const is_spoiler = (document.getElementById("spoiler") as HTMLInputElement).checked;
 
         if (type === "review") {
             await axios.post(
@@ -157,21 +162,13 @@ export default function New() {
                             <span className="mt-2 mb-8 font-semibold text-lg text-primary-600">{book.title}</span>
                             <div className="flex flex-col gap-6">
                                 <div className="flex flex-col gap-2 text-lg font-semibold">
-                                    Tipo de discussão:
-                                    <div className="flex gap-6 font-normal">
-                                        <div className="flex gap-2">
-                                            <input type="radio" name="discussion" id="discussion" value="discussion" checked={type === "discussion"} onChange={() => setType("discussion")} />
-                                            <label htmlFor="discussion" className="text-lg">
-                                                Discussão
-                                            </label>
-                                        </div>
-                                        <div className="flex gap-2">
-                                            <input type="radio" name="review" id="review" value="review" checked={type === "review"} onChange={() => setType("review")} />
-                                            <label htmlFor="review" className="text-lg">
-                                                Review
-                                            </label>
-                                        </div>
-                                    </div>
+                                    Tipo de publicação
+                                    <MuiThemeProvider>
+                                        <RadioGroup row aria-labelledby="demo-row-radio-buttons-group-label" name="row-radio-buttons-group" value={type} onChange={handleType}>
+                                            <FormControlLabel value="discussion" control={<Radio />} label="Discussão" />
+                                            <FormControlLabel value="review" control={<Radio />} label="Review" />
+                                        </RadioGroup>
+                                    </MuiThemeProvider>
                                 </div>
                                 <div className="flex flex-col gap-2">
                                     <label htmlFor="title" className="text-lg font-semibold">
@@ -200,39 +197,29 @@ export default function New() {
                                         <label htmlFor="content" className="text-lg font-semibold">
                                             Contém conteúdo adulto? (+18)
                                         </label>
-                                        <div className="flex gap-4">
-                                            <div className="flex gap-2">
-                                                <input type="radio" name="adult" id="adult" value="adult" />
-                                                <label htmlFor="adult" className="text-lg">
-                                                    Sim
-                                                </label>
-                                            </div>
-                                            <div className="flex gap-2">
-                                                <input type="radio" name="adult" id="noadult" value="adult" />
-                                                <label htmlFor="noadult" className="text-lg">
-                                                    Não
-                                                </label>
-                                            </div>
-                                        </div>
+                                        <MuiThemeProvider>
+                                            <RadioGroup row aria-labelledby="demo-row-radio-buttons-group-label" name="row-radio-buttons-group" value={is_adult} onChange={() => setIsAdult(!is_adult)}>
+                                                <FormControlLabel value={true} control={<Radio />} label="Sim" />
+                                                <FormControlLabel value={false} control={<Radio />} label="Não" />
+                                            </RadioGroup>
+                                        </MuiThemeProvider>
                                     </div>
                                     <div className="flex flex-col gap-2">
                                         <label htmlFor="content" className="text-lg font-semibold">
                                             Contém spoiler?
                                         </label>
-                                        <div className="flex gap-4">
-                                            <div className="flex gap-2">
-                                                <input type="radio" name="spoiler" id="spoiler" value="spoiler" />
-                                                <label htmlFor="spoiler" className="text-lg">
-                                                    Sim
-                                                </label>
-                                            </div>
-                                            <div className="flex gap-2">
-                                                <input type="radio" name="spoiler" id="nospoiler" value="spoiler" />
-                                                <label htmlFor="nospoiler" className="text-lg">
-                                                    Não
-                                                </label>
-                                            </div>
-                                        </div>
+                                        <MuiThemeProvider>
+                                            <RadioGroup
+                                                row
+                                                aria-labelledby="demo-row-radio-buttons-group-label"
+                                                name="row-radio-buttons-group"
+                                                value={is_spoiler}
+                                                onChange={() => setIsSpoiler(!is_spoiler)}
+                                            >
+                                                <FormControlLabel value={true} control={<Radio />} label="Sim" />
+                                                <FormControlLabel value={false} control={<Radio />} label="Não" />
+                                            </RadioGroup>
+                                        </MuiThemeProvider>
                                     </div>
                                 </div>
                                 {type === "review" && (
@@ -262,7 +249,10 @@ export default function New() {
                                 )}
                             </div>
                             <div className="flex gap-12 mt-12 text-xl">
-                                <span className="flex cursor-pointer py-3 rounded-lg bg-secondary-700 dark:bg-[#121922] text-white transition hover:bg-secondary-600 dark:hover:brightness-110 w-full justify-center items-center gap-4">
+                                <span
+                                    className="flex cursor-pointer py-3 rounded-lg bg-secondary-700 dark:bg-[#121922] text-white transition hover:bg-secondary-600 dark:hover:brightness-110 w-full justify-center items-center gap-4"
+                                    onClick={() => router.back()}
+                                >
                                     <FaCircleXmark className="w-6 h-6" />
                                     Cancelar
                                 </span>

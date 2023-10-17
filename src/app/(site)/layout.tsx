@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import Sidebar from "@/components/Sidebar/Sidebar";
+import Image from "next/image";
 
 export default async function HomeLayout({ children }: { children: React.ReactNode }) {
     return (

@@ -1,11 +1,13 @@
+import axios from "axios";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { FaRegCommentDots, FaRegThumbsUp, FaRegBookmark, FaStar, FaBookmark } from "react-icons/fa6";
 
 interface PostCardProps {
     title: string;
     description: string;
     author: string;
-    book?: string;
     bookId?: string;
     date: string;
     isReview?: boolean;
@@ -14,7 +16,23 @@ interface PostCardProps {
     isBookMarked?: boolean;
 }
 
-export default function PostCard({ title, description, author, book, bookId, date, isReview, rating, discussionId, isBookMarked }: PostCardProps) {
+export default function PostCard({ title, description, author, bookId, date, isReview, rating, discussionId, isBookMarked }: PostCardProps) {
+    const { data } = useSession();
+    const [book, setBook] = useState("");
+
+    useEffect(() => {
+        async function getBook() {
+            const { data: book } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/books/${bookId}`, {
+                headers: {
+                    Authorization: `Bearer ${data?.user?.image}`,
+                },
+            });
+            setBook(book.title);
+        }
+
+        if (data?.user?.image) getBook();
+    }, [data, bookId]);
+
     return (
         <div className={`flex flex-col mt-4 bg-white dark:bg-[#2D3F59] text-gray-600 dark:text-white/90 rounded-md px-8 ${isReview ? "py-8" : "py-6"} w-full`}>
             <div className="flex justify-between mb-4">

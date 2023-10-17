@@ -145,7 +145,7 @@ export default function Profile() {
                 {feedStatus === "books" && (
                     <div className="grid grid-cols-5 px-12 mt-6 gap-8">
                         {user?.favorite_books?.map((book: any) => (
-                            <Book key={book.cod_ISBN} id={book.cod_ISBN} image={book.cover} noDetails={true} />
+                            <Book key={book.cod_ISBN} book={book} noDetails={true} />
                         ))}
                         {user?.favorite_books?.length === 0 && <span className="italic col-span-5 text-center pt-8 pb-5 text-gray-400">Sem livros favoritos</span>}
                     </div>
@@ -164,7 +164,6 @@ export default function Profile() {
                             <PostCard
                                 key={discussion.id_discussion}
                                 author={user?.username}
-                                book={discussion.book}
                                 bookId={discussion.cod_ISBN}
                                 title={discussion.title}
                                 description={discussion.description}

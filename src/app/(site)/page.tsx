@@ -4,13 +4,10 @@ import { useEffect, useState } from "react";
 
 import { FaComments, FaBookmark, FaSquarePlus } from "react-icons/fa6";
 
-import Header from "@/components/Header";
 import PostCard from "@/components/PostCard";
-import Sidebar from "@/components/Sidebar/Sidebar";
 import { GenresModal } from "@/components/Home/GenresModal";
 import Leaderboard from "@/components/Home/Leaderboard";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { useSession } from "next-auth/react";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -29,6 +26,7 @@ export default function Home() {
                     Authorization: `Bearer ${data?.user?.image}`,
                 },
             });
+            console.log(user);
             setUser(user);
 
             if (user.genres.length === 0 && localStorage.getItem("genres") !== "skipped") {
@@ -99,39 +97,31 @@ export default function Home() {
                         </Link>
                     </div>
                     <div className="flex flex-col px-6">
-                        <PostCard
-                            author="Jorge_pat"
-                            book="Harry Potter and the Sorcerer's Stone"
-                            bookId="m53ynos09g"
-                            title="Snape is Harry's father"
-                            description="This is a serious description to know if Snape is Harry's father"
-                            date="02/09/2023"
-                            discussionId="b8f9k3l1c5"
-                        />
-                    </div>
-                    {/* content */}
-                    <div className="flex justify-between px-8 pt-10 pb-2">
-                        <h3 className="text-xl text-gray-600 dark:text-white/90 font-bold">Sem atualizações</h3>
-                    </div>
-                    <div className="flex flex-col px-6">
-                        <PostCard
-                            author="Iasminborbita"
-                            book="Oyasumi Punpun"
-                            bookId="z7b8w0fkh0"
-                            title="Is Punpun actually a bird?"
-                            description="I'm not sure if Punpun is a bird or not, does anyone know?"
-                            date="15/11/2022"
-                            discussionId="h6s8h0d8b9"
-                        />
-                        <PostCard
-                            author="thegreat_alex"
-                            book="The Hunger Games"
-                            bookId="c3x5jiogs9"
-                            title="Katniss and Peeta should have died"
-                            description="I think Katniss and Peeta should have died in the end of the book, what do you think?"
-                            date="28/02/2023"
-                            discussionId="x7v6a9g3j1"
-                        />
+                        {feedStatus === "discussions"
+                            ? user?.discussions?.map((discussion: any) => (
+                                  <PostCard
+                                      key={discussion.id_discussion}
+                                      author={user?.username}
+                                      bookId={discussion.cod_ISBN}
+                                      title={discussion.title}
+                                      description={discussion.description}
+                                      date={new Date(discussion.date).toLocaleDateString("pt-BR")}
+                                      discussionId={discussion.id_discussion}
+                                      isBookMarked
+                                  />
+                              ))
+                            : user?.bookmarks?.map((bookmark: any) => (
+                                  <PostCard
+                                      key={bookmark.id_discussion}
+                                      author={user?.username}
+                                      bookId={bookmark.cod_ISBN}
+                                      title={bookmark.title}
+                                      description={bookmark.description}
+                                      date={new Date(bookmark.date).toLocaleDateString("pt-BR")}
+                                      discussionId={bookmark.id_discussion}
+                                      isBookMarked
+                                  />
+                              ))}
                     </div>
                 </div>
                 <Leaderboard />
