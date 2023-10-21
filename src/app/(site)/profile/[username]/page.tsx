@@ -125,19 +125,20 @@ export default function Profile() {
                 </div>
                 {feedStatus === "bookmarks" && (
                     <div className="flex flex-col w-full px-12 mt-6 justify-center">
-                        {/* {user?.bookmarks?.map((bookmark: any) => (
+                        {user?.bookmarks?.map((bookmark: any) => (
                             <PostCard
                                 key={bookmark.id_bookmark}
-                                author={bookmark.username}
-                                book={bookmark.discussion}
-                                bookId="z7b8w0fkh0"
-                                title="Is Punpun actually a bird?"
-                                description="I'm not sure if Punpun is a bird or not, does anyone know?"
-                                date="15/11/2022"
-                                discussionId="h6s8h0d8b9"
+                                author={bookmark.author}
+                                bookId={bookmark.cod_ISBN}
+                                title={bookmark.title}
+                                description={bookmark.description}
+                                date={new Date(bookmark.date).toLocaleDateString("pt-BR")}
+                                discussionId={bookmark.id_discussion}
+                                isAdult={bookmark.is_adult}
+                                isSpoiler={bookmark.is_spoiler}
                                 isBookMarked
                             />
-                        ))} */}
+                        ))}
 
                         {user?.bookmarks?.length === 0 && <span className="italic text-center pt-8 pb-5 text-gray-400">Sem bookmarks</span>}
                     </div>
@@ -169,6 +170,11 @@ export default function Profile() {
                                 description={discussion.description}
                                 date={new Date(discussion.date).toLocaleDateString("pt-BR")}
                                 discussionId={discussion.id_discussion}
+                                likes={discussion.likes}
+                                comments={discussion.comments}
+                                bookmarks={discussion.bookmarks}
+                                isAdult={discussion.is_adult}
+                                isSpoiler={discussion.is_spoiler}
                                 isBookMarked
                             />
                         ))}

@@ -2,11 +2,9 @@
 
 import { useRouter, useSearchParams } from "next/navigation";
 
-import Header from "@/components/Header";
-import Sidebar from "@/components/Sidebar/Sidebar";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { FaArrowLeft, FaCircleXmark, FaRegStar, FaStar, FaX } from "react-icons/fa6";
+import { FaCircleXmark, FaRegStar, FaStar, FaX } from "react-icons/fa6";
 import { FaCheckCircle } from "react-icons/fa";
 import { toast } from "react-hot-toast";
 import axios from "axios";
@@ -15,20 +13,25 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import MuiThemeProvider from "@/components/MuiThemeProvider";
-import { FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from "@mui/material";
+import { FormControlLabel, Radio, RadioGroup } from "@mui/material";
+import Lottie from "lottie-react";
+import Book from "@/assets/book.json";
 
 type Book = {
     title: string;
     cover: string;
 };
 
+type PostType = "discussion" | "review";
+
 export default function New() {
-    const bookId = useSearchParams().get("book");
-    const id = bookId as string;
+    const params = useSearchParams();
+    const typeParam = params.get("type") as PostType;
+    const id = params.get("book") as string;
     const router = useRouter();
     const [books, setBooks] = useState<Book[]>([]);
     const [book, setBook] = useState<any>(null);
-    const [type, setType] = useState<"discussion" | "review">("discussion");
+    const [type, setType] = useState<PostType>(typeParam || "discussion");
     const [is_adult, setIsAdult] = useState(false);
     const [is_spoiler, setIsSpoiler] = useState(false);
     const { data } = useSession();
@@ -60,8 +63,20 @@ export default function New() {
             setBooks(books);
         }
 
+        async function getBook() {
+            if (!id) return;
+            const { data: book } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/books/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${data?.user?.image}`,
+                },
+            });
+            console.log(book);
+            setBook(book);
+        }
+
         if (data?.user?.image) getBooks();
-    }, [data]);
+        if (data?.user?.image && id) getBook();
+    }, [data, id]);
 
     async function handleNew() {
         if (!data?.user?.image) return;
@@ -118,21 +133,24 @@ export default function New() {
         <div className="flex flex-col flex-grow p-8 pl-12 gap-8 bg-[#C4CCD8] dark:bg-[#1C2635] dark:text-white overflow-y-auto">
             <div className="flex flex-col bg-[#F1F5FA] dark:bg-[#253449] py-12 w-full rounded-lg px-12 justify-center gap-4">
                 {!id && !book && (
-                    <div className="flex flex-col gap-4">
-                        <h1 className="text-2xl font-bold">Escolha um livro</h1>
+                    <div className="flex flex-col gap-4 items-center pt-4 pb-2">
+                        <div className="flex flex-col items-center gap-2">
+                            <h1 className="text-4xl font-bold">Criar nova publicação</h1>
+                            <p className="text-xl text-center text-gray-700 dark:text-white/70 pb-3">Escolha um dos livros abaixo para criar uma discussão ou review</p>
+                        </div>
                         <div className="flex flex-wrap gap-4">
                             {books && (
                                 <MuiThemeProvider>
                                     <Autocomplete
                                         id="country-select-demo"
-                                        sx={{ width: 500 }}
+                                        sx={{ width: 700 }}
                                         options={books}
                                         autoHighlight
                                         getOptionLabel={(book) => book.title}
                                         onChange={(e, value) => setBook(value)}
                                         renderOption={(props, book) => (
                                             <Box component="li" sx={{ "& > img": { mr: 2, flexShrink: 0 } }} {...props}>
-                                                <Image loading="lazy" width="40" height="30" src={`${book.cover || "https://via.placeholder.com/20x30"}`} alt={`${book.title}'s cover`} />
+                                                <Image loading="lazy" width="50" height="30" src={`${book.cover || "https://via.placeholder.com/20x30"}`} alt={`${book.title}'s cover`} />
                                                 {book.title}
                                             </Box>
                                         )}
@@ -142,7 +160,6 @@ export default function New() {
                                                 label="Escolha um livro"
                                                 inputProps={{
                                                     ...params.inputProps,
-                                                    autoComplete: "new-password", // disable autocomplete and autofill
                                                 }}
                                             />
                                         )}
@@ -150,6 +167,7 @@ export default function New() {
                                 </MuiThemeProvider>
                             )}
                         </div>
+                        <Lottie animationData={Book} className="w-96 h-96 -mb-12 -mt-8" />
                     </div>
                 )}
                 {book && (
@@ -158,7 +176,7 @@ export default function New() {
                             <Image src={book.cover} width={450} height={300} alt={`${book.title}'s cover`} className="rounded-lg cursor-pointer transition hover:brightness-110" />
                         </div>
                         <div className="flex flex-col w-full text-gray-600 dark:text-white pr-40">
-                            <h2 className="font-semibold text-4xl">Criar {type === "discussion" ? "discussão" : "review"}</h2>
+                            <h2 className="font-semibold text-4xl">Criar uma {type === "discussion" ? "discussão" : "review"}</h2>
                             <span className="mt-2 mb-8 font-semibold text-lg text-primary-600">{book.title}</span>
                             <div className="flex flex-col gap-6">
                                 <div className="flex flex-col gap-2 text-lg font-semibold">

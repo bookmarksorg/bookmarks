@@ -6,7 +6,7 @@ import axios from "axios";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { FaBookOpen } from "react-icons/fa6";
-import Loading from "../loading";
+import Loading from "../../../components/Loading";
 
 type Book = {
     cod_ISBN: string;
@@ -20,7 +20,7 @@ type Book = {
 export default function Library() {
     const [books, setBooks] = useState<Book[]>([]);
     const [shownBooks, setShownBooks] = useState<Book[]>([]);
-    const [orderRating, setOrderRating] = useState<string>("");
+    const [ratingSort, setRatingSort] = useState<string>("");
     const [isLoading, setIsLoading] = useState<boolean>(true);
 
     const { data } = useSession();
@@ -28,7 +28,7 @@ export default function Library() {
     useEffect(() => {
         async function getBooks() {
             setIsLoading(true);
-            const { data: books } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/books/?rating=${orderRating}`, {
+            const { data: books } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/books/?rating=${ratingSort}`, {
                 headers: {
                     Authorization: `Bearer ${data?.user?.image}`,
                 },
@@ -39,7 +39,7 @@ export default function Library() {
         }
 
         if (data?.user?.image) getBooks();
-    }, [data, orderRating]);
+    }, [data, ratingSort]);
 
     const showMoreBooks = () => {
         setIsLoading(true);
@@ -57,7 +57,7 @@ export default function Library() {
                     <FaBookOpen className="w-8 h-8 mr-4" />
                     <h2>Biblioteca</h2>
                 </div>
-                <FilterBar setOrderRating={setOrderRating} />
+                <FilterBar setRatingSort={setRatingSort} />
             </div>
             <div className="flex flex-col bg-white dark:bg-[#253449] text-gray-600 dark:text-white/90 pt-6 pb-8 w-full rounded-lg px-8 justify-center">
                 <div className="flex justify-between pb-8">

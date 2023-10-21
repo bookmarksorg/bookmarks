@@ -13,20 +13,20 @@ import { FaMagnifyingGlass } from "react-icons/fa6";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Loading from "../loading";
+import Loading from "../../../components/Loading";
 
 export default function Search() {
     const term = useSearchParams().get("q");
     const [books, setBooks] = useState<any>([]);
     const [shownBooks, setShownBooks] = useState<any>([]);
-    const [orderRating, setOrderRating] = useState<string>("");
+    const [ratingSort, setRatingSort] = useState<string>("");
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const { data } = useSession();
 
     useEffect(() => {
         async function getBooks() {
             setIsLoading(true);
-            const { data: books } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/books/?title=${term}&rating=${orderRating}`, {
+            const { data: books } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/books/?title=${term}&rating=${ratingSort}`, {
                 headers: {
                     Authorization: `Bearer ${data?.user?.image}`,
                 },
@@ -37,7 +37,7 @@ export default function Search() {
         }
 
         if (data?.user?.image) getBooks();
-    }, [data, orderRating, term]);
+    }, [data, ratingSort, term]);
 
     const showMoreBooks = () => {
         setIsLoading(true);
@@ -55,7 +55,7 @@ export default function Search() {
                     <FaMagnifyingGlass className="w-7 h-7 mr-4" />
                     <h2>Resultados</h2>
                 </div>
-                <FilterBar setOrderRating={setOrderRating} />
+                <FilterBar setRatingSort={setRatingSort} />
             </div>
             <div className="flex flex-col bg-white dark:bg-[#253449] text-gray-600 dark:text-white/90 pt-8 pb-8 w-full rounded-lg px-8 justify-center">
                 <div className="flex justify-between pb-8">

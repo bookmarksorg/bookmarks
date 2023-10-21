@@ -1,4 +1,3 @@
-import { books } from "@/constants/books";
 import Image from "next/image";
 import Link from "next/link";
 import { FaStar } from "react-icons/fa6";

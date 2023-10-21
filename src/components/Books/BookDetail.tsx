@@ -1,105 +1,101 @@
 "use client";
 
-import type { BookInfo } from "@/constants/books";
-
+import axios from "axios";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { toast } from "react-hot-toast";
 import { FaBook, FaComments, FaRegStar, FaRegStarHalfStroke, FaStar } from "react-icons/fa6";
 
 export default function BookDetail({ id }: { id: string }) {
-    const books: Record<string, BookInfo> = {
-        n3ui4tn3tm: {
-            image: "https://m.media-amazon.com/images/I/91LptBSFxQL._AC_UF1000,1000_QL80_.jpg",
-            title: "Percy Jackson and the Olympians: The Lightning Thief",
-            author: "Rick Riordan",
-            pages: 237,
-            language: "English",
-            year: 2005,
-            genres: [
-                { name: "Fantasy", color: "bg-green-500/90" },
-                { name: "Young Adult", color: "bg-yellow-500/90" },
-                { name: "Adventure", color: "bg-teal-500/90" },
-            ],
-            rating: 3.4,
-            ratingUsers: "3.288",
-        },
-        g6h34ui3w4: {
-            image: "https://m.media-amazon.com/images/I/81tM68Xn66L._AC_UF1000,1000_QL80_.jpg",
-            title: "Star Wars: The High Republic: Light of the Jedi",
-            author: "Charles Soule",
-            pages: 427,
-            language: "English",
-            year: 2021,
-            genres: [
-                { name: "Science Fiction", color: "bg-blue-500/90" },
-                { name: "Fantasy", color: "bg-green-500/90" },
-            ],
-            rating: 4.8,
-            ratingUsers: "631",
-        },
-        m53ynos09g: {
-            image: "https://m.media-amazon.com/images/I/A1oURyPAO2L._AC_UF1000,1000_QL80_.jpg",
-            title: "Harry Potter and the Sorcerer's Stone",
-            author: "J. K. Rowling",
-            pages: 309,
-            language: "English",
-            year: 1997,
-            genres: [
-                { name: "Fantasy", color: "bg-green-500/90" },
-                { name: "Magic", color: "bg-yellow-500/90" },
-            ],
-            rating: 2.3,
-            ratingUsers: "5.231",
-        },
-        z7b8w0fkh0: {
-            image: "https://m.media-amazon.com/images/I/91k68MKPbNL._AC_UF1000,1000_QL80_.jpg",
-            title: "Oyasumi Punpun",
-            author: "Inio Asano",
-            pages: 164,
-            language: "Japanese",
-            year: 2007,
-            genres: [
-                { name: "Drama", color: "bg-red-500/90" },
-                { name: "Slice of Life", color: "bg-yellow-500/90" },
-                { name: "Psychological", color: "bg-purple-500/90" },
-                { name: "Seinen", color: "bg-blue-500/90" },
-            ],
-            rating: 5.0,
-            ratingUsers: "666.666",
-        },
-        c3x5jiogs9: {
-            image: "https://m.media-amazon.com/images/I/614SwlZNtJL._AC_UF1000,1000_QL80_.jpg",
-            title: "The Hunger Games",
-            author: "Suzanne Collins",
-            pages: 526,
-            language: "English",
-            year: 2008,
-            genres: [
-                { name: "Science Fiction", color: "bg-blue-500/90" },
-                { name: "Young Adult", color: "bg-yellow-500/90" },
-                { name: "Adventure", color: "bg-teal-500/90" },
-            ],
-            rating: 4.2,
-            ratingUsers: "923",
-        },
-    };
+    const [book, setBook] = useState<any>({
+        title: "",
+        author: "",
+        number_pages: "",
+        language: "",
+        year: "",
+        rating: 0,
+        qty_reviews: 0,
+        cover: "",
+        blurb: "",
+        floatStars: false,
+        emptyStars: [],
+        fullStars: [],
+        hasHalfStar: false,
+    });
+    const [isFavorite, setIsFavorite] = useState(false);
+    const [user, setUser] = useState<any>({});
+    const { data } = useSession();
 
-    const { image, title, sinopses, author, pages, language, year, genres, rating, ratingUsers } = books[id];
+    useEffect(() => {
+        async function getBook() {
+            if (!id) return;
+            const { data: book } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/books/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${data?.user?.image}`,
+                },
+            });
+            console.log(book);
+            book.floatStars = book.rating - Math.floor(book.rating) >= 0.5;
+            book.emptyStars = book.floatStars ? Array(5 - Math.ceil(book.rating)).fill(0) : Array(5 - Math.floor(book.rating)).fill(0);
+            book.fullStars = Array(Math.floor(book.rating)).fill(0);
+            book.hasHalfStar = book.floatStars;
+            setBook(book);
+        }
 
-    const floatStars = rating - Math.floor(rating) >= 0.5;
+        async function getUser() {
+            const { data: user } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/users/`, {
+                headers: {
+                    Authorization: `Bearer ${data?.user?.image}`,
+                },
+            });
+            setUser(user);
+            console.log(user);
+            user.favorite_books.forEach((book: any) => {
+                if (book.cod_ISBN === id) setIsFavorite(true);
+            });
+        }
 
-    const emptyStars = floatStars ? Array(5 - Math.ceil(rating)).fill(0) : Array(5 - Math.floor(rating)).fill(0);
-    const fullStars = Array(Math.floor(rating)).fill(0);
-    const hasHalfStar = floatStars;
+        if (data?.user?.image && id) getBook();
+        if (data?.user?.image) getUser();
+    }, [data, id]);
+
+    async function handleFavorite() {
+        if (!data?.user?.image || !id) return;
+        await axios.patch(
+            `${process.env.NEXT_PUBLIC_API_URL}/users/${user?.id_user}/`,
+            {
+                favorite_book: id,
+            },
+            {
+                headers: {
+                    Authorization: `Bearer ${data?.user?.image}`,
+                },
+            }
+        );
+        if (isFavorite) {
+            toast.success("Livro removido dos favoritos!");
+            setIsFavorite(false);
+        } else {
+            setIsFavorite(true);
+            toast.success("Livro adicionado aos favoritos!");
+        }
+    }
 
     return (
         <div className="flex  dark:text-white/90">
             <div className="flex flex-col w-76">
-                <Image src={image} alt={title} height={446} width={300} className="rounded-lg cursor-pointer transition hover:brightness-110"></Image>
-                <button className="bg-primary-600 rounded-lg w-full py-2 text-white flex justify-center items-center mt-4 hover:brightness-110 transition">
+                <Image src={book.cover} alt={book.title} height={446} width={300} className="rounded-lg cursor-pointer transition hover:brightness-110"></Image>
+                <button
+                    className={`border-[3px] border-primary-600 rounded-lg w-full py-2 flex justify-center items-center mt-4 ${
+                        !isFavorite ? "bg-transparent text-primary-600 hover:bg-primary-600 hover:text-white" : "bg-primary-600 text-white"
+                    } transition`}
+                    onClick={handleFavorite}
+                >
                     <h2 className="text-lg font-bold flex gap-3 items-center">
                         <FaStar className="w-5 h-5" />
-                        Adicionar aos favoritos
+                        {isFavorite ? "Remover dos favoritos" : "Adicionar aos favoritos"}
                     </h2>
                 </button>
                 <div className="flex gap-2">
@@ -122,66 +118,58 @@ export default function BookDetail({ id }: { id: string }) {
             </div>
             <div className="flex flex-col flex-[7] pl-8 pr-16">
                 {/* title */}
-                <h1 className="text-4xl font-bold">{title}</h1>
+                <h1 className="text-4xl font-bold">{book.title}</h1>
                 {/* sinopses */}
-                <p className="mt-4 text-md">
-                    {sinopses || (
-                        <>
-                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Amet temporibus commodi aliquid saepe pariatur animi asperiores excepturi quisquam rerum. Corrupti illum id velit
-                            accusamus quia, at sint ullam alias. Cumque sequi assumenda praesentium dignissimos, iure illo eum distinctio eos voluptas, quidem facilis id. Aperiam saepe, obcaecati
-                            blanditiis tempore odit id?
-                        </>
-                    )}
-                </p>
+                <p className="mt-4 text-md line-clamp-[10]">{book.blurb} </p>
                 {/* details */}
                 <div className="flex gap-3 text-lg mt-6">
                     {/* author | pages | language */}
                     <div>
                         <span className="font-bold">Autor: </span>
-                        <span>{author} |</span>
+                        <span>{book.author} |</span>
                     </div>
                     <div>
                         <span className="font-bold">Nº de páginas: </span>
-                        <span>{pages} |</span>
+                        <span>{book.number_pages} |</span>
                     </div>
                     <div>
                         <span className="font-bold">Idioma: </span>
-                        <span>{language}</span>
+                        <span>{book.language}</span>
                     </div>
                 </div>
                 {/* date */}
                 <div className="flex gap-3 text-lg mt-3">
                     <div>
                         <span className="font-bold">Ano de lançamento: </span>
-                        <span>{year}</span>
+                        <span>{book.year}</span>
                     </div>
                 </div>
                 {/* genres */}
                 <div className="flex gap-3 text-lg mt-3">
                     <div className="flex flex-col gap-2 ">
                         <span className="font-bold">Gêneros: </span>
-                        <div className="flex gap-3">
+                        {/* <div className="flex gap-3">
                             {genres.map((genre) => (
                                 <span key={genre.name} className={`${genre.color} text-white rounded-lg px-3 py-1 cursor-pointer hover:brightness-110`}>
                                     {genre.name}
                                 </span>
                             ))}
-                        </div>
+                        </div> */}
                     </div>
                 </div>
                 <hr className="my-6 bg-gray-300 h-[2px]" />
                 {/* rating */}
                 <div className="flex gap-3 text-lg">
                     <div className="flex flex-col gap-2 ">
-                        <span className="font-bold">Nota dos usuários ({ratingUsers}): </span>
+                        <span className="font-bold">Nota dos usuários ({book.qty_reviews}): </span>
                         <div className="flex gap-2 text-[#F59E0B] items-center">
-                            <span className="font-bold">{rating.toFixed(1)}</span>
+                            <span className="font-bold mt-0.5">{book.rating.toFixed(1)}</span>
                             <div className="flex gap-1">
-                                {fullStars.map((_, index) => (
+                                {book.fullStars.map((_: any, index: any) => (
                                     <FaStar key={index} className="w-7 h-7 text-[#F59E0B]" />
                                 ))}
-                                {hasHalfStar && <FaRegStarHalfStroke className="w-8 h-8 -mt-0.5 text-[#F59E0B]" />}
-                                {emptyStars.map((_, index) => (
+                                {book.hasHalfStar && <FaRegStarHalfStroke className="w-8 h-8 -mt-0.5 text-[#F59E0B]" />}
+                                {book.emptyStars.map((_: any, index: any) => (
                                     <FaRegStar key={index} className="w-7 h-7 text-[#F59E0B]" />
                                 ))}
                             </div>

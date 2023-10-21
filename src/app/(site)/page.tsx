@@ -11,8 +11,12 @@ import Link from "next/link";
 import { useSession } from "next-auth/react";
 import axios from "axios";
 import toast from "react-hot-toast";
+import Loading from "@/components/Loading";
+import Lottie from "lottie-react";
+import Empty from "@/assets/empty.json";
 
 export default function Home() {
+    const [isLoading, setIsLoading] = useState(true);
     const [genresModal, setGenresModal] = useState(false);
     const [feedStatus, setFeedStatus] = useState<"discussions" | "bookmarks">("discussions");
     const [genresSelected, setGenresSelected] = useState<string[]>([]);
@@ -20,6 +24,7 @@ export default function Home() {
     const { data } = useSession();
 
     useEffect(() => {
+        setIsLoading(true);
         async function getUserGenres() {
             const { data: user } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/users/`, {
                 headers: {
@@ -35,6 +40,7 @@ export default function Home() {
         }
 
         if (data?.user?.image) getUserGenres();
+        setIsLoading(false);
     }, [data]);
 
     function handleFeedStatus() {
@@ -64,6 +70,7 @@ export default function Home() {
 
     return (
         <>
+            {isLoading && <Loading />}
             <GenresModal genresSelected={genresSelected} setGenresSelected={setGenresSelected} isOpen={genresModal} onConfirm={() => handleSaveGenres()} setModalIsOpen={setGenresModal} />
             <div id="body" className="flex flex-grow p-8 pl-12 gap-8 bg-[#C4CCD8] dark:bg-[#1C2635] dark:text-white overflow-y-auto">
                 {/* content */}
@@ -107,6 +114,8 @@ export default function Home() {
                                       description={discussion.description}
                                       date={new Date(discussion.date).toLocaleDateString("pt-BR")}
                                       discussionId={discussion.id_discussion}
+                                      isAdult={discussion.is_adult}
+                                      isSpoiler={discussion.is_spoiler}
                                       isBookMarked
                                   />
                               ))
@@ -119,9 +128,18 @@ export default function Home() {
                                       description={bookmark.description}
                                       date={new Date(bookmark.date).toLocaleDateString("pt-BR")}
                                       discussionId={bookmark.id_discussion}
+                                      isAdult={bookmark.is_adult}
+                                      isSpoiler={bookmark.is_spoiler}
                                       isBookMarked
                                   />
                               ))}
+                        {((user?.discussions?.length === 0 && feedStatus === "discussions") || (user?.bookmarks?.length === 0 && feedStatus === "bookmarks")) && (
+                            <div className="flex flex-col items-center justify-center pt-14 pb-4 text-gray-600 dark:text-white">
+                                <h2 className="text-3xl font-bold pb-2">{feedStatus === "discussions" ? "Nenhuma discussão" : "Nenhuma marcação"}</h2>
+                                <p className="text-lg text-center">Você ainda não {feedStatus === "discussions" ? "criou" : "marcou"} nenhuma discussão</p>
+                                <Lottie animationData={Empty} />
+                            </div>
+                        )}
                     </div>
                 </div>
                 <Leaderboard />

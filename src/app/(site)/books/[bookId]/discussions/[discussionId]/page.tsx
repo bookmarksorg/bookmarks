@@ -6,7 +6,6 @@ import { useParams, useRouter } from "next/navigation";
 import Header from "@/components/Header";
 import Sidebar from "@/components/Sidebar/Sidebar";
 
-import { discussions } from "@/constants/discussions";
 import { FaRegBookmark, FaRegCommentDots, FaRegThumbsUp, FaTrash } from "react-icons/fa6";
 import { FaArrowAltCircleRight } from "react-icons/fa";
 import Comment from "@/components/Comment";
@@ -15,7 +14,6 @@ import { toast } from "react-hot-toast";
 import { DeleteModal } from "@/components/Books/DeleteModal";
 import { useSession } from "next-auth/react";
 import axios from "axios";
-import { books } from "@/constants/books";
 
 export default function Discussions() {
     const { bookId, discussionId } = useParams();
@@ -29,6 +27,7 @@ export default function Discussions() {
 
     useEffect(() => {
         async function getBook() {
+            if (!bookId) return;
             const { data: book } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/books/${bookId}`, {
                 headers: {
                     Authorization: `Bearer ${data?.user?.image}`,
@@ -39,6 +38,7 @@ export default function Discussions() {
         }
 
         async function getDiscussion() {
+            if (!discussionId) return;
             const { data: discussion } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/discussions/${discussionId}`, {
                 headers: {
                     Authorization: `Bearer ${data?.user?.image}`,
