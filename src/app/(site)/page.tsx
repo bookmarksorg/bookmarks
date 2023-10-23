@@ -62,10 +62,19 @@ export default function Home() {
         );
 
         if (genresSelected.length === 0) {
-            toast.success("Você pode alterar seus gêneros a qualquer momento na página de perfil", { duration: 10000 });
+            toast.success("Você pode alterar seus gêneros a qualquer momento na página de perfil", { duration: 10000, className: "text-center" });
             localStorage.setItem("genres", "skipped");
         } else toast.success("Gêneros salvos com sucesso!");
         setGenresModal(false);
+    }
+
+    async function refresh() {
+        const { data: user } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/users/`, {
+            headers: {
+                Authorization: `Bearer ${data?.user?.image}`,
+            },
+        });
+        setUser(user);
     }
 
     return (
@@ -116,13 +125,18 @@ export default function Home() {
                                       discussionId={discussion.id_discussion}
                                       isAdult={discussion.is_adult}
                                       isSpoiler={discussion.is_spoiler}
-                                      isBookMarked
+                                      likes={discussion.qty_likes}
+                                      comments={discussion.qty_comments}
+                                      bookmarks={discussion.qty_tags}
+                                      isBookMarked={discussion.is_tagged}
+                                      isLiked={discussion.is_liked}
+                                      isAuthor={discussion.is_author}
                                   />
                               ))
-                            : user?.bookmarks?.map((bookmark: any) => (
+                            : user?.bookmarks.map((bookmark: any) => (
                                   <PostCard
                                       key={bookmark.id_discussion}
-                                      author={user?.username}
+                                      author={bookmark.author}
                                       bookId={bookmark.cod_ISBN}
                                       title={bookmark.title}
                                       description={bookmark.description}
@@ -130,7 +144,13 @@ export default function Home() {
                                       discussionId={bookmark.id_discussion}
                                       isAdult={bookmark.is_adult}
                                       isSpoiler={bookmark.is_spoiler}
-                                      isBookMarked
+                                      likes={bookmark.qty_likes}
+                                      comments={bookmark.qty_comments}
+                                      bookmarks={bookmark.qty_tags}
+                                      isBookMarked={bookmark.is_tagged}
+                                      isLiked={bookmark.is_liked}
+                                      isAuthor={bookmark.is_author}
+                                      refresh={refresh}
                                   />
                               ))}
                         {((user?.discussions?.length === 0 && feedStatus === "discussions") || (user?.bookmarks?.length === 0 && feedStatus === "bookmarks")) && (

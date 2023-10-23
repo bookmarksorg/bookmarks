@@ -1,13 +1,15 @@
 "use client";
 
+import MuiThemeProvider from "@/components/MuiThemeProvider";
 import PostCard from "@/components/PostCard";
+import { MenuItem, Select } from "@mui/material";
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { FaArrowLeft, FaBook, FaFloppyDisk, FaRegStar, FaRegStarHalfStroke, FaStar } from "react-icons/fa6";
+import { FaArrowLeft, FaBook, FaComments, FaFloppyDisk, FaRegStar, FaRegStarHalfStroke, FaStar } from "react-icons/fa6";
 
 export default function Discussions() {
     const router = useRouter();
@@ -19,6 +21,12 @@ export default function Discussions() {
     const [reviews, setReviews] = useState<any[]>();
     const [discussions, setDiscussions] = useState<any[]>();
     const [user, setUser] = useState<any>({});
+    const [discussionsSort, setDiscussionsSort] = useState<string>("");
+
+    const handleDiscussionSort = (event: any) => {
+        setDiscussionsSort(event.target.value);
+        console.log(event.target.value);
+    };
 
     const [book, setBook] = useState<any>({
         title: "",
@@ -96,7 +104,9 @@ export default function Discussions() {
             </button>
             <div className="flex flex-col bg-[#F1F5FA] dark:bg-[#253449] text-gray-600 dark:text-white py-12 w-full rounded-lg px-12 justify-center gap-4">
                 <div className="flex gap-12">
-                    <Image src={book.cover} width={150} height={300} alt={`${book.title}'s cover`} className="rounded-lg cursor-pointer transition hover:brightness-110" />
+                    <Link href={`/books/${bookId}`}>
+                        <Image src={book.cover} width={200} height={400} alt={`${book.title}'s cover`} className="rounded-lg cursor-pointer transition hover:brightness-110" />
+                    </Link>
                     <div className="flex flex-col gap-2 font-semibold justify-between w-full">
                         <h2 className="flex flex-col gap-2 text-2xl">
                             <span className="text-4xl">Fórum sobre:</span>
@@ -119,7 +129,7 @@ export default function Discussions() {
                             </div>
                         </h2>
                         <div className="flex w-full items-center justify-between">
-                            <div className="flex text-xl gap-6">
+                            <div className="flex text-2xl gap-6">
                                 <span>
                                     <span className="text-primary-600">{book.qty_reviews} </span>
                                     review{book.qty_reviews === 1 ? "" : "s"}
@@ -153,25 +163,36 @@ export default function Discussions() {
                 <div className="flex justify-between mt-16 border-b-2 border-b-[#D5D8DB] dark:border-b-[#4B5B73] text-gray-500 dark:text-white">
                     <div className="flex">
                         <div
-                            className={`flex px-10 py-2 cursor-pointer border-b-4 border-transparent ${forumStatus === "reviews" ? "border-b-primary-700" : ""} transition`}
+                            className={`flex px-12 py-3 -mr-3 cursor-pointer rounded-t-xl bg-[#293fbb] text-white ${forumStatus === "reviews" ? "z-10 shadow-xl" : "brightness-75 z-0"} transition`}
                             onClick={() => handleForumStatus()}
                         >
-                            <span className="font-medium text-xl">Reviews</span>
+                            <span className="flex gap-2 items-center font-medium text-xl">
+                                <FaBook className="w-5 h-5" />
+                                Reviews
+                            </span>
                         </div>
                         <div
-                            className={`flex px-8 py-2 cursor-pointer border-b-4 border-transparent ${forumStatus === "discussions" ? "border-b-primary-700" : ""} transition`}
+                            className={`flex px-9 py-3 cursor-pointer rounded-t-xl bg-[#6d29bb] text-white ${forumStatus === "discussions" ? "z-10 shadow-xl" : "brightness-75 z-0"} transition`}
                             onClick={() => handleForumStatus()}
                         >
-                            <span className="font-medium text-xl">Discussões</span>
+                            <span className="flex gap-2 items-center font-medium text-xl">
+                                <FaComments className="w-5 h-5" />
+                                Discussões
+                            </span>
                         </div>
                     </div>
                     <div className="flex gap-2 items-center">
                         <span className="font-semibold">Filtrar:</span>
-                        <select className="border outline-none border-gray-300 rounded-lg px-4 py-1">
-                            <option value="1">Recentes</option>
-                            <option value="2">Antigos</option>
-                            <option value="3">Melhores</option>
-                        </select>
+                        <MuiThemeProvider>
+                        <Select value={discussionsSort} onChange={handleDiscussionSort} displayEmpty componentsProps={{ input: { sx: { padding: "8px 14px" } } }}>>
+                            <MenuItem value="">
+                                <em>Filtre por...</em>
+                            </MenuItem>
+                            <MenuItem value="date=date">Recentes</MenuItem>
+                            <MenuItem value="date=-date">Antigos</MenuItem>
+                            <MenuItem value="rating=asc">Melhores</MenuItem>
+                        </Select>
+                    </MuiThemeProvider>
                     </div>
                 </div>
                 {forumStatus === "reviews" ? (
@@ -221,7 +242,9 @@ export default function Discussions() {
                                     bookmarks={discussion.qty_tags}
                                     isAdult={discussion.is_adult}
                                     isSpoiler={discussion.is_spoiler}
-                                    isBookMarked={user?.bookmarks?.includes(discussion.id_discussion)}
+                                    isBookMarked={discussion.is_tagged}
+                                    isLiked={discussion.is_liked}
+                                    isAuthor={discussion.is_author}
                                 />
                             ))}
                         {discussions?.length === 0 && (

@@ -16,6 +16,7 @@ import MuiThemeProvider from "@/components/MuiThemeProvider";
 import { FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import Lottie from "lottie-react";
 import Book from "@/assets/book.json";
+import Link from "next/link";
 
 type Book = {
     title: string;
@@ -173,7 +174,9 @@ export default function New() {
                 {book && (
                     <div className="flex gap-20">
                         <div className="flex flex-col gap-4">
-                            <Image src={book.cover} width={450} height={300} alt={`${book.title}'s cover`} className="rounded-lg cursor-pointer transition hover:brightness-110" />
+                            <Link href={`/books/${book.cod_ISBN}`}>
+                                <Image src={book.cover} width={450} height={300} alt={`${book.title}'s cover`} className="rounded-lg cursor-pointer transition hover:brightness-110" />
+                            </Link>
                         </div>
                         <div className="flex flex-col w-full text-gray-600 dark:text-white pr-40">
                             <h2 className="font-semibold text-4xl">Criar uma {type === "discussion" ? "discussão" : "review"}</h2>

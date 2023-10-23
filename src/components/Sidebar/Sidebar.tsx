@@ -19,7 +19,7 @@ export default function Sidebar() {
     }, [data]);
 
     return (
-        <div className="flex bg-secondary-700 dark:bg-[#253449]">
+        <div className="flex bg-[#253449]">
             <div className="flex flex-col w-64 items-center py-6 px-3 justify-between">
                 <div id="menu" className="flex flex-col gap-3 w-full">
                     <Link href="/">

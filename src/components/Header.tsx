@@ -1,10 +1,16 @@
+"use client";
+
 import Image from "next/image";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import Link from "next/link";
 import { ThemeSwitcher } from "./ThemeSwitcher";
 import AccessibilityBar from "./AccessibilityBar";
+import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function Header() {
+    const [term, setTerm] = useState<string>(useSearchParams().get("q") || "");
+
     return (
         <>
             {/* <AccessibilityBar /> */}
@@ -20,6 +26,8 @@ export default function Header() {
                             type="text"
                             id="search"
                             name="q"
+                            value={term}
+                            onChange={(e) => setTerm(e.target.value)}
                         />
                         <FaMagnifyingGlass className="h-5 w-5 text-black/40 dark:text-white/40 absolute top-3 left-4 peer-focus:text-primary-600 dark:peer-focus:text-white" />
                     </form>

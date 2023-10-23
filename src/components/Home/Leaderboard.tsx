@@ -3,6 +3,7 @@ import { BiSolidCrown } from "react-icons/bi";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
 
 type LeaderboardUsers = {
     username: string;
@@ -45,7 +46,9 @@ export default function Leaderboard() {
                                 ) : (
                                     <span className="ml-1.5 font-bold ">{user.position}</span>
                                 )}
-                                <span className="ml-3">{user.username}</span>
+                                <Link href={`/profile/${user.username}`} className="ml-3 hover:underline">
+                                    {user.username}
+                                </Link>
                             </div>
                             <span className="text-[#9D6B3C] dark:text-[#FFB743]">{user.points} pts</span>
                         </div>

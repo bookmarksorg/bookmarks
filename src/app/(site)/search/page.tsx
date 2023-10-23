@@ -16,28 +16,31 @@ import axios from "axios";
 import Loading from "../../../components/Loading";
 
 export default function Search() {
-    const term = useSearchParams().get("q");
+    const term = useSearchParams().get("q") || "";
+    const author = useSearchParams().get("a") || "";
     const [books, setBooks] = useState<any>([]);
     const [shownBooks, setShownBooks] = useState<any>([]);
     const [ratingSort, setRatingSort] = useState<string>("");
+    const [dateSort, setDateSort] = useState<string>("");
+    const [popularitySort, setPopularitySort] = useState<string>("");
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const { data } = useSession();
 
     useEffect(() => {
+        setIsLoading(true);
         async function getBooks() {
-            setIsLoading(true);
-            const { data: books } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/books/?title=${term}&rating=${ratingSort}`, {
+            const { data: books } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/books/?title=${term}&author=${author}&popularity=${popularitySort}&rating=${ratingSort}&order_by=${dateSort}`, {
                 headers: {
                     Authorization: `Bearer ${data?.user?.image}`,
                 },
             });
             setBooks(books);
             setShownBooks(books.slice(0, 10));
-            setIsLoading(false);
         }
 
         if (data?.user?.image) getBooks();
-    }, [data, ratingSort, term]);
+        setIsLoading(false);
+    }, [data, term, author, ratingSort, dateSort, popularitySort]);
 
     const showMoreBooks = () => {
         setIsLoading(true);
@@ -55,16 +58,21 @@ export default function Search() {
                     <FaMagnifyingGlass className="w-7 h-7 mr-4" />
                     <h2>Resultados</h2>
                 </div>
-                <FilterBar setRatingSort={setRatingSort} />
+                <FilterBar setRatingSort={setRatingSort} setDateSort={setDateSort} setIsLoading={setIsLoading} />
             </div>
             <div className="flex flex-col bg-white dark:bg-[#253449] text-gray-600 dark:text-white/90 pt-8 pb-8 w-full rounded-lg px-8 justify-center">
                 <div className="flex justify-between pb-8">
-                    <h2 className="text-2xl font-bold">
-                        Resultados para o termo:
-                        <span className="text-primary-600"> {term}</span>
-                    </h2>
-                    {books.length !== 0 && (
-                        <span className="text-md font-medium text-gray-500 dark:text-white/90  hover:text-primary-600 hover:underline cursor-pointer transition pr-2.5">Ver todos</span>
+                    {term && (
+                        <h2 className="text-2xl font-bold">
+                            Resultados para o termo:
+                            <span className="text-primary-600"> {term}</span>
+                        </h2>
+                    )}
+                    {author && (
+                        <h2 className="text-2xl font-bold">
+                            Resultados para o autor(a):
+                            <span className="text-primary-600"> {author}</span>
+                        </h2>
                     )}
                 </div>
                 {data && shownBooks.length === 0 && (

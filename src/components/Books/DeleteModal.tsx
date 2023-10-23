@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { FaExclamationTriangle } from "react-icons/fa";
 import Modal from "react-modal";
 
 const customStyles = {
@@ -36,7 +37,7 @@ export function DeleteModal({ isOpen, onConfirm, setModalIsOpen }: DeleteModalPr
 
     return (
         <Modal
-            className="outline-none absolute w-3/6 h-1/3 bg-white dark:bg-[#253449] rounded-xl flex flex-col items-center"
+            className="outline-none absolute w-3/6 h-[-webkit-fill-available] bg-white dark:bg-[#253449] rounded-xl flex flex-col items-center"
             overlayClassName="overlay"
             onRequestClose={closeModal}
             shouldCloseOnOverlayClick={true}
@@ -44,8 +45,9 @@ export function DeleteModal({ isOpen, onConfirm, setModalIsOpen }: DeleteModalPr
             style={customStyles}
             contentLabel="Select Modal"
         >
-            <div className="flex flex-col text-center text-secondary-700 dark:text-white h-full">
+            <div className="flex flex-col text-center text-secondary-700 dark:text-white">
                 <div className="flex flex-col items-center">
+                    <FaExclamationTriangle className="w-16 h-16 mt-8 text-primary-600" />
                     <h2 className="text-2xl font-semibold mt-12">Tem certeza que deseja excluir essa discussão?</h2>
 
                     <p className="mt-4 w-4/5 text-lg">Essa ação não pode ser desfeita.</p>

@@ -117,13 +117,9 @@ export default function BookDetail({ id }: { id: string }) {
                 </div>
             </div>
             <div className="flex flex-col flex-[7] pl-8 pr-16">
-                {/* title */}
                 <h1 className="text-4xl font-bold">{book.title}</h1>
-                {/* sinopses */}
                 <p className="mt-4 text-md line-clamp-[10]">{book.blurb} </p>
-                {/* details */}
                 <div className="flex gap-3 text-lg mt-6">
-                    {/* author | pages | language */}
                     <div>
                         <span className="font-bold">Autor: </span>
                         <span>{book.author} |</span>
@@ -137,14 +133,12 @@ export default function BookDetail({ id }: { id: string }) {
                         <span>{book.language}</span>
                     </div>
                 </div>
-                {/* date */}
                 <div className="flex gap-3 text-lg mt-3">
                     <div>
                         <span className="font-bold">Ano de lançamento: </span>
-                        <span>{book.year}</span>
+                        <span>{book.published}</span>
                     </div>
                 </div>
-                {/* genres */}
                 <div className="flex gap-3 text-lg mt-3">
                     <div className="flex flex-col gap-2 ">
                         <span className="font-bold">Gêneros: </span>
