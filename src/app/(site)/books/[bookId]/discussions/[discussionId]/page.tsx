@@ -88,7 +88,7 @@ export default function Discussions() {
         router.push(`/books/${bookId}`);
     }
 
-    async function handleLike() {
+    async function handleLikeDiscussion() {
         if (!data?.user?.image || !discussionId) return;
         const { data: like } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/discussions/${discussionId}/like/`, {
             headers: {
@@ -117,7 +117,7 @@ export default function Discussions() {
         setLocalBookmarks(localBookmarks + (bookmark.is_tagged ? 1 : -1));
     }
 
-    async function handleComment() {
+    async function handleCommentDiscussion() {
         if (!data?.user?.image || !discussionId) return;
         await axios.post(
             `${process.env.NEXT_PUBLIC_API_URL}/comments/`,
@@ -213,7 +213,7 @@ export default function Discussions() {
                                             {comments.length} Comentário{comments.length === 1 ? "" : "s"}
                                         </span>
                                     </div>
-                                    <div className={`flex gap-1 items-center cursor-pointer transition ${localIsLiked ? "text-primary-600" : "hover:text-primary-600"}`} onClick={handleLike}>
+                                    <div className={`flex gap-1 items-center cursor-pointer transition ${localIsLiked ? "text-primary-600" : "hover:text-primary-600"}`} onClick={handleLikeDiscussion}>
                                         {localIsLiked ? <FaThumbsUp className="w-5 h-5" /> : <FaRegThumbsUp className="w-5 h-5" />}
                                         <span className="text-sm font-medium select-none">
                                             {localLikes} Curtida{localLikes === 1 ? "" : "s"}
@@ -245,7 +245,7 @@ export default function Discussions() {
                             value={comment}
                             onChange={(e) => setComment(e.target.value)}
                         />
-                        <button className="bg-primary-600 text-white px-4 py-2 rounded-lg absolute right-4 bottom-3" onClick={handleComment}>
+                        <button className="bg-primary-600 text-white px-4 py-2 rounded-lg absolute right-4 bottom-3" onClick={handleCommentDiscussion}>
                             Publicar
                         </button>
                     </div>
@@ -257,9 +257,10 @@ export default function Discussions() {
                                 author={comment.author}
                                 date={new Date(comment.date).toLocaleDateString("pt-BR")}
                                 comment={comment.description}
-                                answers={comment.answers}
+                                answers={comment.qty_answers}
                                 likes={comment.likes}
                                 isAuthor={comment.author.toLowerCase() === username.toLowerCase()}
+                                isLiked={comment.is_liked}
                                 handleDeleteCommment={handleDeleteCommment}
                             />
                         ))}
