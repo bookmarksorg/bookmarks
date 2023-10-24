@@ -210,7 +210,7 @@ export default function Discussions() {
                                     <div className="flex gap-1 items-center">
                                         <FaRegCommentDots className="w-5 h-5" />
                                         <span className="text-sm font-medium">
-                                            {discussion.qty_comments} Comentário{discussion.qty_comments === 1 ? "" : "s"}
+                                            {comments.length} Comentário{comments.length === 1 ? "" : "s"}
                                         </span>
                                     </div>
                                     <div className={`flex gap-1 items-center cursor-pointer transition ${localIsLiked ? "text-primary-600" : "hover:text-primary-600"}`} onClick={handleLike}>
