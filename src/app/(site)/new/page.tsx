@@ -49,7 +49,7 @@ export default function New() {
         setDefinitive(true);
     };
 
-    const handleType = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleType = (event: SelectChangeEvent<string>) => {
         setType((event.target as HTMLInputElement).value as "discussion" | "review");
     };
 

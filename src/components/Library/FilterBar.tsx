@@ -1,6 +1,6 @@
 import { FaFilter } from "react-icons/fa6";
 import MuiThemeProvider from "../MuiThemeProvider";
-import { FormHelperText, MenuItem, Select } from "@mui/material";
+import { FormHelperText, MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import { useState } from "react";
 
 interface FilterBarProps {
@@ -15,15 +15,15 @@ export default function FilterBar({ setRatingSort, setDateSort, setPopularitySor
     const [localDateSort, setLocalDateSort] = useState<string>("");
     const [localPopularitySort, setLocalPopularitySort] = useState<string>("");
 
-    const handleChangeDate = (event: React.ChangeEvent<{ value: unknown }>) => {
+    const handleChangeDate = (event: SelectChangeEvent<string>) => {
         setLocalDateSort(event.target.value as string);
     };
 
-    const handleChangeRating = (event: React.ChangeEvent<{ value: unknown }>) => {
+    const handleChangeRating = (event: SelectChangeEvent<string>) => {
         setLocalRatingSort(event.target.value as string);
     };
 
-    const handleChangePopularity = (event: React.ChangeEvent<{ value: unknown }>) => {
+    const handleChangePopularity = (event: SelectChangeEvent<string>) => {
         setLocalPopularitySort(event.target.value as string);
     };
 
@@ -40,7 +40,7 @@ export default function FilterBar({ setRatingSort, setDateSort, setPopularitySor
                 <div className="flex gap-2 items-center">
                     <span className="font-semibold">Popularidade:</span>
                     <MuiThemeProvider>
-                        <Select value={localPopularitySort} onChange={handleChangePopularity} displayEmpty componentsProps={{ input: { sx: { paddingTop: "8px", paddingBottom: "8px" } } }}>
+                        <Select value={localPopularitySort} onChange={handleChangePopularity} displayEmpty inputProps={{ style: { paddingTop: "8px", paddingBottom: "8px" } }}>
                             <MenuItem value="">
                                 <em>Filtre por...</em>
                             </MenuItem>
@@ -52,7 +52,7 @@ export default function FilterBar({ setRatingSort, setDateSort, setPopularitySor
                 <div className="flex gap-2 items-center">
                     <span className="font-semibold">Avaliação:</span>
                     <MuiThemeProvider>
-                        <Select value={localRatingSort} onChange={handleChangeRating} displayEmpty componentsProps={{ input: { sx: { paddingTop: "8px", paddingBottom: "8px" } } }}>
+                        <Select value={localRatingSort} onChange={handleChangeRating} displayEmpty inputProps={{ style: { paddingTop: "8px", paddingBottom: "8px" } }}>
                             <MenuItem value="">
                                 <em>Filtre por...</em>
                             </MenuItem>
@@ -64,7 +64,7 @@ export default function FilterBar({ setRatingSort, setDateSort, setPopularitySor
                 <div className="flex gap-2 items-center">
                     <span className="font-semibold">Data:</span>
                     <MuiThemeProvider>
-                        <Select value={localDateSort} onChange={handleChangeDate} displayEmpty componentsProps={{ input: { sx: { paddingTop: "8px", paddingBottom: "8px" } } }}>
+                        <Select value={localDateSort} onChange={handleChangeDate} displayEmpty inputProps={{ style: { paddingTop: "8px", paddingBottom: "8px" } }}>
                             <MenuItem value="">
                                 <em>Filtre por...</em>
                             </MenuItem>

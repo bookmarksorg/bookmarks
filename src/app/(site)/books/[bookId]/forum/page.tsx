@@ -184,7 +184,7 @@ export default function Discussions() {
                     <div className="flex gap-2 items-center">
                         <span className="font-semibold">Filtrar:</span>
                         <MuiThemeProvider>
-                            <Select value={discussionsSort} onChange={handleDiscussionSort} displayEmpty componentsProps={{ input: { sx: { padding: "8px 14px" } } }}>
+                            <Select value={discussionsSort} onChange={handleDiscussionSort} displayEmpty sx={{ padding: "8px 14px" }}>
                                 <MenuItem value="">
                                     <em>Filtre por...</em>
                                 </MenuItem>
@@ -198,7 +198,7 @@ export default function Discussions() {
                 {forumStatus === "reviews" ? (
                     <div className="flex flex-col">
                         {reviews &&
-                            reviews?.map((review) => (
+                            reviews?.map((review: any) => (
                                 <PostCard
                                     key={review.id}
                                     title={review.title}
@@ -228,7 +228,7 @@ export default function Discussions() {
                 ) : (
                     <div className="flex flex-col">
                         {discussions &&
-                            discussions?.map((discussion) => (
+                            discussions?.map((discussion: any) => (
                                 <PostCard
                                     key={discussion.id_discussion}
                                     author={discussion.author}

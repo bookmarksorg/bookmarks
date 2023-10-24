@@ -58,7 +58,7 @@ export default function Search() {
                     <FaMagnifyingGlass className="w-7 h-7 mr-4" />
                     <h2>Resultados</h2>
                 </div>
-                <FilterBar setRatingSort={setRatingSort} setDateSort={setDateSort} setIsLoading={setIsLoading} />
+                <FilterBar setRatingSort={setRatingSort} setDateSort={setDateSort} setIsLoading={setIsLoading} setPopularitySort={setPopularitySort} />
             </div>
             <div className="flex flex-col bg-white dark:bg-[#253449] text-gray-600 dark:text-white/90 pt-8 pb-8 w-full rounded-lg px-8 justify-center">
                 <div className="flex justify-between pb-8">
