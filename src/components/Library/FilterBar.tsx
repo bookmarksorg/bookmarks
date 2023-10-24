@@ -40,7 +40,7 @@ export default function FilterBar({ setRatingSort, setDateSort, setPopularitySor
                 <div className="flex gap-2 items-center">
                     <span className="font-semibold">Popularidade:</span>
                     <MuiThemeProvider>
-                        <Select value={localPopularitySort} onChange={handleChangePopularity} displayEmpty componentsProps={{ input: { sx: { paddingTop: "8px", paddingBottom: "8px" } } }}>>
+                        <Select value={localPopularitySort} onChange={handleChangePopularity} displayEmpty componentsProps={{ input: { sx: { paddingTop: "8px", paddingBottom: "8px" } } }}>
                             <MenuItem value="">
                                 <em>Filtre por...</em>
                             </MenuItem>
@@ -52,7 +52,7 @@ export default function FilterBar({ setRatingSort, setDateSort, setPopularitySor
                 <div className="flex gap-2 items-center">
                     <span className="font-semibold">Avaliação:</span>
                     <MuiThemeProvider>
-                        <Select value={localRatingSort} onChange={handleChangeRating} displayEmpty componentsProps={{ input: { sx: { paddingTop: "8px", paddingBottom: "8px" } } }}>>
+                        <Select value={localRatingSort} onChange={handleChangeRating} displayEmpty componentsProps={{ input: { sx: { paddingTop: "8px", paddingBottom: "8px" } } }}>
                             <MenuItem value="">
                                 <em>Filtre por...</em>
                             </MenuItem>
@@ -64,7 +64,7 @@ export default function FilterBar({ setRatingSort, setDateSort, setPopularitySor
                 <div className="flex gap-2 items-center">
                     <span className="font-semibold">Data:</span>
                     <MuiThemeProvider>
-                        <Select value={localDateSort} onChange={handleChangeDate} displayEmpty componentsProps={{ input: { sx: { paddingTop: "8px", paddingBottom: "8px" } } }}>>
+                        <Select value={localDateSort} onChange={handleChangeDate} displayEmpty componentsProps={{ input: { sx: { paddingTop: "8px", paddingBottom: "8px" } } }}>
                             <MenuItem value="">
                                 <em>Filtre por...</em>
                             </MenuItem>

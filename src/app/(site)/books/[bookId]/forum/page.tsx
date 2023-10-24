@@ -184,15 +184,15 @@ export default function Discussions() {
                     <div className="flex gap-2 items-center">
                         <span className="font-semibold">Filtrar:</span>
                         <MuiThemeProvider>
-                        <Select value={discussionsSort} onChange={handleDiscussionSort} displayEmpty componentsProps={{ input: { sx: { padding: "8px 14px" } } }}>>
-                            <MenuItem value="">
-                                <em>Filtre por...</em>
-                            </MenuItem>
-                            <MenuItem value="date=date">Recentes</MenuItem>
-                            <MenuItem value="date=-date">Antigos</MenuItem>
-                            <MenuItem value="rating=asc">Melhores</MenuItem>
-                        </Select>
-                    </MuiThemeProvider>
+                            <Select value={discussionsSort} onChange={handleDiscussionSort} displayEmpty componentsProps={{ input: { sx: { padding: "8px 14px" } } }}>
+                                <MenuItem value="">
+                                    <em>Filtre por...</em>
+                                </MenuItem>
+                                <MenuItem value="date=date">Recentes</MenuItem>
+                                <MenuItem value="date=-date">Antigos</MenuItem>
+                                <MenuItem value="rating=asc">Melhores</MenuItem>
+                            </Select>
+                        </MuiThemeProvider>
                     </div>
                 </div>
                 {forumStatus === "reviews" ? (
