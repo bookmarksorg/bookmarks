@@ -201,10 +201,14 @@ export default function Profile() {
                                 author={comment.author}
                                 date={new Date(comment.date).toLocaleDateString("pt-BR")}
                                 comment={comment.description}
-                                answers={comment.answers}
+                                qtyAnswers={comment.qty_answers}
                                 likes={comment.likes}
-                                isAuthor={isUser}
-                                handleDeleteCommment={handleDeleteCommment}
+                                username={data?.user?.name || ""}
+                                isLiked={comment.is_liked}
+                                depth={0}
+                                setIsLoading={setIsLoading}
+                                isProfile={true}
+                                linkDiscussion={`/books/${comment.book}/discussions/${comment.id_discussion}`}
                             />
                         ))}
                         {user?.comments?.length === 0 && <span className="italic text-center pt-8 pb-5 text-gray-400 text-lg">Sem comentários</span>}

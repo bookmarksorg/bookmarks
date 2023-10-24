@@ -17,15 +17,33 @@ interface CommentProps {
     likes: number;
     username?: string;
     isLiked?: boolean;
-    handleDeleteCommment: (id: string) => void;
+    handleDeleteCommment?: (id: string) => void;
     depth: number;
-    setCommentToAnswer: (id: string) => void;
+    setCommentToAnswer?: (id: string) => void;
     setIsLoading: (isLoading: boolean) => void;
     refresh?: () => void;
     commentsState?: any;
+    isProfile?: boolean;
+    linkDiscussion?: string;
 }
 
-export default function Comment({ id, author, comment, date, qtyAnswers, likes, setCommentToAnswer, username, isLiked, handleDeleteCommment, depth, setIsLoading, commentsState }: CommentProps) {
+export default function Comment({
+    id,
+    author,
+    comment,
+    date,
+    qtyAnswers,
+    likes,
+    setCommentToAnswer,
+    username,
+    isLiked,
+    handleDeleteCommment,
+    depth,
+    setIsLoading,
+    commentsState,
+    isProfile,
+    linkDiscussion,
+}: CommentProps) {
     const [confirmDelete, setConfirmDelete] = useState(false);
     const { data } = useSession();
     const [localLikes, setLocalLikes] = useState(likes);
@@ -40,7 +58,7 @@ export default function Comment({ id, author, comment, date, qtyAnswers, likes, 
             setConfirmDelete(true);
             return;
         }
-        handleDeleteCommment(id);
+        if (handleDeleteCommment) handleDeleteCommment(id);
     };
 
     async function handleLike() {
@@ -59,7 +77,7 @@ export default function Comment({ id, author, comment, date, qtyAnswers, likes, 
     const handleAnswer = () => {
         if (answering) {
             setAnswering(false);
-            setCommentToAnswer("");
+            if (setCommentToAnswer) setCommentToAnswer("");
             setAnswersOpen(true);
             return;
         }
@@ -70,7 +88,7 @@ export default function Comment({ id, author, comment, date, qtyAnswers, likes, 
             element.focus();
         }
         setAnswering(true);
-        setCommentToAnswer(id);
+        if (setCommentToAnswer) setCommentToAnswer(id);
     };
 
     async function handleAnswers() {
@@ -102,45 +120,79 @@ export default function Comment({ id, author, comment, date, qtyAnswers, likes, 
 
     return (
         <div className="flex flex-col gap-2">
-            <div
-                className={`flex flex-col mt-4 bg-white dark:bg-[#2D3F59] text-gray-600 dark:text-white/90 rounded-md px-8 py-6 shadow-md transition ${answering ? "border-2 border-primary-600" : ""}`}
-                style={{ marginLeft: `${depth * 2}rem`, width: `calc(100% - ${depth * 2}rem)` }}
-            >
-                <div className="flex justify-between mb-4">
-                    <div className="flex gap-2 items-center">
-                        <Link href={`/profile/${author}`} className="text-sm font-bold hover:underline cursor-pointer">
-                            {author}
-                        </Link>
-                    </div>
-                    <span className="text-sm font-semibold">{date}</span>
-                </div>
-                <span className="text-md font-medium mt-3">{comment}</span>
-                <div className="flex justify-end mt-8 gap-6">
-                    {isAuthor && (
-                        <div onClick={() => handleDelete(id)} className="flex gap-1 items-center cursor-pointer transition text-primary-600">
-                            {confirmDelete ? <FaExclamationCircle className="w-5 h-5" /> : <FaTrashAlt className="w-5 h-5" />}
-                            <span className="text-sm font-medium">{confirmDelete ? "Confirmar" : "Excluir"}</span>
+            {isProfile ? (
+                <div
+                    className={`flex flex-col mt-4 bg-white dark:bg-[#2D3F59] text-gray-600 dark:text-white/90 rounded-md px-8 py-6 shadow-md transition ${
+                        answering ? "border-2 border-primary-600" : ""
+                    }`}
+                    style={{ marginLeft: `${depth * 2}rem`, width: `calc(100% - ${depth * 2}rem)` }}
+                >
+                    <div className="flex justify-between mb-4">
+                        <div className="flex gap-2 items-center">
+                            <Link href={`/profile/${author}`} className="text-sm font-bold hover:underline cursor-pointer">
+                                {author}
+                            </Link>
                         </div>
-                    )}
-                    <div onClick={handleAnswer} className={`flex gap-1 items-center cursor-pointer transition ${answering ? "text-primary-600" : "hover:text-primary-600"}`}>
-                        <FaRegCommentAlt className="w-5 h-5" />
-                        <span className="text-sm font-medium">Responder</span>
+                        <span className="text-sm font-semibold">{date}</span>
                     </div>
-                    <div className={`flex gap-1 items-center cursor-pointer transition ${answersOpen ? "text-primary-600" : "hover:text-primary-600"}`}>
-                        <FaRegCommentDots className="w-5 h-5" />
-                        <span onClick={() => handleAnswers()} className="text-sm font-medium">
-                            {qtyAnswers} Respostas
-                        </span>
-                    </div>
-                    <div className={`flex gap-1 items-center cursor-pointer transition ${localIsLiked ? "text-primary-600" : "hover:text-primary-600"}`} onClick={handleLike}>
-                        {localIsLiked ? <FaThumbsUp className="w-5 h-5" /> : <FaRegThumbsUp className="w-5 h-5" />}
-                        <span className="text-sm font-medium select-none">
-                            {localLikes} Curtida{localLikes === 1 ? "" : "s"}
-                        </span>
+                    <span className="text-md font-medium mt-3">{comment}</span>
+                    <div className="flex justify-end mt-8 gap-6">
+                        {linkDiscussion && (
+                            <Link href={linkDiscussion} className={`flex gap-1 items-center cursor-pointer transition ${answersOpen ? "text-primary-600" : "hover:text-primary-600"}`}>
+                                <FaRegCommentDots className="w-5 h-5" />
+                                <span className="text-sm font-medium">{qtyAnswers} Respostas</span>
+                            </Link>
+                        )}
+                        <div className={`flex gap-1 items-center cursor-pointer transition ${localIsLiked ? "text-primary-600" : "hover:text-primary-600"}`} onClick={handleLike}>
+                            {localIsLiked ? <FaThumbsUp className="w-5 h-5" /> : <FaRegThumbsUp className="w-5 h-5" />}
+                            <span className="text-sm font-medium select-none">
+                                {localLikes} Curtida{localLikes === 1 ? "" : "s"}
+                            </span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            {answers &&
+            ) : (
+                <div
+                    className={`flex flex-col mt-4 bg-white dark:bg-[#2D3F59] text-gray-600 dark:text-white/90 rounded-md px-8 py-6 shadow-md transition ${
+                        answering ? "border-2 border-primary-600" : ""
+                    }`}
+                    style={{ marginLeft: `${depth * 2}rem`, width: `calc(100% - ${depth * 2}rem)` }}
+                >
+                    <div className="flex justify-between mb-4">
+                        <div className="flex gap-2 items-center">
+                            <Link href={`/profile/${author}`} className="text-sm font-bold hover:underline cursor-pointer">
+                                {author}
+                            </Link>
+                        </div>
+                        <span className="text-sm font-semibold">{date}</span>
+                    </div>
+                    <span className="text-md font-medium mt-3">{comment}</span>
+                    <div className="flex justify-end mt-8 gap-6">
+                        {isAuthor && (
+                            <div onClick={() => handleDelete(id)} className="flex gap-1 items-center cursor-pointer transition text-primary-600">
+                                {confirmDelete ? <FaExclamationCircle className="w-5 h-5" /> : <FaTrashAlt className="w-5 h-5" />}
+                                <span className="text-sm font-medium">{confirmDelete ? "Confirmar" : "Excluir"}</span>
+                            </div>
+                        )}
+                        <div onClick={handleAnswer} className={`flex gap-1 items-center cursor-pointer transition ${answering ? "text-primary-600" : "hover:text-primary-600"}`}>
+                            <FaRegCommentAlt className="w-5 h-5" />
+                            <span className="text-sm font-medium">Responder</span>
+                        </div>
+                        <div onClick={() => handleAnswers()} className={`flex gap-1 items-center cursor-pointer transition ${answersOpen ? "text-primary-600" : "hover:text-primary-600"}`}>
+                            <FaRegCommentDots className="w-5 h-5" />
+                            <span className="text-sm font-medium">{qtyAnswers} Respostas</span>
+                        </div>
+                        <div className={`flex gap-1 items-center cursor-pointer transition ${localIsLiked ? "text-primary-600" : "hover:text-primary-600"}`} onClick={handleLike}>
+                            {localIsLiked ? <FaThumbsUp className="w-5 h-5" /> : <FaRegThumbsUp className="w-5 h-5" />}
+                            <span className="text-sm font-medium select-none">
+                                {localLikes} Curtida{localLikes === 1 ? "" : "s"}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            )}
+            {!isProfile &&
+                answers &&
                 answersOpen &&
                 answers.map((answer) => (
                     <Comment
