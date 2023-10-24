@@ -42,7 +42,9 @@ type GenresModalProps = {
 };
 
 export function GenresModal({ isOpen, onConfirm, setModalIsOpen, genresSelected, setGenresSelected }: GenresModalProps) {
-    Modal.setAppElement("#root");
+    useEffect(() => {
+        Modal.setAppElement("#root");
+    }, []);
 
     const [modalIsOpen, setIsOpen] = useState(isOpen);
 
