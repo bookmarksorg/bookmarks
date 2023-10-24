@@ -8,11 +8,13 @@ import Link from "next/link";
 import { getSession, signOut, useSession } from "next-auth/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { ProfileModal } from "../Home/ProfileModal";
 
 export default function Sidebar() {
     const url = usePathname().toLowerCase();
     const { data } = useSession();
     const [username, setUsername] = useState("");
+    const [profileModal, setProfileModal] = useState(false);
 
     useEffect(() => {
         if (data && data.user && data.user.name) setUsername(data.user.name);
@@ -20,6 +22,7 @@ export default function Sidebar() {
 
     return (
         <div className="flex bg-[#253449]">
+            <ProfileModal isOpen={profileModal} setModalIsOpen={setProfileModal} />
             <div className="flex flex-col w-64 items-center py-6 px-3 justify-between">
                 <div id="menu" className="flex flex-col gap-3 w-full">
                     <Link href="/">
@@ -33,7 +36,9 @@ export default function Sidebar() {
                     </Link>
                 </div>
                 <div className="flex flex-col gap-3 w-full">
-                    <SidebarItem name="Configurações" icon={<FaGear className="h-5 w-5" />} />
+                    <Link href="#" onClick={() => setProfileModal(true)}>
+                        <SidebarItem name="Configurações" icon={<FaGear className="h-5 w-5" />} />
+                    </Link>
                     <Link href="#" onClick={() => signOut()}>
                         <SidebarItem name="Sair" icon={<FaRightFromBracket className="h-5 w-5" />} />
                     </Link>

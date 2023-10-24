@@ -2,6 +2,7 @@
 
 import Comment from "@/components/Comment";
 import Header from "@/components/Header";
+import { ProfileModal } from "@/components/Home/ProfileModal";
 import Book from "@/components/Library/Book";
 import Loading from "@/components/Loading";
 import PostCard from "@/components/PostCard";
@@ -22,6 +23,7 @@ export default function Profile() {
     const { data } = useSession();
     const [isLoading, setIsLoading] = useState(true);
     const [localBookmarks, setLocalBookmarks] = useState<any[]>([]);
+    const [profileModal, setProfileModal] = useState(false);
 
     const url = usePathname().toLowerCase();
 
@@ -76,6 +78,17 @@ export default function Profile() {
         setLocalBookmarks(user.bookmarks);
     }
 
+    async function refreshUser() {
+        const { data: user } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/users/${url.split("/")[2]}/user`, {
+            headers: {
+                Authorization: `Bearer ${data?.user?.image}`,
+            },
+        });
+        console.log(user);
+        setUser(user);
+        setLocalBookmarks(user.bookmarks);
+    }
+
     async function handleDeleteCommment(id: string) {
         if (!data?.user?.image) return;
         await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/comments/${id}/`, {
@@ -90,6 +103,7 @@ export default function Profile() {
     return (
         <div className="flex flex-col flex-grow p-8 pl-12 gap-8 bg-[#C4CCD8] dark:bg-[#1C2635] text-gray-600 dark:text-white overflow-y-auto">
             {isLoading && <Loading />}
+            <ProfileModal isOpen={profileModal} setModalIsOpen={setProfileModal} refresh={refreshUser} />
             <div className="flex flex-col bg-[#F1F5FA] dark:bg-[#253449] mt-12 pt-6 pb-8 px-20 rounded-lg h-fit relative">
                 {/* photo and change bio */}
                 <div className="flex">
@@ -104,7 +118,10 @@ export default function Profile() {
                         <span className="text-xl text-primary-600">{user?.points} pts</span>
                     </div>
                     {isUser && (
-                        <button className="flex self-end items-center gap-3 px-5 py-2 rounded-lg bg-primary-600 text-white transition hover:brightness-105 font-semibold">
+                        <button
+                            onClick={() => setProfileModal(true)}
+                            className="flex self-end items-center gap-3 px-5 py-2 rounded-lg bg-primary-600 text-white transition hover:brightness-105 font-semibold"
+                        >
                             <FaEdit />
                             Editar perfil
                         </button>
