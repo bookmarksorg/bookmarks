@@ -184,7 +184,16 @@ export default function Discussions() {
                     <div className="flex gap-2 items-center">
                         <span className="font-semibold">Filtrar:</span>
                         <MuiThemeProvider>
-                            <Select value={discussionsSort} onChange={handleDiscussionSort} displayEmpty sx={{ padding: "8px 14px" }}>
+                            <Select
+                                value={discussionsSort}
+                                onChange={handleDiscussionSort}
+                                displayEmpty
+                                componentsProps={{
+                                    input: {
+                                        sx: { padding: "8px 14px" },
+                                    } as any,
+                                }}
+                            >
                                 <MenuItem value="">
                                     <em>Filtre por...</em>
                                 </MenuItem>
