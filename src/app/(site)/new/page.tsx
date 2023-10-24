@@ -13,7 +13,7 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import MuiThemeProvider from "@/components/MuiThemeProvider";
-import { FormControlLabel, Radio, RadioGroup } from "@mui/material";
+import { FormControlLabel, Radio, RadioGroup, SelectChangeEvent } from "@mui/material";
 import Lottie from "lottie-react";
 import Book from "@/assets/book.json";
 import Link from "next/link";
