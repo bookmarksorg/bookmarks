@@ -29,6 +29,8 @@ export default function Discussions() {
     const [localBookmarks, setLocalBookmarks] = useState(0);
     const [comments, setComments] = useState<any[]>([]);
     const [comment, setComment] = useState("");
+    const [commentToAnswer, setCommentToAnswer] = useState("");
+    const [commentsState, setCommentsState] = useState(0);
     const { data } = useSession();
     const router = useRouter();
 
@@ -118,21 +120,43 @@ export default function Discussions() {
     }
 
     async function handleCommentDiscussion() {
-        if (!data?.user?.image || !discussionId) return;
-        await axios.post(
-            `${process.env.NEXT_PUBLIC_API_URL}/comments/`,
-            {
-                description: comment,
-                id_discussion: discussionId,
-            },
-            {
-                headers: {
-                    Authorization: `Bearer ${data?.user?.image}`,
+        if (commentToAnswer === "") {
+            if (!data?.user?.image || !discussionId) return;
+            await axios.post(
+                `${process.env.NEXT_PUBLIC_API_URL}/comments/`,
+                {
+                    description: comment,
+                    id_discussion: discussionId,
                 },
-            }
-        );
+                {
+                    headers: {
+                        Authorization: `Bearer ${data?.user?.image}`,
+                    },
+                }
+            );
+        } else {
+            if (!data?.user?.image || !discussionId) return;
+            await axios.post(
+                `${process.env.NEXT_PUBLIC_API_URL}/comments/`,
+                {
+                    description: comment,
+                    id_discussion: discussionId,
+                    id_related_comment: commentToAnswer,
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${data?.user?.image}`,
+                    },
+                }
+            );
+            setCommentsState(commentsState + 1);
+        }
         toast.success("Comentário publicado com sucesso");
         setComment("");
+        refresh();
+    }
+
+    async function refresh() {
         const { data: discussion } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/discussions/${discussionId}`, {
             headers: {
                 Authorization: `Bearer ${data?.user?.image}`,
@@ -149,12 +173,7 @@ export default function Discussions() {
             },
         });
         toast.success("Comentário excluído com sucesso");
-        const { data: discussion } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/discussions/${discussionId}`, {
-            headers: {
-                Authorization: `Bearer ${data?.user?.image}`,
-            },
-        });
-        setComments(discussion.comments);
+        refresh();
     }
 
     return (
@@ -237,7 +256,7 @@ export default function Discussions() {
                 </div>
                 <div className="flex flex-col bg-[#F1F5FA] dark:bg-[#253449] text-gray-600 dark:text-white py-12 w-full rounded-lg px-12 justify-center gap-4">
                     <h2 className="text-2xl font-bold">Comentários</h2>
-                    <div className="flex mt-4 gap-4 relative">
+                    <div className="flex mt-4 gap-4 relative" id="comment">
                         <textarea
                             className="flex-grow border border-gray-300 dark:bg-transparent dark:border-2 rounded-lg px-4 py-2 min-h-[100px]"
                             placeholder="Escreva um comentário..."
@@ -257,11 +276,16 @@ export default function Discussions() {
                                 author={comment.author}
                                 date={new Date(comment.date).toLocaleDateString("pt-BR")}
                                 comment={comment.description}
-                                answers={comment.qty_answers}
+                                qtyAnswers={comment.qty_answers}
                                 likes={comment.likes}
-                                isAuthor={comment.author.toLowerCase() === username.toLowerCase()}
+                                username={username}
                                 isLiked={comment.is_liked}
                                 handleDeleteCommment={handleDeleteCommment}
+                                depth={comment.depth}
+                                setCommentToAnswer={setCommentToAnswer}
+                                setIsLoading={setIsLoading}
+                                refresh={refresh}
+                                commentsState={commentsState}
                             />
                         ))}
                         {comments?.length === 0 && (
