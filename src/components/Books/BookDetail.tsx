@@ -139,18 +139,6 @@ export default function BookDetail({ id }: { id: string }) {
                         <span>{book.published}</span>
                     </div>
                 </div>
-                <div className="flex gap-3 text-lg mt-3">
-                    <div className="flex flex-col gap-2 ">
-                        <span className="font-bold">Gêneros: </span>
-                        {/* <div className="flex gap-3">
-                            {genres.map((genre) => (
-                                <span key={genre.name} className={`${genre.color} text-white rounded-lg px-3 py-1 cursor-pointer hover:brightness-110`}>
-                                    {genre.name}
-                                </span>
-                            ))}
-                        </div> */}
-                    </div>
-                </div>
                 <hr className="my-6 bg-gray-300 h-[2px]" />
                 {/* rating */}
                 <div className="flex gap-3 text-lg">
