@@ -106,6 +106,7 @@ export default function Comment({
 
     useEffect(() => {
         async function refresh() {
+            console.log("refreshei");
             const currentAnswers = answers;
             const { data: newAnswers } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/comments/${id}/answers/`, {
                 headers: {
@@ -125,11 +126,11 @@ export default function Comment({
                             element.classList.remove("animate-pulse");
                         }, 4000);
                     }
-                }, 900);
+                }, 700);
             }
         }
         if (commentsState && data?.user?.image && id) refresh();
-    }, [commentsState, data, id, answers]);
+    }, [commentsState, data, id]);
 
     return (
         <div className="flex flex-col gap-2">
