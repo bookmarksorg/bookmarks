@@ -22,7 +22,8 @@ interface CommentProps {
     setCommentToAnswer?: (id: string) => void;
     setIsLoading: (isLoading: boolean) => void;
     refresh?: () => void;
-    commentsState?: any;
+    commentsState?: number;
+    deletedState?: number;
     isProfile?: boolean;
     linkDiscussion?: string;
 }
@@ -41,6 +42,7 @@ export default function Comment({
     depth,
     setIsLoading,
     commentsState,
+    deletedState,
     isProfile,
     linkDiscussion,
 }: CommentProps) {
@@ -106,15 +108,15 @@ export default function Comment({
 
     useEffect(() => {
         async function refresh() {
-            console.log("refreshei");
             const currentAnswers = answers;
+            console.log("refreshei");
             const { data: newAnswers } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/comments/${id}/answers/`, {
                 headers: {
                     Authorization: `Bearer ${data?.user?.image}`,
                 },
             });
             setAnswers(newAnswers);
-            if (newAnswers.length > currentAnswers.length) {
+            if (currentAnswers.length < newAnswers.length) {
                 setAnswersOpen(true);
                 setTimeout(() => {
                     const element = document.getElementById(`${newAnswers[newAnswers.length - 1].id_comment}`);
@@ -131,6 +133,19 @@ export default function Comment({
         }
         if (commentsState && data?.user?.image && id) refresh();
     }, [commentsState, data, id]);
+
+    useEffect(() => {
+        async function refresh() {
+            console.log("deletei");
+            const { data: newAnswers } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/comments/${id}/answers/`, {
+                headers: {
+                    Authorization: `Bearer ${data?.user?.image}`,
+                },
+            });
+            setAnswers(newAnswers);
+        }
+        if (deletedState && data?.user?.image && id) refresh();
+    }, [deletedState, data, id]);
 
     return (
         <div className="flex flex-col gap-2">
@@ -224,6 +239,7 @@ export default function Comment({
                         depth={answer.depth}
                         setCommentToAnswer={setCommentToAnswer}
                         setIsLoading={setIsLoading}
+                        deletedState={deletedState}
                     />
                 ))}
         </div>

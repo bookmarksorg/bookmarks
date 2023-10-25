@@ -31,6 +31,7 @@ export default function Discussions() {
     const [comment, setComment] = useState("");
     const [commentToAnswer, setCommentToAnswer] = useState("");
     const [commentsState, setCommentsState] = useState(0);
+    const [deletedState, setDeletedState] = useState(0);
     const { data } = useSession();
     const router = useRouter();
 
@@ -173,6 +174,7 @@ export default function Discussions() {
         });
         toast.success("Comentário excluído com sucesso");
         refresh();
+        setDeletedState(deletedState + 1);
     }
 
     return (
@@ -285,6 +287,7 @@ export default function Discussions() {
                                 setIsLoading={setIsLoading}
                                 refresh={refresh}
                                 commentsState={commentsState}
+                                deletedState={deletedState}
                             />
                         ))}
                         {comments?.length === 0 && (
