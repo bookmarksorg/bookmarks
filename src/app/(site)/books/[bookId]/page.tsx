@@ -29,7 +29,7 @@ export default function Books() {
                     Authorization: `Bearer ${data?.user?.image}`,
                 },
             });
-            console.log(book);
+
             setBook(book);
         }
 
@@ -40,7 +40,7 @@ export default function Books() {
                     Authorization: `Bearer ${data?.user?.image}`,
                 },
             });
-            console.log(reviews);
+
             setReviews(reviews);
         }
         if (data?.user?.image && bookId) getBook();

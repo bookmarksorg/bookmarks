@@ -83,7 +83,6 @@ export default function Comment({
         }
         const element = document.getElementById("comment");
         if (element) {
-            console.log("scrolling");
             element.scrollIntoView({ behavior: "smooth", block: "center" });
             element.focus();
         }

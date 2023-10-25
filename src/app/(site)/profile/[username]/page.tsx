@@ -53,7 +53,7 @@ export default function Profile() {
                     Authorization: `Bearer ${data?.user?.image}`,
                 },
             });
-            console.log(user);
+
             setUser(user);
             setLocalBookmarks(user.bookmarks);
         }
@@ -84,7 +84,7 @@ export default function Profile() {
                 Authorization: `Bearer ${data?.user?.image}`,
             },
         });
-        console.log(user);
+
         setUser(user);
         setLocalBookmarks(user.bookmarks);
     }

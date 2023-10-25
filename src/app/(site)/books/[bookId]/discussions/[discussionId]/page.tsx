@@ -43,7 +43,7 @@ export default function Discussions() {
                     Authorization: `Bearer ${data?.user?.image}`,
                 },
             });
-            console.log(book);
+
             setBook(book);
         }
 
@@ -63,7 +63,6 @@ export default function Discussions() {
             }
             const { data: discussion } = response;
 
-            console.log(discussion);
             setDiscussion(discussion);
             setLocalIsLiked(discussion.is_liked);
             setLocalIsBookMarked(discussion.is_tagged);

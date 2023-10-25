@@ -25,7 +25,6 @@ export default function Discussions() {
 
     const handleDiscussionSort = (event: any) => {
         setDiscussionsSort(event.target.value);
-        console.log(event.target.value);
     };
 
     const [book, setBook] = useState<any>({
@@ -44,7 +43,7 @@ export default function Discussions() {
                     Authorization: `Bearer ${data?.user?.image}`,
                 },
             });
-            console.log(user);
+
             setUser(user);
         }
 
@@ -55,7 +54,7 @@ export default function Discussions() {
                     Authorization: `Bearer ${data?.user?.image}`,
                 },
             });
-            console.log(book);
+
             book.floatStars = book.rating - Math.floor(book.rating) >= 0.5;
             book.emptyStars = book.floatStars ? Array(5 - Math.ceil(book.rating)).fill(0) : Array(5 - Math.floor(book.rating)).fill(0);
             book.fullStars = Array(Math.floor(book.rating)).fill(0);
@@ -70,7 +69,7 @@ export default function Discussions() {
                     Authorization: `Bearer ${data?.user?.image}`,
                 },
             });
-            console.log(reviews);
+
             setReviews(reviews);
         }
 
@@ -81,7 +80,7 @@ export default function Discussions() {
                     Authorization: `Bearer ${data?.user?.image}`,
                 },
             });
-            console.log(discussions);
+
             setDiscussions(discussions);
         }
 

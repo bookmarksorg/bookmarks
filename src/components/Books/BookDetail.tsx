@@ -36,7 +36,7 @@ export default function BookDetail({ id }: { id: string }) {
                     Authorization: `Bearer ${data?.user?.image}`,
                 },
             });
-            console.log(book);
+
             book.floatStars = book.rating - Math.floor(book.rating) >= 0.5;
             book.emptyStars = book.floatStars ? Array(5 - Math.ceil(book.rating)).fill(0) : Array(5 - Math.floor(book.rating)).fill(0);
             book.fullStars = Array(Math.floor(book.rating)).fill(0);
@@ -51,7 +51,7 @@ export default function BookDetail({ id }: { id: string }) {
                 },
             });
             setUser(user);
-            console.log(user);
+
             user.favorite_books.forEach((book: any) => {
                 if (book.cod_ISBN === id) setIsFavorite(true);
             });

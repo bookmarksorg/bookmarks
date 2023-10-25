@@ -60,7 +60,7 @@ export default function New() {
                     Authorization: `Bearer ${data?.user?.image}`,
                 },
             });
-            console.log(books);
+
             setBooks(books);
         }
 
@@ -71,7 +71,7 @@ export default function New() {
                     Authorization: `Bearer ${data?.user?.image}`,
                 },
             });
-            console.log(book);
+
             setBook(book);
         }
 

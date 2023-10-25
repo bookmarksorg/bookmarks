@@ -75,7 +75,7 @@ export function ProfileModal({ isOpen, setModalIsOpen, refresh }: ProfileModalPr
                     Authorization: `Bearer ${data?.user?.image}`,
                 },
             });
-            console.log(user);
+
             setUsername(user.username);
             setEmail(user.email);
             setDescription(user.description);

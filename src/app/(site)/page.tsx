@@ -31,7 +31,7 @@ export default function Home() {
                     Authorization: `Bearer ${data?.user?.image}`,
                 },
             });
-            console.log(user);
+
             setUser(user);
 
             if (user.genres.length === 0 && localStorage.getItem("genres") !== "skipped") {
