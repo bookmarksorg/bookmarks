@@ -218,7 +218,7 @@ export default function Profile() {
                                 author={comment.author}
                                 date={new Date(comment.date).toLocaleDateString("pt-BR")}
                                 comment={comment.description}
-                                qtyAnswers={comment.qty_answers}
+                                qtyAnswers={comment.answers}
                                 likes={comment.likes}
                                 username={data?.user?.name || ""}
                                 isLiked={comment.is_liked}

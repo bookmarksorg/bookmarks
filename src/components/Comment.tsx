@@ -78,7 +78,6 @@ export default function Comment({
         if (answering) {
             setAnswering(false);
             if (setCommentToAnswer) setCommentToAnswer("");
-            setAnswersOpen(true);
             return;
         }
         const element = document.getElementById("comment");
@@ -107,15 +106,30 @@ export default function Comment({
 
     useEffect(() => {
         async function refresh() {
-            const { data: answers } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/comments/${id}/answers/`, {
+            const currentAnswers = answers;
+            const { data: newAnswers } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/comments/${id}/answers/`, {
                 headers: {
                     Authorization: `Bearer ${data?.user?.image}`,
                 },
             });
-            setAnswers(answers);
+            setAnswers(newAnswers);
+            if (newAnswers.length > currentAnswers.length) {
+                setAnswersOpen(true);
+                setTimeout(() => {
+                    const element = document.getElementById(`${newAnswers[newAnswers.length - 1].id_comment}`);
+                    console.log(newAnswers[newAnswers.length - 1].id_comment);
+                    if (element) {
+                        element.scrollIntoView({ behavior: "smooth", block: "center" });
+                        element.classList.add("animate-pulse");
+                        setTimeout(() => {
+                            element.classList.remove("animate-pulse");
+                        }, 4000);
+                    }
+                }, 900);
+            }
         }
         if (commentsState && data?.user?.image && id) refresh();
-    }, [commentsState, data, id]);
+    }, [commentsState, data, id, answers]);
 
     return (
         <div className="flex flex-col gap-2">
@@ -156,6 +170,7 @@ export default function Comment({
                         answering ? "border-2 border-primary-600" : ""
                     }`}
                     style={{ marginLeft: `${depth * 2}rem`, width: `calc(100% - ${depth * 2}rem)` }}
+                    id={id}
                 >
                     <div className="flex justify-between mb-4">
                         <div className="flex gap-2 items-center">

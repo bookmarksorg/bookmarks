@@ -21,8 +21,8 @@ export const metadata: Metadata = {
         images: [
             {
                 url: "https://bookmarks-bookmarks.vercel.app/login.png",
-                width: 600,
-                height: 480,
+                width: 500,
+                height: 780,
                 alt: "BookMarks, Junte-se a comunidade!",
             },
         ],
